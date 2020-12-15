@@ -1,0 +1,12 @@
+port:
+  8080
+
+#Baza
+datasource:
+  driverClassName: org.postgresql.Driver
+
+  initialization-mode: always
+  platform: postgres
+  url: jdbc:postgresql://localhost:5432/literary_society
+  username: postgres
+  password: root
