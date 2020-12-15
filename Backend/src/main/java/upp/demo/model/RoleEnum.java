@@ -1,0 +1,5 @@
+package upp.demo.model;
+
+public enum RoleEnum {
+	WRITER, READER, BETA_READER, EDITOR, LECTOR, COMITTEE_MEMBER,COMITTEE_LEADER,ADMINISTRATOR;
+}

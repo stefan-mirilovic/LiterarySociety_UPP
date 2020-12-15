@@ -1,12 +1,25 @@
-port:
-  8080
+server:
+  port: 9090
+
 
 #Baza
-datasource:
-  driverClassName: org.postgresql.Driver
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/literary_society
+    username: postgres
+    password: root
+    initialization-mode: always
 
-  initialization-mode: always
-  platform: postgres
-  url: jdbc:postgresql://localhost:5432/literary_society
-  username: postgres
-  password: root
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
