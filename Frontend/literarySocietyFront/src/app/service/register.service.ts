@@ -10,8 +10,8 @@ export class RegisterService {
 
   constructor(private http : HttpClient) { }
 
-  public registerReader(data: any): void {
-    this.http.post(`${environment.baseUrl}/register/reader`, data);
+  public registerReader(data: any) {
+    return this.http.post(`${environment.baseUrl}/register/reader/`, data);
   }
 
   // @ts-ignore

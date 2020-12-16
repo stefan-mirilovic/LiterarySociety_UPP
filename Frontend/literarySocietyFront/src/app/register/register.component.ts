@@ -23,7 +23,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerService.getFormData().subscribe(
       res => {
-        console.log(res);
         this.formFieldsDto = res;
         this.formFields = res.formFields;
         this.processInstance = res.processInstanceId;
@@ -37,6 +36,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(value: any, f: any) {
-
+    let o = new Array();
+    for (var property in value){
+      o.push({fieldId : property, fieldValue : value[property]});
+    }
+    console.log(o);
+    this.registerService.registerReader(o).subscribe();
   }
 }

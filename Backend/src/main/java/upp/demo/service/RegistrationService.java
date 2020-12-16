@@ -1,6 +1,9 @@
 package upp.demo.service;
 
+import upp.demo.dto.FormSubmissionDto;
 import upp.demo.dto.RegistrationFormDto;
+
+import java.util.List;
 
 public interface RegistrationService {
 	/**
@@ -8,4 +11,6 @@ public interface RegistrationService {
 	 * @return RegistrationFormDto
 	 */
 	RegistrationFormDto getForm();
+
+	void createRegisterRequest(List<FormSubmissionDto> formSubmissionDtoList, String taskId);
 }
