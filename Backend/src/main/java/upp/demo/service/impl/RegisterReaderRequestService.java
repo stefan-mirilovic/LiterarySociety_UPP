@@ -52,6 +52,8 @@ public class RegisterReaderRequestService implements JavaDelegate {
         }catch (Exception e){
             result = "Failed to confirm your email!";
         }
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("Process_14uovfx");
+        List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
 //        Task task = taskService.createTaskQuery().taskId("Activity_1qfd0fd").singleResult();
 //        taskService.complete(task.getId());
         return result;

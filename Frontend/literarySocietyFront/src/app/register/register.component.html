@@ -10,12 +10,24 @@
             <input type="text" name={{field.id}} class="form-control" ngModel  *ngIf="field.type.name=='string'" placeholder="{{field.label}}" >
             <input type="checkbox" name={{field.id}} class="form-control" ngModel  *ngIf="field.type.name=='boolean'">
             <input type="number" name={{field.id}} class="form-control" ngModel  *ngIf="field.type.name=='long'">
-            <select name="field.id" *ngIf="field.type.name=='enum'" ngModel class="form-control">
+            <select name="field.id" *ngIf="field.type.name=='enum'" (change)="onRoleChange($event.target.value)" ngModel class="form-control">
               <option *ngFor="let val of enumValues" value={{val}}>
                 {{field.type.values[val]}}
               </option>
             </select>
+
+
         </div>
+
+        <div class="form-group" *ngIf="isBeta">
+          <label for="genres" class="text-primary">Genres</label>
+          <select name="genres" class="form-control" multiple>
+            <option *ngFor="let genre of genreList" value="{{genre.id}}">
+              {{genre.name}}
+            </option>
+          </select>
+        </div>
+
 
         <input type="submit" class="btn btn-primary float-right" value="Register">
       </form>

@@ -32,11 +32,6 @@ public class RegistrationController {
 		registrationService.createRegisterRequest(formSubmissionList, taskId);
 	}
 
-	@GetMapping("/all/genres")
-	public ResponseEntity allGenres(){
-		return null;
-	}
-
 	@GetMapping("approve/{id}/{approveCode}")
 	public ResponseEntity<?> approve(@PathVariable Long id, @PathVariable UUID approveCode) {
 		return new ResponseEntity<String>(registerReaderRequestService.approve(id, approveCode), HttpStatus.OK);

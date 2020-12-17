@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RegisterService} from "../service/register.service";
+import {Genre} from "../model/genre";
+import {GenreService} from "../service/genre.service";
 
 @Component({
   selector: 'app-register',
@@ -8,17 +10,18 @@ import {RegisterService} from "../service/register.service";
 })
 export class RegisterComponent implements OnInit {
 
+  genreList : Genre[];
   public formField = [];
   public formFieldsDto = null;
-  public genres = [];
   public formFields = [];
   public processInstance = "";
   public enumValues = [];
+  public isBeta = false;
    tasks = [];
 
 
 
-  constructor(private registerService:RegisterService) { }
+  constructor(private registerService:RegisterService, private genreService:GenreService) { }
 
   ngOnInit(): void {
     this.registerService.getFormData().subscribe(
@@ -33,6 +36,12 @@ export class RegisterComponent implements OnInit {
         });
       }
     );
+
+    this.genreService.getAllGenres().subscribe(
+      res =>{
+        console.log(res);
+        this.genreList=res;
+      });
   }
 
   onSubmit(value: any, f: any) {
@@ -43,5 +52,12 @@ export class RegisterComponent implements OnInit {
     console.log(o);
     console.log(this.formFieldsDto.taskId);
     this.registerService.registerReader(o,this.formFieldsDto.taskId).subscribe();
+  }
+
+  onRoleChange(value: any){
+    if(value=="BetaReader")
+      this.isBeta=true;
+    if(value=="Reader")
+      this.isBeta=false;
   }
 }
