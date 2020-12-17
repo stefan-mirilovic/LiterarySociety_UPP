@@ -13,6 +13,7 @@ import upp.demo.dto.FormSubmissionDto;
 import upp.demo.dto.RegistrationFormDto;
 import upp.demo.service.RegistrationService;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -43,6 +44,20 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Override
 	public void createRegisterRequest(List<FormSubmissionDto> formSubmissionDtoList, String taskId) {
-		
+		HashMap<String, Object> map = this.mapListToDto(formSubmissionDtoList);
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		String processInstanceId = task.getProcessInstanceId();
+		runtimeService.setVariable(processInstanceId, "registration", formSubmissionDtoList);
+		formService.submitTaskForm(taskId, map);
+	}
+
+	private HashMap<String, Object> mapListToDto(List<FormSubmissionDto> list)
+	{
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		for(FormSubmissionDto temp : list){
+			map.put(temp.getFieldId(), temp.getFieldValue());
+		}
+
+		return map;
 	}
 }

@@ -16,10 +16,23 @@ spring:
     database: POSTGRESQL
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         jdbc:
           lob:
             non_contextual_creation: true
     show-sql: true
+
+  #email servis
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: noreply.clinical.system@gmail.com
+    #uzdravljuzivio je regularni password
+    password: vhwsbqiwobszobca
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true

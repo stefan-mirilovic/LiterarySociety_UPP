@@ -41,6 +41,7 @@ export class RegisterComponent implements OnInit {
       o.push({fieldId : property, fieldValue : value[property]});
     }
     console.log(o);
-    this.registerService.registerReader(o).subscribe();
+    console.log(this.formFieldsDto.taskId);
+    this.registerService.registerReader(o,this.formFieldsDto.taskId).subscribe();
   }
 }

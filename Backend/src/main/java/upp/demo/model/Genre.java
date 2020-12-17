@@ -18,9 +18,9 @@ public class Genre {
 	@Column
 	private String name;
 
-	@ManyToMany(mappedBy = "genres")
+	@ManyToMany
 	private List<User> users;
 
-
-
+	@ManyToMany(mappedBy = "genres")
+	private List<RegisterReaderRequest> readerRequests;
 }
