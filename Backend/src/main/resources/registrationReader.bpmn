@@ -6,13 +6,12 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_1cnb2y7" sourceRef="StartEvent_1" targetRef="Activity_1ikvql6" />
     <bpmn:endEvent id="Event_1atkf3p">
-      <bpmn:incoming>Flow_13svgou</bpmn:incoming>
+      <bpmn:incoming>Flow_1vkxsum</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_09gvwae" sourceRef="Activity_1ikvql6" targetRef="Activity_1qfd0fd" />
     <bpmn:userTask id="Activity_1ikvql6" name="Register">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="id" label="Id" type="long" />
           <camunda:formField id="username" label="Username" type="string" />
           <camunda:formField id="password" label="Password" type="string" />
           <camunda:formField id="email" label="Email" type="string" />
@@ -29,37 +28,49 @@
       <bpmn:incoming>Flow_1cnb2y7</bpmn:incoming>
       <bpmn:outgoing>Flow_09gvwae</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_13svgou" sourceRef="Activity_1qfd0fd" targetRef="Event_1atkf3p" />
+    <bpmn:sequenceFlow id="Flow_13svgou" sourceRef="Activity_1qfd0fd" targetRef="Activity_1cu16bz" />
     <bpmn:serviceTask id="Activity_1qfd0fd" name="Create request for registration" camunda:class="upp.demo.service.impl.RegisterReaderRequestService">
       <bpmn:incoming>Flow_09gvwae</bpmn:incoming>
       <bpmn:outgoing>Flow_13svgou</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1vkxsum" sourceRef="Activity_1cu16bz" targetRef="Event_1atkf3p" />
+    <bpmn:userTask id="Activity_1cu16bz" name="EmailApprove">
+      <bpmn:incoming>Flow_13svgou</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vkxsum</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_14uovfx">
+      <bpmndi:BPMNEdge id="Flow_13svgou_di" bpmnElement="Flow_13svgou">
+        <di:waypoint x="540" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_09gvwae_di" bpmnElement="Flow_09gvwae">
         <di:waypoint x="410" y="117" />
-        <di:waypoint x="470" y="117" />
+        <di:waypoint x="440" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1cnb2y7_di" bpmnElement="Flow_1cnb2y7">
         <di:waypoint x="215" y="117" />
         <di:waypoint x="310" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_13svgou_di" bpmnElement="Flow_13svgou">
-        <di:waypoint x="570" y="117" />
+      <bpmndi:BPMNEdge id="Flow_1vkxsum_di" bpmnElement="Flow_1vkxsum">
+        <di:waypoint x="690" y="117" />
         <di:waypoint x="732" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1atkf3p_di" bpmnElement="Event_1atkf3p">
+        <dc:Bounds x="732" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_017gyl8_di" bpmnElement="Activity_1ikvql6">
         <dc:Bounds x="310" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0rb2k7c_di" bpmnElement="Activity_1qfd0fd">
-        <dc:Bounds x="470" y="77" width="100" height="80" />
+        <dc:Bounds x="440" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1atkf3p_di" bpmnElement="Event_1atkf3p">
-        <dc:Bounds x="732" y="99" width="36" height="36" />
+      <bpmndi:BPMNShape id="Activity_1yhrdal_di" bpmnElement="Activity_1cu16bz">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
