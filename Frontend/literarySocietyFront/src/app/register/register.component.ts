@@ -24,24 +24,28 @@ export class RegisterComponent implements OnInit {
   constructor(private registerService:RegisterService, private genreService:GenreService) { }
 
   ngOnInit(): void {
-    this.registerService.getFormData().subscribe(
-      res => {
-        this.formFieldsDto = res;
-        this.formFields = res.formFields;
-        this.processInstance = res.processInstanceId;
-        this.formFields.forEach( (field) => {
-          if (field.type.name == 'enum') {
-            this.enumValues = Object.keys(field.type.values);
-          }
-        });
-      }
-    );
+    this.registerService.startProcess().subscribe(
+        data => {
+            console.log(data);
+            this.renderForm(data.taskId);
+            console.log(this.enumValues);
+    });
+  }
 
-    this.genreService.getAllGenres().subscribe(
-      res =>{
-        console.log(res);
-        this.genreList=res;
-      });
+  renderForm(processInstanceId){
+    this.registerService.getFormData(processInstanceId).subscribe(
+        res => {
+          console.log(res);
+          this.formFieldsDto = res;
+          this.formFields = res.formFields;
+          this.processInstance = res.processInstanceId;
+          this.formFields.forEach( (field) => {
+            if (field.type.name == 'enum') {
+              this.enumValues = Object.keys(field.type.values);
+            }
+          });
+        }
+    );
   }
 
   onSubmit(value: any, f: any) {

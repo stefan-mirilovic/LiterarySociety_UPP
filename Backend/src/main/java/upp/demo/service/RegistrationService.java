@@ -1,5 +1,6 @@
 package upp.demo.service;
 
+import upp.demo.dto.FormDto;
 import upp.demo.dto.FormSubmissionDto;
 import upp.demo.dto.RegistrationFormDto;
 
@@ -11,6 +12,12 @@ public interface RegistrationService {
 	 * @return RegistrationFormDto
 	 */
 	RegistrationFormDto getForm();
+
+	/**
+	 * Method for starting process
+	 * @return
+	 */
+	FormDto startProcess();
 
 	void createRegisterRequest(List<FormSubmissionDto> formSubmissionDtoList, String taskId);
 }
