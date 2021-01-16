@@ -1,6 +1,6 @@
 <div>
     <label for={{field.id}} class="text-primary">{{field.label}}</label>
-    <select name="{{field.id}}" ngModel class="form-control" *ngIf="field.custom=='single.select'">
+    <select name="{{field.id}}" id="{{field.id}}" ngModel class="form-control" *ngIf="field.custom=='single.select'">
         <option *ngFor="let val of enumValues">
             {{field.type.values[val]}}
         </option>

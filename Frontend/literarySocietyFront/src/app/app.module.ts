@@ -8,6 +8,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { TextInputFieldComponent } from './forms/text-input-field/text-input-field.component';
 import { EnumSelectFieldComponent } from './forms/enum-select-field/enum-select-field.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { ReaderComponent } from './reader/reader.component';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,13 @@ import { EnumSelectFieldComponent } from './forms/enum-select-field/enum-select-
     RegisterComponent,
     TextInputFieldComponent,
     EnumSelectFieldComponent,
+    ReaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [],

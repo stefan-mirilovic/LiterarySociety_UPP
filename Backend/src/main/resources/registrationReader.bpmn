@@ -17,6 +17,10 @@
               <camunda:property id="constraint" value="text" />
               <camunda:property id="input" value="text" />
             </camunda:properties>
+            <camunda:validation>
+              <camunda:constraint name="minlength" config="3" />
+              <camunda:constraint name="maxlength" config="16" />
+            </camunda:validation>
           </camunda:formField>
           <camunda:formField id="password" label="Password" type="string">
             <camunda:properties>
@@ -33,7 +37,7 @@
           <camunda:formField id="name" label="Name" type="string">
             <camunda:properties>
               <camunda:property id="input" value="text" />
-              <camunda:property id="constratint" value="text" />
+              <camunda:property id="constratint" value="notnumber" />
             </camunda:properties>
           </camunda:formField>
           <camunda:formField id="surname" label="Surname" type="string">

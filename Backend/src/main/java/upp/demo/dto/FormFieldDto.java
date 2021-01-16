@@ -3,6 +3,7 @@ package upp.demo.dto;
 import lombok.Data;
 import org.camunda.bpm.engine.form.FormType;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Data
@@ -16,6 +17,8 @@ public class FormFieldDto {
 	private String typeName;
 
 	private List<String> availableValues;
+
+	private HashMap<String, String> constraints;
 
 	private Boolean readOnly;
 

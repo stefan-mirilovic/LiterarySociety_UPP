@@ -3,12 +3,12 @@
     <div class="container jumbotron w-50 bg-light text-white">
       <h2 class="text-primary">Registration form</h2>
       <br>
-      <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+      <form [formGroup]="form">
         <div *ngFor="let field of formFields" [ngSwitch]="field.input">
-          <app-text-input-field [field]="field" [form]="f" *ngSwitchCase="['text']"></app-text-input-field>
-          <app-text-input-field [field]="field" [form]="f" *ngSwitchCase="['password']"></app-text-input-field>
-          <app-text-input-field [field]="field" [form]="f" *ngSwitchCase="['email']"></app-text-input-field>
-          <app-enum-select-field [field]="field" [form]="f" [enumValues]="enumValues" *ngSwitchCase="['enum']"></app-enum-select-field>
+          <app-text-input-field [field]="field" [form]="form" *ngSwitchCase="['text']"></app-text-input-field>
+          <app-text-input-field [field]="field" [form]="form" *ngSwitchCase="['password']"></app-text-input-field>
+          <app-text-input-field [field]="field" [form]="form" *ngSwitchCase="['email']"></app-text-input-field>
+          <app-enum-select-field [field]="field" [form]="form" [enumValues]="enumValues" *ngSwitchCase="['enum']"></app-enum-select-field>
         </div>
         <div>
           <input type="submit" class="btn btn-primary float-right" value="Register">

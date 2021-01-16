@@ -9,12 +9,14 @@ import upp.demo.dto.FormFieldDto;
 import upp.demo.dto.PropertyDto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class FormFieldsHelper {
 	private final RuntimeService runtimeService;
+	private final ValidationHelper validationHelper;
 	private final upp.demo.helper.PropertyHelper propertyHelper;
 
 	public List<FormFieldDto> convertToDto(String processInstanceId, List<FormField> formFields){
@@ -22,13 +24,13 @@ public class FormFieldsHelper {
 
 		for (FormField formField : formFields) {
 			PropertyDto propertyDto = propertyHelper.findAvailableProperties(formField.getProperties());
-
+			HashMap<String,String> constraintsMap = validationHelper.getValidationConstraints(formField.getValidationConstraints());
 			FormFieldDto formFieldDto = new FormFieldDto();
 			formFieldDto.setId(formField.getId());
 			formFieldDto.setType(formField.getType());
 			formFieldDto.setTypeName(formField.getTypeName());
 			formFieldDto.setLabel(formField.getLabel());
-
+			formFieldDto.setConstraints(constraintsMap);
 			formFieldDto.setAvailableValues(propertyDto.getValues());
 			formFieldDto.setConstraint(propertyDto.getConstraints());
 			formFieldDto.setCustom(propertyDto.getCustom());
