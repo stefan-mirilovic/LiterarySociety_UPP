@@ -10,6 +10,7 @@ import { TextInputFieldComponent } from './forms/text-input-field/text-input-fie
 import { EnumSelectFieldComponent } from './forms/enum-select-field/enum-select-field.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { ReaderComponent } from './reader/reader.component';
+import { WriterComponent } from './writer/writer.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ReaderComponent } from './reader/reader.component';
     TextInputFieldComponent,
     EnumSelectFieldComponent,
     ReaderComponent,
+    WriterComponent,
   ],
   imports: [
     BrowserModule,

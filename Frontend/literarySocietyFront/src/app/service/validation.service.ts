@@ -11,19 +11,18 @@ export class ValidationService {
   createFormGroup(fieldId: any) {
     const group: any = {};
     let validators = [];
+
     validators.push(Validators.required);
     validators.push(Validators.minLength(fieldId.constraints.minlength));
     validators.push(Validators.maxLength(fieldId.constraints.maxlength));
     if(fieldId.id === "email"){
       validators.push(Validators.email)
     }
-    if(fieldId.id ==="password"){
+    else if(fieldId.id==="password"){
       validators.push(Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'));
     }
-    if(fieldId.constraint ==="notnumber"){
-      validators.push(Validators.pattern("^[0-9]*$"));
-    }
-    return validators;
+
+    return new FormControl('',validators);
   }
 
   getValidateEmail(form, field){

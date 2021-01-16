@@ -8,7 +8,7 @@
     <bpmn:endEvent id="Event_1atkf3p">
       <bpmn:incoming>Flow_1vkxsum</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_09gvwae" sourceRef="registrationReaderForm" targetRef="createRequest" />
+    <bpmn:sequenceFlow id="Flow_09gvwae" sourceRef="registrationReaderForm" targetRef="Activity_1wt3ros" />
     <bpmn:userTask id="registrationReaderForm" name="Register Reader">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -24,13 +24,13 @@
           </camunda:formField>
           <camunda:formField id="password" label="Password" type="string">
             <camunda:properties>
-              <camunda:property id="input" value="password" />
+              <camunda:property id="input" value="text" />
               <camunda:property id="constraint" value="password" />
             </camunda:properties>
           </camunda:formField>
           <camunda:formField id="email" label="Email" type="string">
             <camunda:properties>
-              <camunda:property id="input" value="email" />
+              <camunda:property id="input" value="text" />
               <camunda:property id="constraint" value="email" />
             </camunda:properties>
           </camunda:formField>
@@ -79,49 +79,67 @@
       <bpmn:incoming>Flow_1cnb2y7</bpmn:incoming>
       <bpmn:outgoing>Flow_09gvwae</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_13svgou" sourceRef="createRequest" targetRef="emailApprove" />
     <bpmn:serviceTask id="createRequest" name="Create request for registration" camunda:class="upp.demo.service.impl.RegisterReaderRequestService">
-      <bpmn:incoming>Flow_09gvwae</bpmn:incoming>
-      <bpmn:outgoing>Flow_13svgou</bpmn:outgoing>
+      <bpmn:incoming>Flow_1scxs04</bpmn:incoming>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_1vkxsum" sourceRef="emailApprove" targetRef="Event_1atkf3p" />
     <bpmn:userTask id="emailApprove" name="EmailApprove">
-      <bpmn:incoming>Flow_13svgou</bpmn:incoming>
+      <bpmn:incoming>Flow_1b2j49f</bpmn:incoming>
       <bpmn:outgoing>Flow_1vkxsum</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_1wt3ros" name="Validation check" camunda:class="upp.demo.service.task.DataValidationService">
+      <bpmn:incoming>Flow_09gvwae</bpmn:incoming>
+      <bpmn:outgoing>Flow_1scxs04</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1b2j49f" sourceRef="Event_18jgk5b" targetRef="emailApprove" />
+    <bpmn:intermediateCatchEvent id="Event_18jgk5b">
+      <bpmn:outgoing>Flow_1b2j49f</bpmn:outgoing>
+      <bpmn:linkEventDefinition id="LinkEventDefinition_09zo2p4" name="" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1scxs04" sourceRef="Activity_1wt3ros" targetRef="createRequest" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="readerRegistration">
       <bpmndi:BPMNEdge id="Flow_1vkxsum_di" bpmnElement="Flow_1vkxsum">
-        <di:waypoint x="690" y="117" />
-        <di:waypoint x="732" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_13svgou_di" bpmnElement="Flow_13svgou">
-        <di:waypoint x="540" y="117" />
-        <di:waypoint x="590" y="117" />
+        <di:waypoint x="1040" y="117" />
+        <di:waypoint x="1072" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_09gvwae_di" bpmnElement="Flow_09gvwae">
         <di:waypoint x="410" y="117" />
-        <di:waypoint x="440" y="117" />
+        <di:waypoint x="510" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1cnb2y7_di" bpmnElement="Flow_1cnb2y7">
         <di:waypoint x="215" y="117" />
         <di:waypoint x="310" y="117" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1b2j49f_di" bpmnElement="Flow_1b2j49f">
+        <di:waypoint x="898" y="117" />
+        <di:waypoint x="940" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1scxs04_di" bpmnElement="Flow_1scxs04">
+        <di:waypoint x="610" y="117" />
+        <di:waypoint x="720" y="117" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1atkf3p_di" bpmnElement="Event_1atkf3p">
-        <dc:Bounds x="732" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_017gyl8_di" bpmnElement="registrationReaderForm">
         <dc:Bounds x="310" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1atkf3p_di" bpmnElement="Event_1atkf3p">
+        <dc:Bounds x="1072" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0rb2k7c_di" bpmnElement="createRequest">
-        <dc:Bounds x="440" y="77" width="100" height="80" />
+        <dc:Bounds x="720" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1yhrdal_di" bpmnElement="emailApprove">
-        <dc:Bounds x="590" y="77" width="100" height="80" />
+        <dc:Bounds x="940" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1izbush_di" bpmnElement="Event_18jgk5b">
+        <dc:Bounds x="862" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_19a9qag_di" bpmnElement="Activity_1wt3ros">
+        <dc:Bounds x="510" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import upp.demo.dto.FormSubmissionDto;
 import upp.demo.enumeration.RegisterRequestStatus;
 import upp.demo.enumeration.RoleEnum;
+import upp.demo.globals.Processes;
+import upp.demo.globals.PropertyName;
 import upp.demo.model.RegisterReaderRequest;
 import upp.demo.model.User;
 import upp.demo.repository.RegisterReaderRequestRepository;
@@ -61,7 +63,7 @@ public class RegisterReaderRequestService implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        List<FormSubmissionDto> registration = (List<FormSubmissionDto>)delegateExecution.getVariable("registration");
+        List<FormSubmissionDto> registration = (List<FormSubmissionDto>)delegateExecution.getVariable(PropertyName.FormName.FORM_DATA);
         RegisterReaderRequest registerReaderRequest = conversionService.convert(registration, RegisterReaderRequest.class);
         registerReaderRequest.setGenres(new ArrayList<>());
         registerReaderRequest.setStatus(RegisterRequestStatus.PENDING);

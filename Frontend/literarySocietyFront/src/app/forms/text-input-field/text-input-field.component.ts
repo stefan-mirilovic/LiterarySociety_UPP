@@ -14,16 +14,14 @@ export class TextInputFieldComponent implements OnInit {
 
     @Input()
     form: FormGroup;
+    public fieldTextType: boolean;
 
     constructor(private validationService:ValidationService) {
     }
 
     ngOnInit(): void {
         var min: number=+this.field.constraints.minlength;
-        console.log(this.field.id,this.validationService.createFormGroup(this.field))
-        this.form = new FormGroup({
-            [this.field.id]: new FormControl(this.field.id,this.validationService.createFormGroup(this.field)),
-        });
+        this.form.addControl(this.field.id,this.validationService.createFormGroup(this.field));
     }
     get validateEmail(){
         return this.validationService.getValidateEmail(this.form,this.field);
@@ -43,5 +41,9 @@ export class TextInputFieldComponent implements OnInit {
 
     get password(){
         return this.validationService.getValidatePattern(this.form,this.field);
+    }
+
+    toggleFieldTextType() {
+        this.fieldTextType = !this.fieldTextType;
     }
 }

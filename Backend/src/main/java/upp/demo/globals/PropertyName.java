@@ -10,4 +10,8 @@ public interface PropertyName {
 	interface CustomNames {
 		String GENRES = "genres";
 	}
+
+	interface FormName{
+		String FORM_DATA ="formData";
+	}
 }

@@ -1,6 +1,18 @@
 <div [formGroup]="form">
-    <label for="{{field.id}}" class="text-primary">{{field.label}}</label>
-    <input type="text" id="{{field.id}}" name={{field.id}} class="form-control" [formControlName]="field.id"  ngModel  placeholder="{{field.label}}" >
+    <div *ngIf="field.id!='password'">
+        <label for="{{field.id}}" class="text-primary">{{field.label}}</label>
+        <input type="text" id="{{field.id}}" name={{field.id}} class="form-control" [formControlName]="field.id"  ngModel  placeholder="{{field.label}}" >
+    </div>
+
+    <label for="{{field.id}}" *ngIf="field.id=='password'" class="text-primary">{{field.label}}</label>
+    <div class="input-group" *ngIf="field.id=='password'">
+        <input [type]="fieldTextType ? 'text' : 'password'" id="{{field.id}}" name={{field.id}} class="form-control" [formControlName]="field.id"  ngModel  placeholder="{{field.label}}" >
+        <div class="input-group-append" (click)="toggleFieldTextType()">
+          <span class="input-group-text">
+            <i class="fa fa-eye-slash"></i>
+          </span>
+        </div>
+    </div>
 
     <span class="error" *ngIf="form.get(field.id).hasError('required')">{{field.id}} is required</span>
     <span class="error" *ngIf="form.get(field.id).hasError('email')">{{field.id}} is not in good format</span>

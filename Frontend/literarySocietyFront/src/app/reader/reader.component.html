@@ -1,1 +1,4 @@
-<p>reader works!</p>
+<div>
+    <app-register [taskId]="taskId" *ngIf="!loading" [formName]="'Reader registration'"></app-register>
+    <p *ngIf="loading">Loading...</p>
+</div>

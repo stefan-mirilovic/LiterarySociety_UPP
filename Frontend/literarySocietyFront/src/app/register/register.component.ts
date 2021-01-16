@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {RegisterService} from "../service/register.service";
 import {Genre} from "../model/genre";
 import {GenreService} from "../service/genre.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../service/validation.service";
 
 @Component({
@@ -11,38 +11,35 @@ import {ValidationService} from "../service/validation.service";
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-    genreList : Genre[];
-    public formField = [];
     public formFieldsDto = null;
     public formFields = [];
-    public processInstance = "";
     public enumValues = [];
     public isBeta = false;
-    tasks = [];
-    public form: FormGroup;
+    @Input() taskId:string;
+    @Input() formName:string;
 
+    form=this.fb.group({
 
+    });
 
-    constructor(private registerService:RegisterService, private genreService:GenreService, private validationService:ValidationService) { }
+    constructor(private registerService:RegisterService, private genreService:GenreService, private validationService:ValidationService, private fb: FormBuilder) { }
 
     ngOnInit(): void {
+        this.registerService.getFormData(this.taskId).subscribe(
+            res=>{
+                this.renderForm(this.taskId);
+            }
+        )
 
-        this.registerService.startProcess().subscribe(
-            data => {
-                console.log(data);
-                this.renderForm(data.taskId);
-                console.log(this.enumValues);
-            });
     }
 
-    renderForm(processInstanceId){
-        this.registerService.getFormData(processInstanceId).subscribe(
+    renderForm(taskId){
+        this.registerService.getFormData(taskId).subscribe(
             res => {
                 console.log(res);
                 this.formFieldsDto = res;
                 this.formFields = res.formFields;
-                this.processInstance = res.processInstanceId;
+                this.taskId = res.processInstanceId;
                 this.formFields.forEach( (field) => {
                     if (field.type.name == 'enum') {
                         this.enumValues = Object.keys(field.type.values);
@@ -52,13 +49,12 @@ export class RegisterComponent implements OnInit {
         );
     }
 
-    onSubmit(value: any, f: any) {
+    onSubmit() {
         let o = new Array();
-        for (var property in value){
-            o.push({fieldId : property, fieldValue : value[property]});
+        for(var property in this.form.value){
+            o.push({fieldId : property, fieldValue : this.form.value[property]});
         }
         console.log(o);
-        console.log(this.formFieldsDto.taskId);
         this.registerService.registerReader(o,this.formFieldsDto.taskId).subscribe();
     }
 
