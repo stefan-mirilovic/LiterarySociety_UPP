@@ -16,7 +16,7 @@ public class FormFieldDto {
 
 	private String typeName;
 
-	private List<String> availableValues;
+	private List<EnumDto> availableValues;
 
 	private HashMap<String, String> constraints;
 

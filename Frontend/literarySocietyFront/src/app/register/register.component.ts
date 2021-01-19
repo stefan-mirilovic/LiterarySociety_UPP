@@ -4,6 +4,7 @@ import {Genre} from "../model/genre";
 import {GenreService} from "../service/genre.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../service/validation.service";
+import {isLineBreak} from "codelyzer/angular/sourceMappingVisitor";
 
 @Component({
     selector: 'app-register',
@@ -14,9 +15,11 @@ export class RegisterComponent implements OnInit {
     public formFieldsDto = null;
     public formFields = [];
     public enumValues = [];
+    public load:boolean;
     public isBeta = false;
     @Input() taskId:string;
     @Input() formName:string;
+
 
     form=this.fb.group({
 
@@ -25,6 +28,7 @@ export class RegisterComponent implements OnInit {
     constructor(private registerService:RegisterService, private genreService:GenreService, private validationService:ValidationService, private fb: FormBuilder) { }
 
     ngOnInit(): void {
+        this.load=true;
         this.registerService.getFormData(this.taskId).subscribe(
             res=>{
                 this.renderForm(this.taskId);
@@ -41,10 +45,11 @@ export class RegisterComponent implements OnInit {
                 this.formFields = res.formFields;
                 this.taskId = res.processInstanceId;
                 this.formFields.forEach( (field) => {
-                    if (field.type.name == 'enum') {
-                        this.enumValues = Object.keys(field.type.values);
+                    if (field.type.name == 'enum'&&field.input=='radio') {
+                        this.enumValues.push(Object.keys(field.type.values));
                     }
                 });
+                this.load=false;
             }
         );
     }
@@ -52,16 +57,28 @@ export class RegisterComponent implements OnInit {
     onSubmit() {
         let o = new Array();
         for(var property in this.form.value){
-            o.push({fieldId : property, fieldValue : this.form.value[property]});
+            if(property=='genre'){
+                o.push({fieldId: property, fieldValue : this.transform(this.form.value[property])});
+                console.log(this.transform(this.form.value[property]));
+            }
+            else{
+                o.push({fieldId : property, fieldValue : this.form.value[property]});
+            }
         }
         console.log(o);
         this.registerService.registerReader(o,this.formFieldsDto.taskId).subscribe();
     }
 
-    onRoleChange(value: any){
-        if(value=="BetaReader")
-            this.isBeta=true;
-        if(value=="Reader")
-            this.isBeta=false;
+    public transform(input:Array<any>, sep = ','): string {
+        return input.join(sep);
+    }
+
+    setBeta(event) {
+        console.log(event);
+        this.isBeta=event;
+    }
+
+    isValidRadio(){
+
     }
 }

@@ -20,7 +20,6 @@ export class TextInputFieldComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        var min: number=+this.field.constraints.minlength;
         this.form.addControl(this.field.id,this.validationService.createFormGroup(this.field));
     }
     get validateEmail(){

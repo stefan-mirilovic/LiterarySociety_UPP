@@ -36,7 +36,12 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public List<Task> getAllByProcess(String processInstanceId) {
-		return null;
+		List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstanceId).list();
+
+		if (!tasks.isEmpty()) {
+			final Task nextTask = tasks.iterator().next();
+		}
+		return tasks;
 	}
 
 	@Override

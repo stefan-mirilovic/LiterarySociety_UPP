@@ -1,0 +1,13 @@
+<div [formGroup]="form">
+    <br>
+    <label for={{field.id}} class="text-primary">{{field.label}}</label>
+    <div *ngFor="let enum of enumList" >
+        <div >
+        <input type="radio" id="{{field.id}}" value="{{enum}}" name="{{field.id}}" formControlName="{{field.id}}" (change)="changeRadio($event)"  />
+            <span class="text-dark text-center"> {{enum}}</span>
+        </div>
+
+    </div>
+    <span class="error" *ngIf="form.get(field.id).hasError('required')">{{field.id}} is required</span>
+</div>
+<br>

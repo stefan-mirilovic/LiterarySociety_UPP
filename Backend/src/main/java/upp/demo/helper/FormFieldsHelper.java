@@ -27,6 +27,7 @@ public class FormFieldsHelper {
 			PropertyDto propertyDto = propertyHelper.findAvailableProperties(formField.getProperties());
 			HashMap<String, String> constraintsMap = validationHelper.getValidationConstraints(formField.getValidationConstraints());
 			FormFieldDto formFieldDto = new FormFieldDto();
+
 			formFieldDto.setId(formField.getId());
 			formFieldDto.setType(formField.getType());
 			formFieldDto.setTypeName(formField.getTypeName());

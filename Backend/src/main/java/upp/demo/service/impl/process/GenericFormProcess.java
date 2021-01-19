@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.FormService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.form.TaskFormData;
-import org.camunda.bpm.engine.rest.dto.task.TaskDto;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.feel.syntaxtree.For;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import upp.demo.dto.FormDto;
 
 import upp.demo.dto.FormSubmissionDto;
+import upp.demo.dto.TaskDto;
 import upp.demo.globals.PropertyName;
 import upp.demo.helper.FormFieldsHelper;
 import upp.demo.service.ProcessInstanceService;
@@ -21,6 +21,7 @@ import upp.demo.service.TaskService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -70,11 +71,13 @@ public class GenericFormProcess implements ProcessInstanceService {
 
 	@Override
 	public List<TaskDto> findNextTasks(String processId) {
-		return null;
+		List<Task> tasks = taskService.getAllByProcess(processId);
+		return tasks.stream().map(t -> new TaskDto(t.getId(), t.getName(), t.getAssignee())).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<TaskDto> getAllTasks(String name) {
-		return null;
+		List<Task> tasks = taskService.getAllByUsername(name);
+		return tasks.stream().map(t -> new TaskDto(t.getId(), t.getName(), t.getAssignee())).collect(Collectors.toList());
 	}
 }

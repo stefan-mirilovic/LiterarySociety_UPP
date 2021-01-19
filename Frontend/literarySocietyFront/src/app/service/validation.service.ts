@@ -25,6 +25,15 @@ export class ValidationService {
     return new FormControl('',validators);
   }
 
+  radioButtonValidation(fieldId, isBeta){
+    let validators = [];
+    if(isBeta){
+      console.log("TEST");
+      validators.push(Validators.required);
+    }
+    return new FormControl('',validators);
+  }
+
   getValidateEmail(form, field){
     if(form.controls[field.id].hasError('email')){
       return true;

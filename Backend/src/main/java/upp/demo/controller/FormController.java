@@ -1,12 +1,12 @@
 package upp.demo.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.camunda.bpm.engine.rest.dto.task.TaskDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import upp.demo.dto.FormDto;
 import upp.demo.dto.FormSubmissionDto;
+import upp.demo.dto.TaskDto;
 import upp.demo.service.impl.RegisterReaderRequestService;
 import upp.demo.service.impl.process.GenericFormProcess;
 
@@ -34,9 +34,10 @@ public class FormController {
 	}
 
 	@PostMapping("/submitForm/{taskId}")
-	public void registerReader(@RequestBody List<FormSubmissionDto> formSubmissionList, @PathVariable("taskId") String taskId) {
+	public ResponseEntity registerReader(@RequestBody List<FormSubmissionDto> formSubmissionList, @PathVariable("taskId") String taskId) {
 		String processId = genericFormProcess.submitForm(taskId, formSubmissionList);
 		List<TaskDto> tasks = genericFormProcess.findNextTasks(processId);
+		return tasks.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(tasks.get(0), HttpStatus.OK);
 	}
 
 	@GetMapping("approve/{id}/{approveCode}")

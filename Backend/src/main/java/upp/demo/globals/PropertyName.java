@@ -11,7 +11,17 @@ public interface PropertyName {
 		String GENRES = "genres";
 	}
 
-	interface FormName{
-		String FORM_DATA ="formData";
+	interface FormName {
+		String FORM_DATA = "formData";
+	}
+
+	interface VariableName {
+		String VALID = "valid";
+		String APPROVE_CODE = "approveCode";
+		String REGISTRATION_REQUEST = "registrationId";
+	}
+
+	interface Validation {
+		String EMAIL = "email";
 	}
 }

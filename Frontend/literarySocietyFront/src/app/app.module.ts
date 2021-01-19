@@ -11,6 +11,11 @@ import { EnumSelectFieldComponent } from './forms/enum-select-field/enum-select-
 import {ReactiveFormsModule} from "@angular/forms";
 import { ReaderComponent } from './reader/reader.component';
 import { WriterComponent } from './writer/writer.component';
+import { BookComponent } from './book/book.component';
+import { TableComponent } from './table/table.component';
+import { TableFieldComponent } from './forms/table-field/table-field.component';
+import { PdfInputFieldComponent } from './forms/pdf-input-field/pdf-input-field.component';
+import { RadioButtonFieldComponent } from './forms/radio-button-field/radio-button-field.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +25,18 @@ import { WriterComponent } from './writer/writer.component';
     EnumSelectFieldComponent,
     ReaderComponent,
     WriterComponent,
+    BookComponent,
+    TableComponent,
+    TableFieldComponent,
+    PdfInputFieldComponent,
+    RadioButtonFieldComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
