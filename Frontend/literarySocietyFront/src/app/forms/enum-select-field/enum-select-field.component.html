@@ -1,0 +1,17 @@
+<div *ngIf="field.custom=='single.select'">
+    <label for={{field.id}} class="text-primary">{{field.label}}</label>
+    <select name="{{field.id}}" id="{{field.id}}" ngModel class="form-control">
+        <option *ngFor="let val of enumValues">
+            {{field.type.values[val]}}
+        </option>
+    </select>
+</div>
+<div *ngIf="field.constraint=='multi.select'&&check()" [formGroup]="form">
+    <label for={{field.id}} class="text-primary">{{field.label}}</label>
+    <select name="{{field.id}}" ngModel class="form-control" formControlName="{{field.id}}"  multiple placeholder="Select">
+        <option *ngFor="let val of field.availableValues">
+            {{val.value}}
+        </option>
+    </select>
+    <span class="error text-danger" *ngIf="form.get(field.id).hasError('required')">{{field.id}} is required</span>
+</div>

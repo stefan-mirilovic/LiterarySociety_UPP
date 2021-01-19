@@ -10,12 +10,16 @@ export class RegisterService {
 
   constructor(private http : HttpClient) { }
 
+  public startProcess(processName): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/startProcess/${processName}`);
+  }
+
   public registerReader(data: any, taskId:string) {
-    return this.http.post(`${environment.baseUrl}/register/reader/${taskId}`, data);
+    return this.http.post(`${environment.baseUrl}/submitForm/${taskId}`, data);
   }
 
   // @ts-ignore
-  public getFormData(): Observable <any> {
-    return this.http.get(`${environment.baseUrl}/render/form`);
+  public getFormData(taskId): Observable <any> {
+    return this.http.get(`${environment.baseUrl}/getForm/${taskId}`);
   }
 }

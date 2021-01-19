@@ -9,6 +9,7 @@ import org.camunda.bpm.engine.form.TaskFormData;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.springframework.stereotype.Service;
+import upp.demo.dto.FormDto;
 import upp.demo.dto.FormSubmissionDto;
 import upp.demo.dto.RegistrationFormDto;
 import upp.demo.service.RegistrationService;
@@ -27,9 +28,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private final FormService formService;
 
 	@Override
+	public FormDto startProcess() {
+		return null;
+	}
+
+	@Override
 	public RegistrationFormDto getForm() {
 		RegistrationFormDto registrationForm = new RegistrationFormDto();
-		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("Process_14uovfx");
+		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("readerRegistration");
 
 		Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list().get(0);
 
