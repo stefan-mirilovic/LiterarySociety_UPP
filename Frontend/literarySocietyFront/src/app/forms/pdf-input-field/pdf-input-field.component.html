@@ -1,4 +1,9 @@
-<div>
-    <label for="{{field.id}}" class="text-primary">{{field.label}}</label>
-    <input id="{{field.id}}" type="file" class="text-info  form-control-file">
+<div class="custom-file" [formGroup]="form">
+    <div>
+        <label for="{{field.id}}" class="custom-file-label">{{path}}</label>
+        <input id="{{field.id}}" accept=".pdf*" formControlName="{{field.id}}" type="file" (change)="textFileAdded($event)"  class="custom-file-input">
+        <span class="error" *ngIf="form.get(field.id).hasError('required')">{{field.id}} is required</span>
+        <span class="text-info" *ngIf="!form.get(field.id).hasError('required')">File added</span>
+    </div>
+    <br>
 </div>
