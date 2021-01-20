@@ -19,6 +19,7 @@ public interface PropertyName {
 		String VALID = "valid";
 		String APPROVE_CODE = "approveCode";
 		String REGISTRATION_REQUEST = "registrationId";
+		String PROCESS_ID = "processId";
 	}
 
 	interface Validation {

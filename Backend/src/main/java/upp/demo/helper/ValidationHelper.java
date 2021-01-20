@@ -15,22 +15,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ValidationHelper {
 
-	public String getValidation(List<FormSubmissionDto>form){
-		String email=null;
-		for(FormSubmissionDto submissionDto: form){
-			if(submissionDto.getFieldId().equals(PropertyName.Validation.EMAIL)){
-				email= (String) submissionDto.getFieldValue();
+	public String getValidation(List<FormSubmissionDto> form) {
+		String email = null;
+		for (FormSubmissionDto submissionDto : form) {
+			if (submissionDto.getFieldId().equals(PropertyName.Validation.EMAIL)) {
+				email = submissionDto.getFieldValue();
 				break;
 			}
 		}
 		return email;
 	}
 
-	public HashMap<String, String> getValidationConstraints(List<FormFieldValidationConstraint> constraintList){
-		HashMap<String,String> constraints = new HashMap<>();
-		if(!constraintList.isEmpty() && constraintList != null){
-			for(FormFieldValidationConstraint fc: constraintList){
-				constraints.put(fc.getName(),fc.getConfiguration().toString());
+	public HashMap<String, String> getValidationConstraints(List<FormFieldValidationConstraint> constraintList) {
+		HashMap<String, String> constraints = new HashMap<>();
+		if (!constraintList.isEmpty() && constraintList != null) {
+			for (FormFieldValidationConstraint fc : constraintList) {
+				constraints.put(fc.getName(), fc.getConfiguration().toString());
 			}
 		}
 		return constraints;

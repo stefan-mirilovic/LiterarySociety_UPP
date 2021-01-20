@@ -24,7 +24,7 @@ public class GenericTableProcess implements ProcessInstanceService {
 	}
 
 	@Override
-	public List<TaskDto> findNextTasks(String processId) {
+	public FormDto findNextTasks(String process) {
 		return null;
 	}
 

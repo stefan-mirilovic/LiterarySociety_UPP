@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import upp.demo.dto.FormDto;
 import upp.demo.dto.FormSubmissionDto;
 import upp.demo.dto.TaskDto;
+import upp.demo.globals.PropertyName;
 import upp.demo.service.impl.RegisterReaderRequestService;
 import upp.demo.service.impl.process.GenericFormProcess;
 
+import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 import java.util.List;
@@ -24,7 +26,9 @@ public class FormController {
 	private final RegisterReaderRequestService registerReaderRequestService;
 
 	@GetMapping("/startProcess/{processName}")
-	public ResponseEntity<FormDto> processStart(@PathVariable("processName") String processName) {
+	public ResponseEntity<FormDto> processStart(@PathVariable("processName") String processName,HttpSession session) {
+		FormDto formDto = genericFormProcess.startProcess(processName);
+		session.setAttribute(PropertyName.VariableName.PROCESS_ID,formDto.getProcessInstanceId());
 		return new ResponseEntity<>(genericFormProcess.startProcess(processName), HttpStatus.OK);
 	}
 
@@ -34,10 +38,8 @@ public class FormController {
 	}
 
 	@PostMapping("/submitForm/{taskId}")
-	public ResponseEntity registerReader(@RequestBody List<FormSubmissionDto> formSubmissionList, @PathVariable("taskId") String taskId) {
-		String processId = genericFormProcess.submitForm(taskId, formSubmissionList);
-		List<TaskDto> tasks = genericFormProcess.findNextTasks(processId);
-		return tasks.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(tasks.get(0), HttpStatus.OK);
+	public void registerReader(@RequestBody List<FormSubmissionDto> formSubmissionList, @PathVariable("taskId") String taskId) {
+		genericFormProcess.submitForm(taskId, formSubmissionList);
 	}
 
 	@GetMapping("approve/{id}/{approveCode}")

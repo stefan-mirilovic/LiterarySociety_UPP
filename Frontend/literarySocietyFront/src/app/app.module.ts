@@ -16,6 +16,7 @@ import { TableComponent } from './table/table.component';
 import { TableFieldComponent } from './forms/table-field/table-field.component';
 import { PdfInputFieldComponent } from './forms/pdf-input-field/pdf-input-field.component';
 import { RadioButtonFieldComponent } from './forms/radio-button-field/radio-button-field.component';
+import { WriterDocumentComponent } from './writer-document/writer-document.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { RadioButtonFieldComponent } from './forms/radio-button-field/radio-butt
     TableFieldComponent,
     PdfInputFieldComponent,
     RadioButtonFieldComponent,
+    WriterDocumentComponent,
   ],
   imports: [
     BrowserModule,
