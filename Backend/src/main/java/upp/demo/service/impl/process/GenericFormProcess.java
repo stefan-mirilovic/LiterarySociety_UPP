@@ -6,7 +6,6 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.form.TaskFormData;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
-import org.camunda.feel.syntaxtree.For;
 import org.springframework.stereotype.Service;
 import upp.demo.dto.FormDto;
 
@@ -15,11 +14,10 @@ import upp.demo.dto.TaskDto;
 import upp.demo.globals.PropertyName;
 import upp.demo.helper.FormFieldsHelper;
 import upp.demo.service.ProcessInstanceService;
-import upp.demo.globals.Processes.*;
 import upp.demo.service.ProcessService;
 import upp.demo.service.TaskService;
 
-import java.util.ArrayList;
+import java.text.Normalizer;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,9 +68,13 @@ public class GenericFormProcess implements ProcessInstanceService {
 
 
 	@Override
-	public List<TaskDto> findNextTasks(String processId) {
+	public FormDto findNextTasks(String processId) {
 		List<Task> tasks = taskService.getAllByProcess(processId);
-		return tasks.stream().map(t -> new TaskDto(t.getId(), t.getName(), t.getAssignee())).collect(Collectors.toList());
+		Task currentTask = tasks.get(0);
+		FormDto formDto = new FormDto();
+		formDto.setTaskId(currentTask.getId());
+		formDto.setProcessInstanceId(processId);
+		return formDto;
 	}
 
 	@Override

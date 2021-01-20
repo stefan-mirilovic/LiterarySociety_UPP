@@ -14,7 +14,7 @@ public interface ProcessInstanceService {
 
 	String submitForm(String taskId, List<FormSubmissionDto> submissionDto);
 
-	List<TaskDto> findNextTasks(String processId);
+	FormDto findNextTasks(String processId);
 
 	List<TaskDto> getAllTasks(String name);
 }

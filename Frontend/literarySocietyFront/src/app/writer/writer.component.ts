@@ -19,8 +19,9 @@ export class WriterComponent implements OnInit {
     this.processService.startProcess(processes.writer).subscribe(
         data => {
           this.formFieldsDto=data;
+          localStorage.setItem('processId',this.formFieldsDto.processInstanceId);
           this.taskId=data.taskId;
-          console.log(this.taskId);
+          console.log(this.formFieldsDto);
           this.loading=false;
         });
   }

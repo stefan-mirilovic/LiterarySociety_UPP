@@ -22,7 +22,7 @@ export class RadioButtonFieldComponent implements OnInit {
   }
 
   changeRadio(event) {
-    if(this.form.value.role=='BetaReader'){
+    if(this.form.value.role=='BetaReader'||this.form.value.role=='Writer'){
       this.isBeta.emit(true);
     }
     else {

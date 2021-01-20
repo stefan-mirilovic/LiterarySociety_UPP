@@ -79,7 +79,7 @@
       <bpmn:incoming>Flow_172dah2</bpmn:incoming>
       <bpmn:outgoing>Flow_09gvwae</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="createRequest" name="Create request for registration" camunda:class="upp.demo.service.task.RegistrationApprovedService">
+    <bpmn:serviceTask id="createRequest" name="Create request for registration" camunda:class="upp.demo.service.task.RegistrationApprovedReaderService">
       <bpmn:incoming>Flow_1sejoya</bpmn:incoming>
       <bpmn:outgoing>Flow_13hxhr5</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -103,7 +103,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valid==false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_172dah2" sourceRef="Gateway_0t5ljon" targetRef="registrationReaderForm" />
-    <bpmn:serviceTask id="emailApprove" name="EmailApprove" camunda:class="upp.demo.service.task.EmailApproveService">
+    <bpmn:serviceTask id="emailApprove" name="EmailApprove" camunda:class="upp.demo.service.task.EmailApproveReaderService">
       <bpmn:incoming>Flow_06dw4fm</bpmn:incoming>
       <bpmn:outgoing>Flow_1vkxsum</bpmn:outgoing>
     </bpmn:serviceTask>

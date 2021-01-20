@@ -1,0 +1,5 @@
+<div>
+    <app-register [taskId]="taskId" *ngIf="!loading" [formName]="'Writer registration'"></app-register>
+    <p *ngIf="loading">Loading...</p>
+</div>
+

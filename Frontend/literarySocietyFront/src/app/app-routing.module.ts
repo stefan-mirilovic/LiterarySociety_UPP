@@ -5,6 +5,7 @@ import {ReaderComponent} from "./reader/reader.component";
 import {WriterComponent} from "./writer/writer.component";
 import {BookComponent} from "./book/book.component";
 import {TableComponent} from "./table/table.component";
+import {WriterDocumentComponent} from "./writer-document/writer-document.component";
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'writerRegistration', component: WriterComponent},
   { path: 'book', component: BookComponent},
   { path: 'table', component: TableComponent},
+  { path: 'writer/document', component: WriterDocumentComponent},
 ];
 
 @NgModule({
