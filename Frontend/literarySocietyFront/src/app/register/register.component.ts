@@ -5,6 +5,8 @@ import {GenreService} from "../service/genre.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../service/validation.service";
 import {isLineBreak} from "codelyzer/angular/sourceMappingVisitor";
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -19,11 +21,20 @@ export class RegisterComponent implements OnInit {
   public isBeta = false;
   @Input() taskId: string;
   @Input() formName: string;
+  @Input() redirectLink: string;
+  @Input() scsMsg: string;
+  @Input() errMsg: string;
 
 
   form = this.fb.group({});
 
-  constructor(private registerService: RegisterService, private genreService: GenreService, private validationService: ValidationService, private fb: FormBuilder) {
+  constructor(
+    private registerService: RegisterService,
+    private genreService: GenreService,
+    private validationService: ValidationService,
+    private fb: FormBuilder,
+    private router: Router,
+    private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -64,7 +75,25 @@ export class RegisterComponent implements OnInit {
       }
     }
     console.log(o);
-    this.registerService.registerReader(o, this.formFieldsDto.taskId).subscribe();
+    this.registerService.registerReader(o, this.formFieldsDto.taskId).subscribe({
+      next: () => {
+        if (this.redirectLink) {
+          this.router.navigate([this.redirectLink]);
+        }
+        if (this.scsMsg) {
+          this.toastr.success(this.scsMsg)
+        } else {
+          this.toastr.success("Successfully completed!")
+        }
+      },
+      error: () => {
+        if (this.errMsg) {
+          this.toastr.error(this.errMsg)
+        } else {
+          this.toastr.error("An error occured!")
+        }
+      }
+    });
   }
 
   public transform(input: Array<any>, sep = ','): string {

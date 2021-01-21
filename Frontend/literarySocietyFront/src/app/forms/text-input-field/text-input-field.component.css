@@ -9,3 +9,7 @@ input.ng-valid{
 .error{
     color: red;
 }
+
+fa-icon {
+    color: gray;
+}

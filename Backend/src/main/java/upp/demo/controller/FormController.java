@@ -3,15 +3,20 @@ package upp.demo.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import upp.demo.dto.FormDto;
 import upp.demo.dto.FormSubmissionDto;
 import upp.demo.dto.TaskDto;
 import upp.demo.globals.PropertyName;
+import upp.demo.model.User;
 import upp.demo.service.impl.RegisterReaderRequestService;
 import upp.demo.service.impl.process.GenericFormProcess;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.UUID;
 
 import java.util.List;
@@ -26,9 +31,8 @@ public class FormController {
 	private final RegisterReaderRequestService registerReaderRequestService;
 
 	@GetMapping("/startProcess/{processName}")
-	public ResponseEntity<FormDto> processStart(@PathVariable("processName") String processName,HttpSession session) {
+	public ResponseEntity<FormDto> processStart(@PathVariable("processName") String processName) {
 		FormDto formDto = genericFormProcess.startProcess(processName);
-		session.setAttribute(PropertyName.VariableName.PROCESS_ID,formDto.getProcessInstanceId());
 		return new ResponseEntity<>(genericFormProcess.startProcess(processName), HttpStatus.OK);
 	}
 
