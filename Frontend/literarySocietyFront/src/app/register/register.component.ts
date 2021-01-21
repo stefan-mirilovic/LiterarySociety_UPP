@@ -17,8 +17,10 @@ export class RegisterComponent implements OnInit {
     public enumValues = [];
     public load:boolean;
     public isBeta = false;
+    public fileMap=new Map<string, string>();
     @Input() taskId:string;
     @Input() formName:string;
+    public currentFile;
 
 
     form=this.fb.group({
@@ -57,13 +59,20 @@ export class RegisterComponent implements OnInit {
     onSubmit() {
         let o = new Array();
         for(var property in this.form.value){
-            if(property=='genre'){
-                o.push({fieldId: property, fieldValue : this.transform(this.form.value[property])});
-                console.log(this.transform(this.form.value[property]));
+
+            if(this.fileMap.size>0){
+                o.push({fieldId: property, fieldValue: this.convertToBase64(property), isFile:"yes"});
             }
-            else{
-                o.push({fieldId : property, fieldValue : this.form.value[property]});
+            else {
+                if(property=='genre'){
+                    o.push({fieldId: property, fieldValue : this.transform(this.form.value[property])});
+                    console.log(this.transform(this.form.value[property]));
+                }else{
+
+                    o.push({fieldId : property, fieldValue : this.form.value[property]});
+                }
             }
+
         }
         console.log(o);
         this.registerService.registerReader(o,this.formFieldsDto.taskId).subscribe();
@@ -78,7 +87,8 @@ export class RegisterComponent implements OnInit {
         this.isBeta=event;
     }
 
-    isValidRadio(){
-
+    convertToBase64(property) {
+        return this.fileMap.get(property);
     }
+
 }

@@ -12,11 +12,13 @@ import upp.demo.dto.FormDto;
 import upp.demo.dto.FormSubmissionDto;
 import upp.demo.dto.TaskDto;
 import upp.demo.globals.PropertyName;
+import upp.demo.handler.PdfHandler;
 import upp.demo.helper.FormFieldsHelper;
 import upp.demo.service.ProcessInstanceService;
 import upp.demo.service.ProcessService;
 import upp.demo.service.TaskService;
 
+import java.io.IOException;
 import java.text.Normalizer;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GenericFormProcess implements ProcessInstanceService {
 
+	private final PdfHandler pdfHandler;
 	private final TaskService taskService;
 	private final FormService formService;
 	private final ProcessService processService;
@@ -58,7 +61,8 @@ public class GenericFormProcess implements ProcessInstanceService {
 	}
 
 	@Override
-	public String submitForm(String taskId, List<FormSubmissionDto> submissionDto) {
+	public String submitForm(String taskId, List<FormSubmissionDto> submissionDto) throws IOException {
+		List<FormSubmissionDto> changed = pdfHandler.change(submissionDto);
 		Task task = taskService.getById(taskId);
 		String processInstanceId = task.getProcessInstanceId();
 		runtimeService.setVariable(processInstanceId, PropertyName.FormName.FORM_DATA,submissionDto);

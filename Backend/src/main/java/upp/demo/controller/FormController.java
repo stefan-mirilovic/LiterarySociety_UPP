@@ -12,6 +12,7 @@ import upp.demo.service.impl.RegisterReaderRequestService;
 import upp.demo.service.impl.process.GenericFormProcess;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.UUID;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class FormController {
 	}
 
 	@PostMapping("/submitForm/{taskId}")
-	public void registerReader(@RequestBody List<FormSubmissionDto> formSubmissionList, @PathVariable("taskId") String taskId) {
+	public void registerReader(@RequestBody List<FormSubmissionDto> formSubmissionList, @PathVariable("taskId") String taskId) throws IOException {
 		genericFormProcess.submitForm(taskId, formSubmissionList);
 	}
 

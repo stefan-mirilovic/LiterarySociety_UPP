@@ -10,7 +10,7 @@
           <app-text-input-field [field]="field" [form]="form" *ngSwitchCase="['text']"></app-text-input-field>
           <app-radio-button-field [field]="field" [form]="form" (isBeta)="setBeta($event)"  [enumValues]="enumValues" *ngSwitchCase="['radio']"></app-radio-button-field>
           <app-enum-select-field [field]="field" [form]="form" [isBeta]="isBeta" *ngSwitchCase="['enum']" ></app-enum-select-field>
-          <app-pdf-input-field [field]="field" [form]="form" *ngSwitchCase="['file']"></app-pdf-input-field>
+          <app-pdf-input-field [field]="field" [form]="form" *ngSwitchCase="['file']" [filesList]="fileMap" ></app-pdf-input-field>
         </div>
         <br>
         <div>
