@@ -22,4 +22,8 @@ export class RegisterService {
   public getFormData(taskId): Observable <any> {
     return this.http.get(`${environment.baseUrl}/getForm/${taskId}`);
   }
+
+  public confirmAccount(id: number, uuid:string) {
+    return this.http.get(`${environment.baseUrl}/approve/${id}/${uuid}`, {responseType: 'text'});
+  }
 }

@@ -11,7 +11,11 @@ export class WriterComponent implements OnInit {
   public formFieldsDto = null;
   public taskId:any;
   public loading:boolean;
-  public process
+  public process;
+  public redirectLink = "/login";
+  public scsMsg = "Email sent, please click link in email to confirm your account";
+  public errMsg = "An error occured while registering!";
+
   constructor(private processService:RegisterService) { }
 
   ngOnInit(): void {

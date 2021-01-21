@@ -9,6 +9,7 @@ import upp.demo.dto.EmailDto;
 import upp.demo.dto.FormSubmissionDto;
 import upp.demo.enumeration.RoleEnum;
 import upp.demo.globals.PropertyName;
+import upp.demo.mapper.SynopsisMapper;
 import upp.demo.model.Book;
 import upp.demo.model.User;
 import upp.demo.repository.BookRepository;
@@ -21,7 +22,7 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class SaveSynopsisService implements JavaDelegate {
 
-    private final ConversionService conversionService;
+    private final SynopsisMapper synopsisMapper;
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
 
@@ -30,7 +31,7 @@ public class SaveSynopsisService implements JavaDelegate {
         //delegateExecution.setVariable(); pravim promenjivu sa bilo kojom vrednoscu
         //vidljiva je i na kamundi
         List<FormSubmissionDto> synopsisForm = (List<FormSubmissionDto>) delegateExecution.getVariable(PropertyName.FormName.FORM_DATA);
-        Book book = conversionService.convert(synopsisForm,Book.class);
+        Book book = synopsisMapper.convert(synopsisForm);
         book.setPublished(false);
         //ubaciti iz baze
         book.setOwner(userRepository.findByEmail("merchant1@maildrop.cc"));

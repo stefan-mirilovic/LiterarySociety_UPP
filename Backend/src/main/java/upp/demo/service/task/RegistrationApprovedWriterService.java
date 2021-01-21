@@ -11,6 +11,7 @@ import upp.demo.enumeration.RegisterRequestStatus;
 import upp.demo.globals.Processes;
 import upp.demo.globals.PropertyName;
 import upp.demo.helper.SubmissionListHelper;
+import upp.demo.mapper.RegisterReaderMapper;
 import upp.demo.model.Genre;
 import upp.demo.model.RegisterReaderRequest;
 import upp.demo.repository.GenreRepository;
@@ -28,14 +29,14 @@ public class RegistrationApprovedWriterService implements JavaDelegate {
 
 	private final EmailService emailService;
 	private final GenreRepository genreRepository;
-	private final ConversionService conversionService;
+	private final RegisterReaderMapper registerReaderMapper;
 	private final SubmissionListHelper submissionListHelper;
 	private final RegisterReaderRequestRepository registerReaderRequestRepository;
 
 	@Override
 	public void execute(DelegateExecution delegateExecution) throws Exception {
 		List<FormSubmissionDto> registration = (List<FormSubmissionDto>) delegateExecution.getVariable(PropertyName.FormName.FORM_DATA);
-		RegisterReaderRequest registerReaderRequest = conversionService.convert(registration, RegisterReaderRequest.class);
+		RegisterReaderRequest registerReaderRequest = registerReaderMapper.convert(registration);
 		List<Genre> genres = genreRepository.findAllByNameIn(submissionListHelper.getEnums(registration, "genre"));
 		if(genres!=null){
 			delegateExecution.setVariable("genre",genres);
@@ -50,7 +51,7 @@ public class RegistrationApprovedWriterService implements JavaDelegate {
 		delegateExecution.setVariable(PropertyName.VariableName.APPROVE_CODE, registerReaderRequest.getApproveCode());
 		delegateExecution.setVariable(PropertyName.VariableName.REGISTRATION_REQUEST, registerReaderRequest.getId());
 		emailService.sendSimpleMessage(registerReaderRequest.getEmail(), "Confirm your email",
-				"To confirm your email, please click this link: http://localhost:9090/api/approve/" + registerReaderRequest.getId()
+				"To confirm your email, please click this link: http://localhost:4200/confirm/" + registerReaderRequest.getId()
 						+ "/" + registerReaderRequest.getApproveCode());
 	}
 }

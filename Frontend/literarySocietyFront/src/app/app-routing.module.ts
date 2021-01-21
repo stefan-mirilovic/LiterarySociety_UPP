@@ -8,6 +8,7 @@ import {TableComponent} from "./table/table.component";
 import {WriterDocumentComponent} from "./writer-document/writer-document.component";
 import {SynopsisComponent} from "./synopsis/synopsis.component";
 import { LoginComponent } from './login/login.component';
+import { RegisterRedirectComponent } from './pages/register-redirect/register-redirect.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,10 @@ const routes: Routes = [
     path: '',
     component: LoginComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'confirm/:id/:uuid',
+    component: RegisterRedirectComponent
   },
   { path: 'readerRegistration', component: ReaderComponent},
   { path: 'writerRegistration', component: WriterComponent},
