@@ -9,7 +9,8 @@
         <input [type]="fieldTextType ? 'text' : 'password'" id="{{field.id}}" name={{field.id}} class="form-control" [formControlName]="field.id"  ngModel  placeholder="{{field.label}}" >
         <div class="input-group-append" (click)="toggleFieldTextType()">
           <span class="input-group-text">
-            <i class="fa fa-eye-slash"></i>
+            <fa-icon [icon]="fieldTextType ? 'eye-slash' : 'eye'"></fa-icon>
+            <!--<i class="fa fa-eye-slash"></i>-->
           </span>
         </div>
     </div>

@@ -7,15 +7,22 @@ import {BookComponent} from "./book/book.component";
 import {TableComponent} from "./table/table.component";
 import {WriterDocumentComponent} from "./writer-document/writer-document.component";
 import {SynopsisComponent} from "./synopsis/synopsis.component";
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
-  {path: 'readerRegistration', component: ReaderComponent},
-  {path: 'writerRegistration', component: WriterComponent},
-  {path: 'book', component: BookComponent},
-  {path: 'table', component: TableComponent},
-  {path: 'writer/document', component: WriterDocumentComponent},
-  {path: 'book/publish', component: SynopsisComponent},
+  {
+    path: '',
+    component: LoginComponent,
+    pathMatch: 'full'
+  },
+  { path: 'readerRegistration', component: ReaderComponent},
+  { path: 'writerRegistration', component: WriterComponent},
+  { path: 'book', component: BookComponent},
+  { path: 'table', component: TableComponent},
+  { path: 'writer/document', component: WriterDocumentComponent},
+  { path: 'book/publish', component: SynopsisComponent},
+  { path: 'login', component: LoginComponent},
 ];
 
 @NgModule({

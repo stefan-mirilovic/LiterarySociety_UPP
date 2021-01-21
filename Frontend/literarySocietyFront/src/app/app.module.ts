@@ -19,6 +19,12 @@ import { RadioButtonFieldComponent } from './forms/radio-button-field/radio-butt
 import { WriterDocumentComponent } from './writer-document/writer-document.component';
 import { SynopsisComponent } from './synopsis/synopsis.component';
 import { TextAreaFieldComponent } from './forms/text-area-field/text-area-field.component';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './login/login.component';
+import { MaterialModule } from './material-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,6 +42,7 @@ import { TextAreaFieldComponent } from './forms/text-area-field/text-area-field.
     WriterDocumentComponent,
     SynopsisComponent,
     TextAreaFieldComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,8 +50,16 @@ import { TextAreaFieldComponent } from './forms/text-area-field/text-area-field.
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    ToastrModule.forRoot(),
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+  }
+}
