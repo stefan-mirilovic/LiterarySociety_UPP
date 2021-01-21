@@ -7,78 +7,76 @@ import {ValidationService} from "../service/validation.service";
 import {isLineBreak} from "codelyzer/angular/sourceMappingVisitor";
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    public formFieldsDto = null;
-    public formFields = [];
-    public enumValues = [];
-    public load:boolean;
-    public isBeta = false;
-    @Input() taskId:string;
-    @Input() formName:string;
+  public formFieldsDto = null;
+  public formFields = [];
+  public enumValues = [];
+  public load: boolean;
+  public isBeta = false;
+  @Input() taskId: string;
+  @Input() formName: string;
 
 
-    form=this.fb.group({
+  form = this.fb.group({});
 
-    });
+  constructor(private registerService: RegisterService, private genreService: GenreService, private validationService: ValidationService, private fb: FormBuilder) {
+  }
 
-    constructor(private registerService:RegisterService, private genreService:GenreService, private validationService:ValidationService, private fb: FormBuilder) { }
+  ngOnInit(): void {
+    this.load = true;
+    this.registerService.getFormData(this.taskId).subscribe(
+      res => {
+        this.renderForm(this.taskId);
+      }
+    )
 
-    ngOnInit(): void {
-        this.load=true;
-        this.registerService.getFormData(this.taskId).subscribe(
-            res=>{
-                this.renderForm(this.taskId);
-            }
-        )
+  }
 
+  renderForm(taskId) {
+    this.registerService.getFormData(taskId).subscribe(
+      res => {
+        console.log(res);
+        this.formFieldsDto = res;
+        this.formFields = res.formFields;
+        this.taskId = res.processInstanceId;
+        this.formFields.forEach((field) => {
+          if (field.type.name == 'enum' && field.input == 'radio') {
+            this.enumValues.push(Object.keys(field.type.values));
+          }
+        });
+        this.load = false;
+      }
+    );
+  }
+
+  onSubmit() {
+    let o = new Array();
+    for (var property in this.form.value) {
+      if (property == 'genre' && this.form.value[property] instanceof Array) {
+        o.push({fieldId: property, fieldValue: this.transform(this.form.value[property])});
+        console.log(this.transform(this.form.value[property]));
+      } else {
+        o.push({fieldId: property, fieldValue: this.form.value[property]});
+      }
     }
+    console.log(o);
+    this.registerService.registerReader(o, this.formFieldsDto.taskId).subscribe();
+  }
 
-    renderForm(taskId){
-        this.registerService.getFormData(taskId).subscribe(
-            res => {
-                console.log(res);
-                this.formFieldsDto = res;
-                this.formFields = res.formFields;
-                this.taskId = res.processInstanceId;
-                this.formFields.forEach( (field) => {
-                    if (field.type.name == 'enum'&&field.input=='radio') {
-                        this.enumValues.push(Object.keys(field.type.values));
-                    }
-                });
-                this.load=false;
-            }
-        );
-    }
+  public transform(input: Array<any>, sep = ','): string {
+    return input.join(sep);
+  }
 
-    onSubmit() {
-        let o = new Array();
-        for(var property in this.form.value){
-            if(property=='genre'){
-                o.push({fieldId: property, fieldValue : this.transform(this.form.value[property])});
-                console.log(this.transform(this.form.value[property]));
-            }
-            else{
-                o.push({fieldId : property, fieldValue : this.form.value[property]});
-            }
-        }
-        console.log(o);
-        this.registerService.registerReader(o,this.formFieldsDto.taskId).subscribe();
-    }
+  setBeta(event) {
+    console.log(event);
+    this.isBeta = event;
+  }
 
-    public transform(input:Array<any>, sep = ','): string {
-        return input.join(sep);
-    }
+  isValidRadio() {
 
-    setBeta(event) {
-        console.log(event);
-        this.isBeta=event;
-    }
-
-    isValidRadio(){
-
-    }
+  }
 }

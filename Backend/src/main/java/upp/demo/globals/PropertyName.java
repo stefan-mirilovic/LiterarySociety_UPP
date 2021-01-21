@@ -20,6 +20,8 @@ public interface PropertyName {
 		String APPROVE_CODE = "approveCode";
 		String REGISTRATION_REQUEST = "registrationId";
 		String PROCESS_ID = "processId";
+		String GENERIC_EMAIL = "genericEmail";
+		String BOOK_SYNOPSIS = "bookSynopsis";
 	}
 
 	interface Validation {

@@ -1,0 +1,5 @@
+<div [formGroup]="form">
+  <label for="{{field.id}}}" class="text-primary">{{field.label}}</label>
+  <textarea rows="4" class="form-control" [formControlName]="field.id" placeholder="{{field.label}}" cols="50" id="{{field.id}}}" ></textarea>
+  <span class="error" *ngIf="form.get(field.id).hasError('required')">{{field.id}} is required</span>
+</div>
