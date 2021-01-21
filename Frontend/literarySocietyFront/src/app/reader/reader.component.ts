@@ -13,6 +13,9 @@ export class ReaderComponent implements OnInit {
     public taskId: any;
     public loading: boolean;
     public process;
+    public redirectLink;
+    public scsMsg;
+    public errMsg;
     constructor(private processService: RegisterService) {
     }
 
@@ -22,6 +25,9 @@ export class ReaderComponent implements OnInit {
             data => {
                 this.formFieldsDto=data;
                 this.taskId=data.taskId;
+                this.redirectLink="/login";
+                this.scsMsg = "Email sent, please click link in email to confirm your account"
+                this.errMsg = "An error occured while registering!"
                 this.loading=false;
             });
     }

@@ -1,4 +1,4 @@
 <div>
-    <app-register [taskId]="taskId" *ngIf="!loading" [formName]="'Reader registration'"></app-register>
+    <app-register [taskId]="taskId" *ngIf="!loading" [redirectLink]="redirectLink" [scsMsg]="scsMsg" [errMsg]="errMsg" [formName]="'Reader registration'"></app-register>
     <p *ngIf="loading">Loading...</p>
 </div>

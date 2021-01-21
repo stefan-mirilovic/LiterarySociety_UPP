@@ -27,9 +27,8 @@ public class FormController {
 	private final RegisterReaderRequestService registerReaderRequestService;
 
 	@GetMapping("/startProcess/{processName}")
-	public ResponseEntity<FormDto> processStart(@PathVariable("processName") String processName,HttpSession session) {
+	public ResponseEntity<FormDto> processStart(@PathVariable("processName") String processName) {
 		FormDto formDto = genericFormProcess.startProcess(processName);
-		session.setAttribute(PropertyName.VariableName.PROCESS_ID,formDto.getProcessInstanceId());
 		return new ResponseEntity<>(genericFormProcess.startProcess(processName), HttpStatus.OK);
 	}
 

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { TextInputFieldComponent } from './forms/text-input-field/text-input-field.component';
 import { EnumSelectFieldComponent } from './forms/enum-select-field/enum-select-field.component';
@@ -19,6 +19,14 @@ import { RadioButtonFieldComponent } from './forms/radio-button-field/radio-butt
 import { WriterDocumentComponent } from './writer-document/writer-document.component';
 import { SynopsisComponent } from './synopsis/synopsis.component';
 import { TextAreaFieldComponent } from './forms/text-area-field/text-area-field.component';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './login/login.component';
+import { MaterialModule } from './material-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
+import { RegisterRedirectComponent } from './pages/register-redirect/register-redirect.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +44,8 @@ import { TextAreaFieldComponent } from './forms/text-area-field/text-area-field.
     WriterDocumentComponent,
     SynopsisComponent,
     TextAreaFieldComponent,
+    LoginComponent,
+    RegisterRedirectComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,8 +53,22 @@ import { TextAreaFieldComponent } from './forms/text-area-field/text-area-field.
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    ToastrModule.forRoot(),
+    FontAwesomeModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+  }
+}

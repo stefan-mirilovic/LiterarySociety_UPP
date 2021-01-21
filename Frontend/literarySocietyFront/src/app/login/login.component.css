@@ -1,0 +1,19 @@
+.error {
+    color: red;
+}
+
+.btn-primary {
+    height: 50px;
+}
+
+.btn-secondary {
+    margin-top: 10px;
+}
+
+.btn-info {
+    margin-top: 10px;
+}
+
+fa-icon {
+    color: gray;
+}
