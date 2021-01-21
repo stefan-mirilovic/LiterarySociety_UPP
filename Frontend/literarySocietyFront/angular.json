@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "literarySocietyFront"
+    }
+  },
+  "defaultProject": "literarySocietyFront",
+  "cli": {
+    "analytics": false
+  }
 }

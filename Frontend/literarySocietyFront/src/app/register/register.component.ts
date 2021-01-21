@@ -7,17 +7,17 @@ import {ValidationService} from "../service/validation.service";
 import {isLineBreak} from "codelyzer/angular/sourceMappingVisitor";
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    public formFieldsDto = null;
-    public formFields = [];
-    public enumValues = [];
-    public load:boolean;
-    public isBeta = false;
-    public fileMap=new Map<string, string>();
+  public formFieldsDto = null;
+  public formFields = [];
+  public enumValues = [];
+  public load: boolean;
+  public isBeta = false;
+  public fileMap=new Map<string, string>();
     @Input() taskId:string;
     @Input() formName:string;
     public currentFile;
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
                 o.push({fieldId: property, fieldValue: this.convertToBase64(property), isFile:"yes"});
             }
             else {
-                if(property=='genre'){
+                if(property=='genre'&& this.form.value[property] instanceof Array){
                     o.push({fieldId: property, fieldValue : this.transform(this.form.value[property])});
                     console.log(this.transform(this.form.value[property]));
                 }else{
@@ -73,22 +73,21 @@ export class RegisterComponent implements OnInit {
                 }
             }
 
-        }
-        console.log(o);
-        this.registerService.registerReader(o,this.formFieldsDto.taskId).subscribe();
     }
+    console.log(o);
+    this.registerService.registerReader(o, this.formFieldsDto.taskId).subscribe();
+  }
 
-    public transform(input:Array<any>, sep = ','): string {
-        return input.join(sep);
+  public transform(input: Array<any>, sep = ','): string {
+    return input.join(sep);
+  }
+
+  setBeta(event) {
+    console.log(event);
+    this.isBeta = event;
+  }
+
+  convertToBase64(property) {
+        return this.fileMap.get(property) ;
     }
-
-    setBeta(event) {
-        console.log(event);
-        this.isBeta=event;
-    }
-
-    convertToBase64(property) {
-        return this.fileMap.get(property);
-    }
-
 }

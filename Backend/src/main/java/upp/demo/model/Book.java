@@ -3,6 +3,8 @@ package upp.demo.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -11,6 +13,15 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@ManyToOne
+	private User owner;
+
+	@ManyToMany
+	private List<User> editors = new ArrayList<>();
+
+	@ManyToMany
+	private List<User> betaReaders = new ArrayList<>();
 
 	@Column
 	private String isbn;
@@ -27,4 +38,9 @@ public class Book {
 	@Column
 	private String synopsis;
 
+	@ManyToOne
+	private Genre genre;
+
+	@Column
+	private Boolean published;
 }

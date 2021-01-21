@@ -11,6 +11,7 @@
           <app-radio-button-field [field]="field" [form]="form" (isBeta)="setBeta($event)"  [enumValues]="enumValues" *ngSwitchCase="['radio']"></app-radio-button-field>
           <app-enum-select-field [field]="field" [form]="form" [isBeta]="isBeta" *ngSwitchCase="['enum']" ></app-enum-select-field>
           <app-pdf-input-field [field]="field" [form]="form" *ngSwitchCase="['file']" [filesList]="fileMap" ></app-pdf-input-field>
+          <app-text-area-field [field]="field" [form]="form" *ngSwitchCase="['textarea']" ></app-text-area-field>
         </div>
         <br>
         <div>

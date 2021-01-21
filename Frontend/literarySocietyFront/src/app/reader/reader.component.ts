@@ -10,9 +10,9 @@ import {processes} from "../../environments/processes";
 export class ReaderComponent implements OnInit {
 
     public formFieldsDto = null;
-    public taskId:any;
-    public loading:boolean;
-    public process
+    public taskId: any;
+    public loading: boolean;
+    public process;
     constructor(private processService: RegisterService) {
     }
 
