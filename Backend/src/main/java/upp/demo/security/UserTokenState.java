@@ -13,4 +13,5 @@ public class UserTokenState {
     private Long userId;
     private String userType;
     private boolean passwordChanged;
+    private String email;
 }

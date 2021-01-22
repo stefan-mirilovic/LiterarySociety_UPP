@@ -34,6 +34,6 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenUtils.generateToken(user.getUsername());
         Long expiresIn = tokenUtils.getExpiredIn();
-        return new UserTokenState(jwt, expiresIn, user.getId(), user.getRole().toString(), false);
+        return new UserTokenState(jwt, expiresIn, user.getId(), user.getRole().toString(), false, user.getEmail());
     }
 }

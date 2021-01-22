@@ -41,7 +41,7 @@ public class EmailApproveReaderService implements JavaDelegate {
 		request.setStatus(RegisterRequestStatus.APPROVED);
 		RoleEnum roleEnum = request.isBeta() ? RoleEnum.BETA_READER : RoleEnum.READER;
 		User user = new User(0L, request.getEmail(), request.getPassword(), request.getName(), request.getSurname(),
-				request.getCity(), request.getCity(), roleEnum, request.getGenres());
+				request.getCity(), request.getCountry(), roleEnum, request.getGenres(), true);
 		request.setGenres((List<Genre>)delegateExecution.getVariable("genres"));
 		registerReaderRequestRepository.save(request);
 		userRepository.save(user);
