@@ -27,6 +27,12 @@ import { MaterialModule } from './material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
 import { RegisterRedirectComponent } from './pages/register-redirect/register-redirect.component';
+import { ReaderDashboardComponent } from './dashboard/reader-dashboard/reader-dashboard.component';
+import { ReaderGuard } from './guard/reader.guard';
+import { WriterDashboardComponent } from './dashboard/writer-dashboard/writer-dashboard.component';
+import { WriterGuard } from './guard/writer.guard';
+import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
+import { AdminGuard } from './guard/admin.guard';
 
 @NgModule({
   declarations: [
@@ -46,6 +52,9 @@ import { RegisterRedirectComponent } from './pages/register-redirect/register-re
     TextAreaFieldComponent,
     LoginComponent,
     RegisterRedirectComponent,
+    ReaderDashboardComponent,
+    WriterDashboardComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +73,9 @@ import { RegisterRedirectComponent } from './pages/register-redirect/register-re
       useClass: AuthInterceptorService,
       multi: true
     },
+    ReaderGuard,
+    WriterGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

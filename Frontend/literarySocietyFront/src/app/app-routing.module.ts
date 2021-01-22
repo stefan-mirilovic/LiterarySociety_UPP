@@ -9,6 +9,12 @@ import {WriterDocumentComponent} from "./writer-document/writer-document.compone
 import {SynopsisComponent} from "./synopsis/synopsis.component";
 import { LoginComponent } from './login/login.component';
 import { RegisterRedirectComponent } from './pages/register-redirect/register-redirect.component';
+import { ReaderDashboardComponent } from './dashboard/reader-dashboard/reader-dashboard.component';
+import { ReaderGuard } from './guard/reader.guard';
+import { WriterDashboardComponent } from './dashboard/writer-dashboard/writer-dashboard.component';
+import { WriterGuard } from './guard/writer.guard';
+import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
+import { AdminGuard } from './guard/admin.guard';
 
 
 const routes: Routes = [
@@ -28,6 +34,27 @@ const routes: Routes = [
   { path: 'writer/document', component: WriterDocumentComponent},
   { path: 'book/publish', component: SynopsisComponent},
   { path: 'login', component: LoginComponent},
+  {
+    path: 'reader-dashboard',
+    component: ReaderDashboardComponent,
+    canActivate: [ReaderGuard]
+  },
+  {
+    path: 'writer-dashboard',
+    component: WriterDashboardComponent,
+    canActivate: [WriterGuard],
+    children: [
+      { 
+        path: 'book/publish',
+        component: SynopsisComponent
+      },
+    ]
+  },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [AdminGuard]
+  },
 ];
 
 @NgModule({

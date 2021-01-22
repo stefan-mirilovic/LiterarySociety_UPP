@@ -34,7 +34,16 @@ export class LoginComponent implements OnInit {
       next: (result) => {
         this.loading = false;
         this.form.reset();
-        this.toastr.success(`Welcome, ${result.userId}`);
+        if (result.userType === "READER" || result.userType === "BETA_READER" ) {
+          this.router.navigate(["/reader-dashboard"]);
+        } else if (result.userType === "WRITER") {
+          this.router.navigate(["/writer-dashboard"]);
+        } else if (result.userType === "ADMINISTRATOR") {
+          this.router.navigate(["/admin-dashboard"]);
+        } else {
+          this.toastr.success(`Welcome, ${result.email}`);
+          //this.router.navigate(["/reader-dashboard"]);
+        }
       },
           error: data => {
             this.loading = false;

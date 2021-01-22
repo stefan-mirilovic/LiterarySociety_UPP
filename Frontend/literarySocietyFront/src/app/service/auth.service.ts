@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, timer } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserLogin } from '../model/userLogin';
@@ -34,9 +34,14 @@ export class AuthService {
       resData.userId, 
       resData.userType,
       resData.passwordChanged,
-      resData.numLogin);
+      resData.numLogin,
+      resData.email);
     this.loggedUser.next(user);
     localStorage.setItem('loggedUser', JSON.stringify(user));
+    const source = timer(user.expiresIn);
+    const subscribe = source.subscribe(val => {
+      this.logout();
+    });
   }
 
   logout() {

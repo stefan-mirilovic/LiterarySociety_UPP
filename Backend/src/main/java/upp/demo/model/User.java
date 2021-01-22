@@ -3,7 +3,6 @@ package upp.demo.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import upp.demo.enumeration.RoleEnum;
@@ -48,6 +47,9 @@ public class User implements UserDetails {
 	@JoinTable(name = "user_genre", joinColumns = @JoinColumn(name = "genre_id"), inverseJoinColumns = @JoinColumn (name = "user_id"))
 	private List<Genre> genres;
 
+	@Column
+	private boolean enabled;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return null;
@@ -75,6 +77,6 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return enabled;
 	}
 }

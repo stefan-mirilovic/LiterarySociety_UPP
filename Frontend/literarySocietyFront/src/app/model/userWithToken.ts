@@ -7,8 +7,10 @@ export class UserWithToken {
     public passwordChanged: boolean;
     public numLogin: number;
     public expirationDate: Date;
+    public email: string;
 
-    constructor(accessToken: string, expiresIn: number, userId: number, userType: string, passwordChanged: boolean, numLogin: number) {
+    constructor(accessToken: string, expiresIn: number, userId: number, userType: string, passwordChanged: boolean, numLogin: number,
+        email: string) {
         this.accessToken = accessToken;
         this.expiresIn = expiresIn;
         this.userId = userId;
@@ -16,6 +18,7 @@ export class UserWithToken {
         this.passwordChanged = passwordChanged;
         this.numLogin = numLogin;
         this.expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+        this.email = email;
     }
 
     get getToken() {
