@@ -18,12 +18,9 @@ public class PdfHandler {
 		List<FormSubmissionDto> forms=submission;
 		for(FormSubmissionDto form: submission){
 			if(form.getIsFile()!=null){
-				fileHelper.saveFile(form.getFieldValue());
 				form.setFieldValue("accepted");
 			}
 		}
 		return forms;
 	}
-
-
 }

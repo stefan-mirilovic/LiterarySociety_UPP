@@ -22,6 +22,9 @@ public interface PropertyName {
 		String PROCESS_ID = "processId";
 		String GENERIC_EMAIL = "genericEmail";
 		String BOOK_SYNOPSIS = "bookSynopsis";
+		String EDITORS_FOR_REVIEW_TEXT = "textEditors";
+		String BOOKS_FOR_REVIEW = "booksForReviews";
+		String LOGGED_USER = "loggedUser";
 	}
 
 	interface Validation {

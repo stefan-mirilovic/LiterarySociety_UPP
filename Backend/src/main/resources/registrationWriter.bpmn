@@ -71,7 +71,7 @@
       <bpmn:outgoing>Flow_0r395f4</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:endEvent id="Event_0kaxemb">
-      <bpmn:incoming>Flow_1yshb52</bpmn:incoming>
+      <bpmn:incoming>Flow_03jf16v</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0r395f4" sourceRef="registrationWriterForm" targetRef="Activity_1an2wsm" />
     <bpmn:sequenceFlow id="Flow_1qf988o" sourceRef="Activity_1an2wsm" targetRef="Gateway_0dju6h5" />
@@ -113,7 +113,7 @@
       <bpmn:incoming>Flow_10brnwf</bpmn:incoming>
       <bpmn:outgoing>Flow_1k9p5c9</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1yshb52" sourceRef="Activity_01rwvvo" targetRef="Event_0kaxemb" />
+    <bpmn:sequenceFlow id="Flow_1yshb52" sourceRef="Activity_01rwvvo" targetRef="Activity_043v2z3" />
     <bpmn:userTask id="Activity_01rwvvo" name="Pdf form">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -136,17 +136,56 @@
       <bpmn:incoming>Flow_1k9p5c9</bpmn:incoming>
       <bpmn:outgoing>Flow_1yshb52</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0uxz61v" sourceRef="Activity_043v2z3" targetRef="Activity_0gtaegq" />
+    <bpmn:serviceTask id="Activity_043v2z3" name="Save pdf" camunda:class="upp.demo.service.task.SavePdfService">
+      <bpmn:incoming>Flow_1yshb52</bpmn:incoming>
+      <bpmn:outgoing>Flow_0uxz61v</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_03jf16v" sourceRef="Activity_1ch483j" targetRef="Event_0kaxemb" />
+    <bpmn:serviceTask id="Activity_1ch483j" name="Review" camunda:class="upp.demo.service.task.BooksForReviewService">
+      <bpmn:incoming>Flow_125v0tx</bpmn:incoming>
+      <bpmn:outgoing>Flow_03jf16v</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_125v0tx" sourceRef="Activity_1uydef5" targetRef="Activity_1ch483j" />
+    <bpmn:userTask id="Activity_1uydef5" name="Table of book for review">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="pdf" label="Writer text" type="string">
+            <camunda:properties>
+              <camunda:property id="input" value="pdf" />
+            </camunda:properties>
+          </camunda:formField>
+          <camunda:formField id="owner" label="Owners Username" type="string">
+            <camunda:properties>
+              <camunda:property id="input" value="text" />
+            </camunda:properties>
+          </camunda:formField>
+          <camunda:formField id="FormField_1mt3u0q" type="long" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0zazycd</bpmn:incoming>
+      <bpmn:outgoing>Flow_125v0tx</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0zazycd" sourceRef="Activity_0gtaegq" targetRef="Activity_1uydef5" />
+    <bpmn:serviceTask id="Activity_0gtaegq" name="Get documents" camunda:class="upp.demo.service.task.GetDocumentsForReview">
+      <bpmn:incoming>Flow_0uxz61v</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zazycd</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:signal id="Signal_0hfu33a" name="signalName" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="registrationWriter">
+      <bpmndi:BPMNEdge id="Flow_1yshb52_di" bpmnElement="Flow_1yshb52">
+        <di:waypoint x="1210" y="200" />
+        <di:waypoint x="1250" y="200" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_10brnwf_di" bpmnElement="Flow_10brnwf">
         <di:waypoint x="938" y="200" />
         <di:waypoint x="970" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1k9p5c9_di" bpmnElement="Flow_1k9p5c9">
         <di:waypoint x="1070" y="200" />
-        <di:waypoint x="1140" y="200" />
+        <di:waypoint x="1110" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0xfbzag_di" bpmnElement="Flow_0xfbzag">
         <di:waypoint x="830" y="200" />
@@ -184,9 +223,21 @@
         <di:waypoint x="390" y="200" />
         <di:waypoint x="460" y="200" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1yshb52_di" bpmnElement="Flow_1yshb52">
-        <di:waypoint x="1240" y="200" />
-        <di:waypoint x="1302" y="200" />
+      <bpmndi:BPMNEdge id="Flow_0uxz61v_di" bpmnElement="Flow_0uxz61v">
+        <di:waypoint x="1350" y="200" />
+        <di:waypoint x="1400" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03jf16v_di" bpmnElement="Flow_03jf16v">
+        <di:waypoint x="1790" y="200" />
+        <di:waypoint x="1912" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_125v0tx_di" bpmnElement="Flow_125v0tx">
+        <di:waypoint x="1640" y="200" />
+        <di:waypoint x="1690" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zazycd_di" bpmnElement="Flow_0zazycd">
+        <di:waypoint x="1500" y="200" />
+        <di:waypoint x="1540" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="152" y="182" width="36" height="36" />
@@ -215,11 +266,23 @@
       <bpmndi:BPMNShape id="Activity_156pfho_di" bpmnElement="Activity_1xwxjmj">
         <dc:Bounds x="970" y="160" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0kaxemb_di" bpmnElement="Event_0kaxemb">
-        <dc:Bounds x="1302" y="182" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_06fey0l_di" bpmnElement="Activity_01rwvvo">
-        <dc:Bounds x="1140" y="160" width="100" height="80" />
+        <dc:Bounds x="1110" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0kaxemb_di" bpmnElement="Event_0kaxemb">
+        <dc:Bounds x="1912" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_044w95l_di" bpmnElement="Activity_1ch483j">
+        <dc:Bounds x="1690" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qvv2ht_di" bpmnElement="Activity_1uydef5">
+        <dc:Bounds x="1540" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vhqpit_di" bpmnElement="Activity_043v2z3">
+        <dc:Bounds x="1250" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rlo1md_di" bpmnElement="Activity_0gtaegq">
+        <dc:Bounds x="1400" y="160" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

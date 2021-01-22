@@ -3,6 +3,12 @@ package upp.demo.helper;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
+import upp.demo.enumeration.DocumentStatus;
+import upp.demo.enumeration.RoleEnum;
+import upp.demo.model.Book;
+import upp.demo.model.User;
+import upp.demo.repository.BookRepository;
+import upp.demo.repository.UserRepository;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.File;
@@ -12,15 +18,18 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.List;
 import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
 public class FileHelper {
 
+	private final UserRepository userRepository;
+	private final BookRepository bookRepository;
 
-	public void saveFile(String base64) throws IOException {
-		File currentDirFile = new File(".");
+	public void saveFile(String base64,String ownerEmail) throws IOException {
+		File currentDirFile = new File("/pdf");
 		String filePath = currentDirFile.getAbsolutePath();
 
 		int length = 10;
@@ -36,5 +45,17 @@ public class FileHelper {
 		fos.write(pdfBytes);
 		System.out.println("PDF File Saved");
 		fos.close();
+
+		List<User> editors = userRepository.findAllByRole(RoleEnum.EDITOR);
+		User owner = userRepository.findByEmail(ownerEmail);
+		Book textDocument = new Book();
+		textDocument.setOwner(owner);
+		textDocument.setPublished(false);
+		textDocument.setEditors(editors);
+		textDocument.setDocumentStatus(DocumentStatus.TEXT_PENDING);
+		textDocument.setDocumentPath(path);
+		bookRepository.save(textDocument);
 	}
+
+
 }

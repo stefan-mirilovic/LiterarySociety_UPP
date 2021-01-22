@@ -62,10 +62,11 @@ public class GenericFormProcess implements ProcessInstanceService {
 
 	@Override
 	public String submitForm(String taskId, List<FormSubmissionDto> submissionDto) throws IOException {
-		List<FormSubmissionDto> changed = pdfHandler.change(submissionDto);
 		Task task = taskService.getById(taskId);
 		String processInstanceId = task.getProcessInstanceId();
 		runtimeService.setVariable(processInstanceId, PropertyName.FormName.FORM_DATA,submissionDto);
+
+		pdfHandler.change(submissionDto);
 		formService.submitTaskForm(taskId,formFieldsHelper.listToMapSubmit(submissionDto));
 		return processInstanceId;
 	}

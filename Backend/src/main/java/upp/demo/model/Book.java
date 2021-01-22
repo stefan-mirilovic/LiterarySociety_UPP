@@ -1,6 +1,7 @@
 package upp.demo.model;
 
 import lombok.Data;
+import upp.demo.enumeration.DocumentStatus;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -43,4 +44,10 @@ public class Book {
 
 	@Column
 	private Boolean published;
+
+	@Column
+	private DocumentStatus documentStatus;
+
+	@Column
+	private String documentPath;
 }
