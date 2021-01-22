@@ -19,8 +19,6 @@ public class TableHelper {
 	private final RuntimeService runtimeService;
 	public List<TableDto> convertToBook(String process, List<FormField> formFields){
 		List<Book> textForReviews = (List<Book>) runtimeService.getVariable(process, PropertyName.VariableName.BOOKS_FOR_REVIEW);
-		for(Book book: textForReviews){
-			
-		}
+		
 	}
 }
