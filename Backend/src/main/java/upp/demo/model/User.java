@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import upp.demo.enumeration.RoleEnum;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -49,6 +50,9 @@ public class User implements UserDetails {
 
 	@Column
 	private boolean enabled;
+
+	@ManyToMany
+	private List<Book> ownedBooks = new ArrayList<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

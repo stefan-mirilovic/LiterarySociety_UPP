@@ -14,6 +14,7 @@ import upp.demo.repository.RegisterReaderRequestRepository;
 import upp.demo.repository.UserRepository;
 import upp.demo.service.impl.EmailService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,7 +38,7 @@ public class EmailApproveWriterService implements JavaDelegate {
 		request.setStatus(RegisterRequestStatus.APPROVED);
 		RoleEnum roleEnum = RoleEnum.WRITER;
 		User user = new User(0L, request.getEmail(), request.getPassword(), request.getName(), request.getSurname(),
-				request.getCity(), request.getCountry(), roleEnum, request.getGenres(), false);
+				request.getCity(), request.getCountry(), roleEnum, request.getGenres(), false, new ArrayList<>());
 		request.setGenres((List<Genre>) delegateExecution.getVariable("genres"));
 		registerReaderRequestRepository.save(request);
 		userRepository.save(user);
