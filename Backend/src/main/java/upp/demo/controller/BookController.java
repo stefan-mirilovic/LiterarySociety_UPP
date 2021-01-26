@@ -20,9 +20,9 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping(value = "/store")
-    public ResponseEntity<?> findAllForStoreDisplay(@RequestParam int resperpage, @RequestParam int pageno) {
+    public ResponseEntity<?> findAllForStoreDisplay(@RequestParam int resperpage, @RequestParam int pageno, @RequestParam String genreid) {
         try {
-            List<BookStoreDisplayDTO> result = bookService.findAllForStoreDisplay(resperpage, pageno);
+            List<BookStoreDisplayDTO> result = bookService.findAllForStoreDisplay(resperpage, pageno, genreid);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BookDisplay } from 'src/app/model/book-display';
+import { Genre } from 'src/app/model/genre';
 import { GenreDisplay } from 'src/app/model/genre-display';
 import { BookService } from 'src/app/service/book.service';
+import { GenreService } from 'src/app/service/genre.service';
 import { TransactionService } from 'src/app/service/transaction.service';
 
 @Component({
@@ -19,11 +21,13 @@ export class StoreComponent implements OnInit {
   noOfPages: number;
   pageNo: number;
   resultsPerPage: number;
+  selectedGenre: GenreDisplay
 
   constructor(
     private transactionService: TransactionService,
     private bookService: BookService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private genreService: GenreService
   ) { }
 
   ngOnInit(): void {
@@ -50,16 +54,22 @@ export class StoreComponent implements OnInit {
       new BookDisplay(3, "Cilkin put", "Heder Moris", "Od autorke bestselera Tetovažer iz Aušvica\nZasnovano na potresnoj istinitoj priči o ljubavi i opstanku\nLepota ju je spasla – i osudila.\nCilka je imala svega šesnaest godina kad je 1942. odvedena u koncentracioni logor Aušvic-Birkenau, gde je komandant odmah primetio njenu lepotu. Zbog toga će biti prisilno odvojena od ostalih zatvorenica, i ubrzo shvatiti da moć, čak i nerado prihvaćena, znači opstanak.\n Završetak rata i oslobađanje logora Cilki neće doneti slobodu već optužbu za kolaboraciju jer je spavala s neprijateljem i osudu na zatočeništvo u sibirskom logoru. Ali da li je zaista imala izbora? I gde su granice morala za Cilku, koja je odvedena u Aušvic kad je još bila dete?\nU Sibiru se Cilka suočava i sa novim i sa starim, jezivim izazovima uključujući i neželjenu pažnju stražara. Ali kad upozna ljubaznu lekarku, Cilka dospeva pod njeno okrilje i počinje da neguje bolesne logoraše trudeći se da im pomogne u surovim uslovima.\nSvakodnevno se suočavajući sa smrću i užasom, Cilka u sebi otkriva snagu kakvu nije ni znala da poseduje. A kad počne da s oklevanjem gradi veze i odnose u toj surovoj novoj stvarnosti, Cilka shvata da, uprkos svemu što joj se dogodilo, u njenom srcu ima mesta za ljubav.\nOd deteta do žene, od žene do isceliteljke, Cilkin put rasvetljava izdržljivost ljudskog duha i našu volju da preživimo.\n„Nikad nisam sreo hrabriju osobu od Cilke.“ Lali Sokolov, tetovažer iz Aušvica\n„Cilkina neizmerna hrabrost i odlučnost da preživi čak i kad je svaka nada već izgubljena bude veliko poštovanje. Potresna priča koju ćete dugo pamtiti.“ Sunday Express\n„Izuzetna priča o snazi da se prevaziđu nezamislive teškoće.“ Woman’s Weekly", false, 49.99)
     );*/
     this.genres = [];
-    this.genres.push(new GenreDisplay(0, "Mystery", false))
+    /*this.genres.push(new GenreDisplay(0, "Mystery", false))
     this.genres.push(new GenreDisplay(1, "Comedy", false))
     this.genres.push(new GenreDisplay(2, "Adventure", false))
-    this.genres.push(new GenreDisplay(3, "Children's", false))
-    
+    this.genres.push(new GenreDisplay(3, "Children's", false))*/
+    this.genreService.getAllGenres().subscribe({
+      next: (results) => {
+        for (let result of results) {
+          this.genres.push(new GenreDisplay(result.id, result.name, false))
+        }
+      }
+    })
   }
 
   getBooks() {
     this.books = [];
-    this.bookService.findAllWithPagination(this.resultsPerPage, this.pageNo).subscribe({
+    this.bookService.findAllWithPagination(this.resultsPerPage, this.pageNo, this.selectedGenre ? this.selectedGenre.id : undefined).subscribe({
       next: (results) => {
         this.books = results;
         if (results.length != 0) {
@@ -105,10 +115,14 @@ export class StoreComponent implements OnInit {
         genre.checked = false;
       }
     }
+    this.selectedGenre = g;
     if (g.checked)
       this.title = g.name;
-    else
+    else {
       this.title = "Chronological Order";
+      this.selectedGenre = undefined;
+    }
+    this.getBooks();
   }
 
   previousPage() {

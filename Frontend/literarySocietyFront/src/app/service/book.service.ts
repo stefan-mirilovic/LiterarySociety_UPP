@@ -11,11 +11,12 @@ export class BookService {
 
   constructor(private http : HttpClient) { }
 
-  public findAllWithPagination(resultsPerPage: number, pageNo: number): Observable<BookDisplay[]> {
+  public findAllWithPagination(resultsPerPage: number, pageNo: number, genreid: number): Observable<BookDisplay[]> {
     return this.http.get<BookDisplay[]>(`${environment.baseUrl}/books/store`, {
       params: {
         resperpage: resultsPerPage.toString(),
-        pageno: pageNo.toString()
+        pageno: pageNo.toString(),
+        genreid: genreid ? genreid.toString() : undefined
       }
     });
   }
