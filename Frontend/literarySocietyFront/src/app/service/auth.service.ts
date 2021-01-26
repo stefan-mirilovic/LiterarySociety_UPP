@@ -14,7 +14,12 @@ export class AuthService {
 
   loggedUser = new BehaviorSubject<UserWithToken>(null);
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+    if (localStorage.getItem("loggedUser")) {
+      let user: UserWithToken = JSON.parse(localStorage.getItem("loggedUser"));
+      this.handleAuthentication(user);
+    }
+  }
 
   login(data: UserLogin) {
     return this.http.post<UserWithToken>(`${environment.baseUrl}/auth/login`, data)

@@ -35,7 +35,7 @@ public class Book {
 	@Column
 	private int noOfPages;
 
-	@Column
+	@Column(columnDefinition="text")
 	private String synopsis;
 
 	@ManyToOne

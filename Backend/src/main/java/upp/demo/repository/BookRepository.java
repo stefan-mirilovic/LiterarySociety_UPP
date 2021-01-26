@@ -10,4 +10,6 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book,Long> {
 
     List<Book> findAllByEditorsIn(List<User> users);
+
+    List<Book> findAllByOrderByPublishingYearDesc();
 }

@@ -22,6 +22,15 @@
             <h3 class="title">{{title}}</h3>
         </div>
     </div>
+    <div class="row empty-message-div" *ngIf="books?.length == 0 && !loading">
+        <p class="empty-message">
+            Well this is awkward...<br>
+            Please come back later!
+        </p>
+    </div>
+    <div class="row">
+        <mat-spinner *ngIf="loading" [diameter]="200"></mat-spinner>
+    </div>
     <div class="row card-deck">
         <div *ngFor="let book of books">
             <mat-card class="example-card">
@@ -48,6 +57,34 @@
                     <button mat-button class="btn-details">DETAILS</button>
                 </mat-card-actions>
             </mat-card>
+        </div>
+    </div>
+    <div class="row footer">
+        <div class="col-sm-2">
+            <mat-form-field class="page-control-select">
+                <mat-label>Results per page</mat-label>
+                <mat-select [(value)]="resultsPerPage"
+                    (selectionChange)="onResultPerPageChange($event)">
+                    <mat-option [value]="1">1</mat-option>
+                    <mat-option [value]="2">5</mat-option>
+                    <mat-option [value]="10">10</mat-option>
+                    <mat-option [value]="10">20</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-3">
+            <button class="page-control-button" (click)="previousPage()" [disabled]="pageNo == 0">
+                <fa-icon icon="arrow-left"></fa-icon>
+            </button>
+        </div>
+        <div class="col-sm-2">
+            <p class="page-control-preview">Page {{pageNo+1}}/{{noOfPages}}</p>
+        </div>
+        <div class="col-sm-3">
+            <button class="page-control-button" (click)="nextPage()"
+                [disabled]="pageNo+1 >= noOfPages">
+                <fa-icon icon="arrow-right"></fa-icon>
+            </button>
         </div>
     </div>
 </mat-drawer-container>

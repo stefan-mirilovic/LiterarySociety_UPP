@@ -51,7 +51,7 @@ public class User implements UserDetails {
 	@Column
 	private boolean enabled;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Book> ownedBooks = new ArrayList<>();
 
 	@Override

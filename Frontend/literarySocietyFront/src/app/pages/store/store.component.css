@@ -107,3 +107,49 @@ button:focus {
 .genre-toggle-button {
     height: 50px;
 }
+
+.page-control-button {
+    margin: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #09427A;
+    color: white;
+    border: none;
+    font-size: 14px;
+}
+
+.page-control-preview {
+    text-align: center;
+}
+
+.page-control-button:disabled {
+    background-color: lightgray;
+    color: gray;
+}
+
+.page-control-select {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.empty-message-div {
+    margin: auto;
+    color: darkgray;
+    font-weight: lighter;
+    width: 100%;
+    text-align: center;
+}
+
+.empty-message {
+    width: 100%;
+}
+
+.footer {
+    margin-top: 50px;
+}
+
+mat-spinner {
+    margin: auto;
+}
