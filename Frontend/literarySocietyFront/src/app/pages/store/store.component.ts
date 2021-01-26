@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BookDisplay } from 'src/app/model/book-display';
 import { Genre } from 'src/app/model/genre';
@@ -27,7 +28,8 @@ export class StoreComponent implements OnInit {
     private transactionService: TransactionService,
     private bookService: BookService,
     private toastr: ToastrService,
-    private genreService: GenreService
+    private genreService: GenreService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -141,6 +143,10 @@ export class StoreComponent implements OnInit {
     this.pageNo = 0;
     this.loading = true;
     this.getBooks();
+  }
+
+  details(book: BookDisplay) {
+    this.router.navigate([`/reader-dashboard/book/${book.id}`]);
   }
 
 }

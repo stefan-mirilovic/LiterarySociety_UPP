@@ -53,6 +53,7 @@ export class AuthService {
         extendedTimeOut: 0
       })
       this.subscribe.unsubscribe();
+      this.router.navigate(["/login"]);
     });
   }
 

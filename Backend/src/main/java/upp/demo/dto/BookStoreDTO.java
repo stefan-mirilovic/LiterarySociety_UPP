@@ -15,6 +15,7 @@ public class BookStoreDTO {
     private int publishingYear;
     private String genre;
     private String synopsis;
+    private int noOfPages;
     private boolean owned;
     private double price;
 }

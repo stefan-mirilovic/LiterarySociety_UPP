@@ -118,15 +118,19 @@ button:focus {
     color: white;
     border: none;
     font-size: 14px;
+    background-color: transparent;
+    color: gray;
 }
 
 .page-control-preview {
     text-align: center;
+    color: gray;
+    font-weight: 300;
 }
 
 .page-control-button:disabled {
-    background-color: lightgray;
-    color: gray;
+    background-color: transparent;
+    color: lightgray;
 }
 
 .page-control-select {

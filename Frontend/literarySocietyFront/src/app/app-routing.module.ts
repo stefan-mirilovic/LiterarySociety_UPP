@@ -16,6 +16,7 @@ import { WriterGuard } from './guard/writer.guard';
 import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guard/admin.guard';
 import { StoreComponent } from './pages/store/store.component';
+import { BookDetailsComponent } from './pages/book-details/book-details.component';
 
 
 const routes: Routes = [
@@ -35,7 +36,6 @@ const routes: Routes = [
   { path: 'writer/document', component: WriterDocumentComponent },
   { path: 'book/publish', component: SynopsisComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'store', component: StoreComponent },
   {
     path: 'reader-dashboard',
     component: ReaderDashboardComponent,
@@ -49,6 +49,10 @@ const routes: Routes = [
       {
         path: 'store',
         component: StoreComponent
+      },
+      {
+        path: 'book/:id',
+        component: BookDetailsComponent
       },
     ]
   },

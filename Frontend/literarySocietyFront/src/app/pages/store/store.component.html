@@ -54,7 +54,7 @@
                     <button mat-button class="btn-purchase" *ngIf="!book.owned">PURCHASE</button>
                     <button mat-button class="btn-download" *ngIf="book.owned">DOWNLOAD</button>
                     <br>
-                    <button mat-button class="btn-details">DETAILS</button>
+                    <button mat-button class="btn-details" (click)="details(book)">DETAILS</button>
                 </mat-card-actions>
             </mat-card>
         </div>
@@ -73,7 +73,7 @@
             </mat-form-field>
         </div>
         <div class="col-3">
-            <button class="page-control-button" (click)="previousPage()" [disabled]="pageNo == 0">
+            <button class="page-control-button" (click)="previousPage()" [disabled]="pageNo == 0" style="text-align: right;">
                 <fa-icon icon="arrow-left"></fa-icon>
             </button>
         </div>
@@ -82,7 +82,7 @@
         </div>
         <div class="col-3">
             <button class="page-control-button" (click)="nextPage()"
-                [disabled]="pageNo+1 >= noOfPages">
+                [disabled]="pageNo+1 >= noOfPages" style="text-align: left;">
                 <fa-icon icon="arrow-right"></fa-icon>
             </button>
         </div>

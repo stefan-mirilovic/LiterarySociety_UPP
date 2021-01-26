@@ -2,6 +2,7 @@ package upp.demo.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import upp.demo.dto.BookStoreDTO;
 import upp.demo.dto.BookStoreDisplayDTO;
 import upp.demo.mapper.BookMapper;
 import upp.demo.model.Book;
@@ -23,10 +24,10 @@ public class BookService {
     public List<BookStoreDisplayDTO> findAllForStoreDisplay(int resultsPerPage, int pageNo, String genreid) throws Exception {
         List<Book> list = null;
         if (genreid.equals("undefined"))
-            list = bookRepository.findAllByOrderByPublishingYearDesc();
+            list = bookRepository.findAllByPublishedOrderByPublishingYearDesc(true);
         else {
             Genre genre = genreRepository.findById(Long.parseLong(genreid)).orElseThrow(() -> new Exception("Genre not found!"));
-            list = bookRepository.findAllByGenreOrderByPublishingYearDesc(genre);
+            list = bookRepository.findAllByGenreAndPublishedOrderByPublishingYearDesc(genre, true);
         }
         //paginacija
         int no_of_pages = list.size() / resultsPerPage;
@@ -46,5 +47,10 @@ public class BookService {
         if (results.size() != 0)
             results.get(0).setNoOfPages(no_of_pages);
         return results;
+    }
+
+    public BookStoreDTO findForStore(Long id) throws Exception {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new Exception("Book not found!"));
+        return bookMapper.toBookStoreDTO(book);
     }
 }

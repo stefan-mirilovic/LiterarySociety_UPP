@@ -12,7 +12,7 @@ public interface BookRepository extends JpaRepository<Book,Long> {
 
     List<Book> findAllByEditorsIn(List<User> users);
 
-    List<Book> findAllByOrderByPublishingYearDesc();
+    List<Book> findAllByPublishedOrderByPublishingYearDesc(boolean published);
 
-    List<Book> findAllByGenreOrderByPublishingYearDesc(Genre genre);
+    List<Book> findAllByGenreAndPublishedOrderByPublishingYearDesc(Genre genre, boolean published);
 }

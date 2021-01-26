@@ -6,6 +6,7 @@ export class BookDetails {
     publishingYear:number;
     genre:string;
     synopsis:string;
+    noOfPages:number;
     owned: boolean;
     price: number;
 
