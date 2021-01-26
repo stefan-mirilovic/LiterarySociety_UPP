@@ -21,7 +21,7 @@ public class TokenUtils {
     @Value("somesecret")
     public String SECRET;
 
-    @Value("180000")
+    @Value("1800000") //1800000
     private Long EXPIRES_IN;
 
     @Value("Authorization")

@@ -1,0 +1,159 @@
+.example-card {
+    max-width: 10rem;
+    min-width: 292px;
+}
+
+.avatar-icon {
+    color: white;
+    font-size: 27px;
+    padding-left: 8px;
+}
+
+.card-badge {
+    font-size: 10px;
+    border-radius: 5px;
+    background-color: #09427A;
+    color: white;
+    padding: 5px;
+    height: 22px;
+    width: 100px;
+    text-align: center;
+}
+
+.card-badge-icon {
+    margin-right: 5px;
+}
+
+.btn-purchase {
+    color: white;
+    background-color: #09427A;
+    width: 260px;
+}
+
+.btn-purchase:hover {
+    background-color: #1a6ab9;
+}
+
+.btn-download {
+    color: white;
+    background-color: #0e9e1a;
+    width: 260px;
+    margin-left: 8px !important;
+}
+
+.btn-download:hover {
+    background-color: #14c522;
+}
+
+.btn-details {
+    margin-top: 5px !important;
+    width: 260px;
+}
+
+.price-tag {
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+mat-card-header {
+    height: 90px;
+}
+
+mat-card-content {
+    height: 150px;
+}
+
+mat-card-content p {
+    font-size: 12px;
+    text-align: justify;
+}
+
+mat-card {
+    margin: 5px;
+    cursor: pointer;
+}
+
+.card-deck {
+    margin-left: 10px;
+}
+
+.example-sidenav {
+    width: 200px;
+}
+
+.genre-container mat-checkbox {
+    padding-left: 30px;
+}
+
+.title {
+    text-align: center;
+    font-weight: 300;
+    color: gray;
+    margin-bottom: 30px;
+}
+
+.title-genres {
+    font-weight: 300;
+    color: gray;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+button:focus {
+    outline: none;
+}
+
+.genre-toggle-button {
+    height: 50px;
+}
+
+.page-control-button {
+    margin: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #09427A;
+    color: white;
+    border: none;
+    font-size: 14px;
+    background-color: transparent;
+    color: gray;
+}
+
+.page-control-preview {
+    text-align: center;
+    color: gray;
+    font-weight: 300;
+}
+
+.page-control-button:disabled {
+    background-color: transparent;
+    color: lightgray;
+}
+
+.page-control-select {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.empty-message-div {
+    margin: auto;
+    color: darkgray;
+    font-weight: lighter;
+    width: 100%;
+    text-align: center;
+}
+
+.empty-message {
+    width: 100%;
+}
+
+.footer {
+    margin-top: 50px;
+}
+
+mat-spinner {
+    margin: auto;
+}
