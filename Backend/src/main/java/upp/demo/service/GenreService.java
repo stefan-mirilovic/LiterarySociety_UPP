@@ -12,4 +12,5 @@ public interface GenreService {
 	 */
 	List<GenreDto> getAllGenres();
 
+    List<GenreDto> findAllSortedByName();
 }

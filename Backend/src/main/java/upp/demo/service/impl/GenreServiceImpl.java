@@ -30,5 +30,15 @@ public class GenreServiceImpl implements GenreService {
 		}
 		return results;
 	}
+
+	@Override
+	public List<GenreDto> findAllSortedByName() {
+		List<Genre> genres = genreRepository.findAllByOrderByNameAsc();
+		List<GenreDto> results = new ArrayList<>();
+		for (Genre genre: genres) {
+			results.add(new GenreDto(genre.getId(), genre.getName()));
+		}
+		return results;
+	}
 }
 

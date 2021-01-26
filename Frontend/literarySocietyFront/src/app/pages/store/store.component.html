@@ -24,7 +24,7 @@
     </div>
     <div class="row empty-message-div" *ngIf="books?.length == 0 && !loading">
         <p class="empty-message">
-            No Books Found<br>
+            No books found<br>
             Please check back later!
         </p>
     </div>
@@ -50,7 +50,7 @@
                     </p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <span class="price-tag">{{book.price}}$</span>
+                    <span class="price-tag">{{book.price}}€</span>
                     <button mat-button class="btn-purchase" *ngIf="!book.owned">PURCHASE</button>
                     <button mat-button class="btn-download" *ngIf="book.owned">DOWNLOAD</button>
                     <br>

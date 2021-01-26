@@ -58,7 +58,7 @@ export class StoreComponent implements OnInit {
     this.genres.push(new GenreDisplay(1, "Comedy", false))
     this.genres.push(new GenreDisplay(2, "Adventure", false))
     this.genres.push(new GenreDisplay(3, "Children's", false))*/
-    this.genreService.getAllGenres().subscribe({
+    this.genreService.getAllGenresSorted().subscribe({
       next: (results) => {
         for (let result of results) {
           this.genres.push(new GenreDisplay(result.id, result.name, false))

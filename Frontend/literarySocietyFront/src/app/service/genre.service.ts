@@ -14,4 +14,8 @@ export class GenreService {
   public getAllGenres(): Observable <Genre[]> {
     return this.http.get<Genre[]>(`${environment.baseUrl}/genres`);
   }
+
+  public getAllGenresSorted(): Observable <Genre[]> {
+    return this.http.get<Genre[]>(`${environment.baseUrl}/genres/store`);
+  }
 }
