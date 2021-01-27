@@ -33,6 +33,7 @@ import { WriterDashboardComponent } from './dashboard/writer-dashboard/writer-da
 import { WriterGuard } from './guard/writer.guard';
 import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guard/admin.guard';
+import { EditorsReviewComponent } from './editors-review/editors-review.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AdminGuard } from './guard/admin.guard';
     ReaderDashboardComponent,
     WriterDashboardComponent,
     AdminDashboardComponent,
+    EditorsReviewComponent,
   ],
   imports: [
     BrowserModule,

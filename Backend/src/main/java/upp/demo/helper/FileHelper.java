@@ -27,10 +27,9 @@ public class FileHelper {
 
 	private final UserRepository userRepository;
 	private final BookRepository bookRepository;
+	static String filePath="pdf/";
 
 	public void saveFile(String base64,String ownerEmail) throws IOException {
-		File currentDirFile = new File("/pdf");
-		String filePath = currentDirFile.getAbsolutePath();
 
 		int length = 10;
 		boolean useLetters = true;
@@ -39,7 +38,7 @@ public class FileHelper {
 		String base64pdf = base64.split(",")[1];
 		byte[] pdfBytes = Base64.getDecoder().decode(base64pdf);
 		String path = filePath + generatedString+".pdf";
-		Files.createDirectories(Paths.get("/pdf"));
+		Files.createDirectories(Paths.get("pdf"));
 		File file = new File(path);
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.write(pdfBytes);
@@ -49,12 +48,12 @@ public class FileHelper {
 		List<User> editors = userRepository.findAllByRole(RoleEnum.EDITOR);
 		User owner = userRepository.findByEmail(ownerEmail);
 		Book textDocument = new Book();
-		textDocument.setOwner(owner);
+		textDocument.setOwnerEmail(owner.getEmail());
 		textDocument.setPublished(false);
 		textDocument.setEditors(editors);
 		textDocument.setDocumentStatus(DocumentStatus.TEXT_PENDING);
 		textDocument.setDocumentPath(path);
-		bookRepository.save(textDocument);
+		Book book=bookRepository.save(textDocument);
 	}
 
 

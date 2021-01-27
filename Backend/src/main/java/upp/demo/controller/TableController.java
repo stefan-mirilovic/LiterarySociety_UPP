@@ -17,8 +17,13 @@ public class TableController {
 
 	private final GenericTableProcess genericTableProcess;
 
-	@GetMapping("/getTable/{id}")
-	public ResponseEntity<?> getTableForm(@PathVariable("id") String processId){
+	@GetMapping("/getTable/{taskId}")
+	public ResponseEntity<?> renderForm(@PathVariable String taskId) {
+		return new ResponseEntity<>(genericTableProcess.getFormFields(taskId), HttpStatus.OK);
+	}
+
+	@GetMapping("/getNextTaskTable/{id}")
+	public ResponseEntity<?> getNextTaskTable(@PathVariable("id") String processId){
 		return new ResponseEntity<>(genericTableProcess.findNextTasks(processId), HttpStatus.OK);
 	}
 

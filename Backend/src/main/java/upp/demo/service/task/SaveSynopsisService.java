@@ -34,7 +34,7 @@ public class SaveSynopsisService implements JavaDelegate {
         Book book = synopsisMapper.convert(synopsisForm);
         book.setPublished(false);
         //ubaciti iz baze
-        book.setOwner(userRepository.findByEmail("merchant1@maildrop.cc"));
+        book.setOwnerEmail(userRepository.findByEmail("merchant1@maildrop.cc").getEmail());
         Random rand = new Random();
         List<User> editorsList = userRepository.findAllByRole(RoleEnum.EDITOR);
         User randomEditor = editorsList.get(rand.nextInt(editorsList.size()));

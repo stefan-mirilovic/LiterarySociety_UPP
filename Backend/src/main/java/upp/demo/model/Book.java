@@ -4,19 +4,20 @@ import lombok.Data;
 import upp.demo.enumeration.DocumentStatus;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
 @Table
-public class Book {
+public class Book implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
-	private User owner;
+	@Column
+	private String ownerEmail;
 
 	@ManyToMany
 	private List<User> editors = new ArrayList<>();

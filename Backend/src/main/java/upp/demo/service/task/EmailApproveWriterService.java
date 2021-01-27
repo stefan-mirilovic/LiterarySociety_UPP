@@ -41,6 +41,7 @@ public class EmailApproveWriterService implements JavaDelegate {
 		request.setGenres((List<Genre>) delegateExecution.getVariable("genres"));
 		registerReaderRequestRepository.save(request);
 		userRepository.save(user);
+		delegateExecution.setVariable(PropertyName.VariableName.LOGGED_USER,user.getEmail());
 
 		String processId = delegateExecution.getProcessInstanceId();
 		delegateExecution.setVariable(PropertyName.VariableName.PROCESS_ID, processId);

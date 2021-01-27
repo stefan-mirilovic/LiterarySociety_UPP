@@ -10,12 +10,14 @@ import upp.demo.dto.FormSubmissionDto;
 import upp.demo.enumeration.RoleEnum;
 import upp.demo.globals.PropertyName;
 import upp.demo.helper.FileHelper;
+import upp.demo.model.Book;
 import upp.demo.model.User;
 import upp.demo.repository.BookRepository;
 import upp.demo.repository.UserRepository;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,7 +33,7 @@ public class SavePdfService implements JavaDelegate {
 		List<FormSubmissionDto> submissionList = (List<FormSubmissionDto>) delegateExecution.getVariable(PropertyName.FormName.FORM_DATA);
 		submissionList.forEach(x-> {
 			try {
-				fileHelper.saveFile(x.getFieldValue(),ownerEmail);
+				 fileHelper.saveFile(x.getFieldValue(),ownerEmail);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

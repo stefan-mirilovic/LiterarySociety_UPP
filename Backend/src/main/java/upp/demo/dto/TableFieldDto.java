@@ -7,4 +7,5 @@ public class TableFieldDto {
 	private String fieldId;
 	private String fieldValue;
 	private String input;
+	private String custom;
 }

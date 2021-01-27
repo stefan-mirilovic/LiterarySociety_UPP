@@ -15,6 +15,7 @@ import { WriterDashboardComponent } from './dashboard/writer-dashboard/writer-da
 import { WriterGuard } from './guard/writer.guard';
 import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guard/admin.guard';
+import {EditorsReviewComponent} from "./editors-review/editors-review.component";
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'writer/document', component: WriterDocumentComponent},
   { path: 'book/publish', component: SynopsisComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'editor/review', component: EditorsReviewComponent},
   {
     path: 'reader-dashboard',
     component: ReaderDashboardComponent,
