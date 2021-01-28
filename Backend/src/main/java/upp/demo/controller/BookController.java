@@ -36,4 +36,14 @@ public class BookController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(value = "/owned")
+    public ResponseEntity<?> findAllOwned(@RequestParam int resperpage, @RequestParam int pageno) {
+        try {
+            List<BookStoreDisplayDTO> result = bookService.findAllOwned(resperpage, pageno);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 }

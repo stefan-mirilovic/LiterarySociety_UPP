@@ -17,6 +17,7 @@ import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashb
 import { AdminGuard } from './guard/admin.guard';
 import { StoreComponent } from './pages/store/store.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
+import { MyBooksComponent } from './pages/my-books/my-books.component';
 
 
 const routes: Routes = [
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'book/:id',
         component: BookDetailsComponent
+      },
+      {
+        path: 'my-library',
+        component: MyBooksComponent
       },
     ]
   },

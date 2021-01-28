@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import upp.demo.dto.OrderDTO;
 import upp.demo.dto.TransactionDTO;
 import upp.demo.enumeration.TransactionStatus;
 import upp.demo.service.impl.TransactionService;
@@ -19,7 +20,7 @@ public class TransactionController {
     @PostMapping()
     public ResponseEntity<?> create(@RequestBody TransactionDTO dto){
         try {
-            TransactionDTO result = transactionService.create(dto);
+            OrderDTO result = transactionService.create(dto);
             return new ResponseEntity<>(result, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

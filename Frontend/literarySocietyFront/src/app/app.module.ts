@@ -35,6 +35,7 @@ import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashb
 import { AdminGuard } from './guard/admin.guard';
 import { StoreComponent } from './pages/store/store.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
+import { MyBooksComponent } from './pages/my-books/my-books.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { BookDetailsComponent } from './pages/book-details/book-details.componen
     AdminDashboardComponent,
     StoreComponent,
     BookDetailsComponent,
+    MyBooksComponent,
   ],
   imports: [
     BrowserModule,
