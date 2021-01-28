@@ -22,6 +22,15 @@ export class BookService {
     });
   }
 
+  public findAllOwnedWithPagination(resultsPerPage: number, pageNo: number): Observable<BookDisplay[]> {
+    return this.http.get<BookDisplay[]>(`${environment.baseUrl}/books/owned`, {
+      params: {
+        resperpage: resultsPerPage.toString(),
+        pageno: pageNo.toString()
+      }
+    });
+  }
+
   public getBook(id: number) {
     return this.http.get<BookDetails>(`${environment.baseUrl}/books/store/${id}`)
   }

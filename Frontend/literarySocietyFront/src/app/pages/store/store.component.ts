@@ -4,9 +4,11 @@ import { ToastrService } from 'ngx-toastr';
 import { BookDisplay } from 'src/app/model/book-display';
 import { Genre } from 'src/app/model/genre';
 import { GenreDisplay } from 'src/app/model/genre-display';
+import { Transaction } from 'src/app/model/transaction';
 import { BookService } from 'src/app/service/book.service';
 import { GenreService } from 'src/app/service/genre.service';
 import { TransactionService } from 'src/app/service/transaction.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-store',
@@ -29,7 +31,7 @@ export class StoreComponent implements OnInit {
     private bookService: BookService,
     private toastr: ToastrService,
     private genreService: GenreService,
-    private router: Router
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -146,7 +148,29 @@ export class StoreComponent implements OnInit {
   }
 
   details(book: BookDisplay) {
+    localStorage.setItem("prevPage", "reader-dashboard/store")
     this.router.navigate([`/reader-dashboard/book/${book.id}`]);
   }
 
+  purchase(event, book: BookDisplay) {
+    event.stopPropagation();
+    let transaction: Transaction = new Transaction(null, null, null, book.id, null);
+    this.transactionService.create(transaction).subscribe({
+      next: (result) => {
+        window.location.href = `${environment.paymentUrl}?merchantId=${result.merchantId}&amount=${result.amount}&successUrl=${result.successUrl}&failedUrl=${result.failedUrl}&errorUrl=${result.errorUrl}`;
+      },
+      error: data => {
+        this.loading = false;
+        if (data.error && typeof data.error === "string")
+          this.toastr.error(data.error);
+        else
+          this.toastr.error("An error occured while purchasing book!")
+      }
+    })
+  }
+
+  download(event, book: BookDisplay) {
+    event.stopPropagation();
+    this.toastr.info("Placeholder");
+  }
 }

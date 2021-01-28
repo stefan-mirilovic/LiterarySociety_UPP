@@ -33,7 +33,7 @@
     </div>
     <div class="row card-deck">
         <div *ngFor="let book of books">
-            <mat-card class="example-card">
+            <mat-card class="example-card" (click)="details(book)">
                 <mat-card-header>
                     <div mat-card-avatar [style]="book.color">
                         <fa-icon class="avatar-icon" icon="book"></fa-icon>
@@ -51,8 +51,8 @@
                 </mat-card-content>
                 <mat-card-actions>
                     <span class="price-tag">{{book.price}}€</span>
-                    <button mat-button class="btn-purchase" *ngIf="!book.owned">PURCHASE</button>
-                    <button mat-button class="btn-download" *ngIf="book.owned">DOWNLOAD</button>
+                    <button mat-button class="btn-purchase" *ngIf="!book.owned" (click)="purchase($event, book)">PURCHASE</button>
+                    <button mat-button class="btn-download" *ngIf="book.owned" (click)="download($event, book)">DOWNLOAD</button>
                     <br>
                     <button mat-button class="btn-details" (click)="details(book)">DETAILS</button>
                 </mat-card-actions>
@@ -64,7 +64,7 @@
             <mat-form-field class="page-control-select">
                 <mat-label>Results per page</mat-label>
                 <mat-select [(value)]="resultsPerPage"
-                    (selectionChange)="onResultPerPageChange($event)">
+                    (selectionChange)="onResultPerPageChange()">
                     <mat-option [value]="1">1</mat-option>
                     <mat-option [value]="2">5</mat-option>
                     <mat-option [value]="10">10</mat-option>
