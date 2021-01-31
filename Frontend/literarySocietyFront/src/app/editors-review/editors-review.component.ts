@@ -7,23 +7,12 @@ import {DocumentService} from "../service/document.service";
   styleUrls: ['./editors-review.component.css']
 })
 export class EditorsReviewComponent implements OnInit {
-  public taskId:any;
-  public loading:boolean;
-  public process;
 
-  constructor(private documentService: DocumentService) { }
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.loading=true;
-    var processId =localStorage.getItem("processId");
-    console.log(processId);
-    this.documentService.getNextTaskTable(processId).subscribe(
-        data=>{
-          console.log(data);
-          this.taskId=data.taskId;
-          this.loading=false;
-        }
-    );
+
   }
 
 }

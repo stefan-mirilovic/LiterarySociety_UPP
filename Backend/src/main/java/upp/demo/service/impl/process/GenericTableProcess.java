@@ -12,6 +12,7 @@ import upp.demo.helper.TableHelper;
 import upp.demo.service.ProcessInstanceService;
 import upp.demo.service.TaskService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -25,14 +26,14 @@ public class GenericTableProcess {
 		return null;
 	}
 
-	public TableDto getFormFields(String taskId){
+	public TableDto getFormFields(String taskId) throws IOException {
 		Task task = taskService.getById(taskId);
 		TaskFormData taskFormData = taskService.formData(taskId);
 
 		TableDto tableDto = new TableDto();
 		tableDto.setProcessInstanceId(task.getProcessInstanceId());
 		tableDto.setTaskId(taskId);
-		tableDto.setTableFields(tableHelper.convertToBook(task.getProcessInstanceId(),taskFormData.getFormFields()));
+		tableDto.setTableRows(tableHelper.convertToBook(task.getProcessInstanceId(),taskFormData.getFormFields()));
 		return tableDto;
 
 	}
@@ -41,13 +42,13 @@ public class GenericTableProcess {
 		return null;
 	}
 
-	public TableDto findNextTasks(String processId) {
+	public TableDto findNextTasks(String processId) throws IOException {
 		List<Task> tasks = taskService.getAllByProcess(processId);
 		Task currentTask = tasks.get(0);
 		TaskFormData taskFormData = taskService.formData(currentTask.getId());
 
 		TableDto tableDto = new TableDto();
-		tableDto.setTableFields(tableHelper.convertToBook(processId, taskFormData.getFormFields()));
+		tableDto.setTableRows(tableHelper.convertToBook(processId, taskFormData.getFormFields()));
 		tableDto.setTaskId(currentTask.getId());
 		tableDto.setProcessInstanceId(processId);
 		return tableDto;

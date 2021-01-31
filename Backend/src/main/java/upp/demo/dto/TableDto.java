@@ -8,5 +8,5 @@ import java.util.Collection;
 public class TableDto {
 	private String processInstanceId;
 	private String taskId;
-	private Collection<TableFieldDto> tableFields;
+	private Collection<RowDto> tableRows;
 }

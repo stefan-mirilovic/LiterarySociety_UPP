@@ -1,6 +1,7 @@
 package upp.demo.helper;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
 import upp.demo.enumeration.DocumentStatus;
@@ -54,6 +55,12 @@ public class FileHelper {
 		textDocument.setDocumentStatus(DocumentStatus.TEXT_PENDING);
 		textDocument.setDocumentPath(path);
 		Book book=bookRepository.save(textDocument);
+	}
+
+	public String load(String path) throws IOException {
+		byte[] fileContent = FileUtils.readFileToByteArray(new File(path));
+		String base64 = Base64.getEncoder().encodeToString(fileContent);
+		return base64;
 	}
 
 
