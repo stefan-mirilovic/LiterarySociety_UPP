@@ -25,6 +25,7 @@ public interface PropertyName {
 		String EDITORS_FOR_REVIEW_TEXT = "textEditors";
 		String BOOKS_FOR_REVIEW = "booksForReviews";
 		String LOGGED_USER = "loggedUser";
+		String EMAIL_FOR_REVIEW = "emailForReview";
 	}
 
 	interface Validation {

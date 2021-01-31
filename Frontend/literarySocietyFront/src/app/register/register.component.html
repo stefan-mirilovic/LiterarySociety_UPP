@@ -1,7 +1,12 @@
 <div class="container">
+  <h2 class="text-primary">{{tableName}}</h2>
+  <div >
+
+    <app-table [tableRows]="tableRows"></app-table>
+  </div>
   <div class="container h-100 d-flex justify-content-center">
     <div class="container jumbotron w-50 bg-light text-white">
-      <h2 class="text-primary">{{formName}} form</h2>
+      <h2 class="text-primary">{{formName}}</h2>
       <br>
       <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!load">
         <p *ngIf=load>Loading...</p>

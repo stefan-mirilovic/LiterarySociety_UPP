@@ -18,7 +18,8 @@ public class GetDocumentsForReview implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution delegateExecution){
-		List<Book> books = bookRepository.findAllByDocumentStatus(DocumentStatus.TEXT_PENDING);
+		String ownerEmail= (String) delegateExecution.getVariable(PropertyName.VariableName.LOGGED_USER);
+		List<Book> books = bookRepository.findAllByDocumentStatusAndOwnerEmail(DocumentStatus.TEXT_PENDING,ownerEmail);
 		delegateExecution.setVariable(PropertyName.VariableName.BOOKS_FOR_REVIEW, books);
 	}
 }

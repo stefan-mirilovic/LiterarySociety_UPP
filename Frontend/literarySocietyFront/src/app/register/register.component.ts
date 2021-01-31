@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit {
     @Input() redirectLink: string;
     @Input() scsMsg: string;
     @Input() errMsg: string;
+    @Input() tableRows: [];
+    @Input() tableName: string;
 
 
     form = this.fb.group({});
@@ -36,6 +38,7 @@ export class RegisterComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.tableRows);
         this.load = true;
         this.registerService.getFormData(this.taskId).subscribe(
             res => {

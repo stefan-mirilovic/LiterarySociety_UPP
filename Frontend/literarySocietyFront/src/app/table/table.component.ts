@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DocumentService} from "../service/document.service";
 
 @Component({
@@ -11,20 +11,14 @@ export class TableComponent implements OnInit {
   public taskId:any;
   public loading:boolean;
   public process;
+
+  @Input()
   public tableRows= [];
 
-  constructor(private documentService: DocumentService ) { }
+  constructor( ) { }
 
   ngOnInit(): void {
-    var processId =localStorage.getItem("processId");
-    this.documentService.getNextTaskTable(processId).subscribe(
-      data=>{
-        console.log(data);
-        this.tableRows = data.tableRows;
-        this.taskId=data.taskId;
-        this.loading=false;
-      }
-    );
+
   }
 
   toArray(row: any) {
