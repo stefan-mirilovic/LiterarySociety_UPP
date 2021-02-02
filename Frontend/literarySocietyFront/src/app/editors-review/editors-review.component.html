@@ -1,0 +1,4 @@
+<div>
+  <app-register [tableRows]="tableRows" *ngIf="!loading" [taskId]="taskId" [tableName]="'Editor Review Table'"></app-register>
+  <p *ngIf="loading">Loading...</p>
+</div>

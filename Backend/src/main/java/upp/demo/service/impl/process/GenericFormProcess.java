@@ -7,16 +7,17 @@ import org.camunda.bpm.engine.form.TaskFormData;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.springframework.stereotype.Service;
-import upp.demo.dto.FormDto;
+import upp.demo.dto.*;
 
-import upp.demo.dto.FormSubmissionDto;
-import upp.demo.dto.TaskDto;
 import upp.demo.globals.PropertyName;
+import upp.demo.handler.PdfHandler;
 import upp.demo.helper.FormFieldsHelper;
+import upp.demo.helper.TableHelper;
 import upp.demo.service.ProcessInstanceService;
 import upp.demo.service.ProcessService;
 import upp.demo.service.TaskService;
 
+import java.io.IOException;
 import java.text.Normalizer;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,8 +26,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GenericFormProcess implements ProcessInstanceService {
 
+	private final PdfHandler pdfHandler;
 	private final TaskService taskService;
 	private final FormService formService;
+	private final TableHelper tableHelper;
 	private final ProcessService processService;
 	private final RuntimeService runtimeService;
 	private final FormFieldsHelper formFieldsHelper;
@@ -58,23 +61,35 @@ public class GenericFormProcess implements ProcessInstanceService {
 	}
 
 	@Override
-	public String submitForm(String taskId, List<FormSubmissionDto> submissionDto) {
+	public String submitForm(String taskId, List<FormSubmissionDto> submissionDto) throws IOException {
 		Task task = taskService.getById(taskId);
 		String processInstanceId = task.getProcessInstanceId();
 		runtimeService.setVariable(processInstanceId, PropertyName.FormName.FORM_DATA,submissionDto);
+
+		pdfHandler.change(submissionDto);
 		formService.submitTaskForm(taskId,formFieldsHelper.listToMapSubmit(submissionDto));
 		return processInstanceId;
 	}
 
 
 	@Override
-	public FormDto findNextTasks(String processId) {
+	public UserInterfaceDto findNextTasks(String processId) throws IOException {
 		List<Task> tasks = taskService.getAllByProcess(processId);
 		Task currentTask = tasks.get(0);
+
+		TaskFormData taskFormData = taskService.formData(currentTask.getId());
+		TableDto tableDto = new TableDto();
+		tableDto.setTableRows(tableHelper.convertToBook(processId, taskFormData.getFormFields()));
+
 		FormDto formDto = new FormDto();
 		formDto.setTaskId(currentTask.getId());
 		formDto.setProcessInstanceId(processId);
-		return formDto;
+		formDto.setFormFields(formFieldsHelper.convertToDto(currentTask.getProcessInstanceId(),taskFormData.getFormFields()));
+
+		UserInterfaceDto userInterfaceDto = new UserInterfaceDto();
+		userInterfaceDto.setFormDto(formDto);
+		userInterfaceDto.setTableDto(tableDto);
+		return userInterfaceDto;
 	}
 
 	@Override

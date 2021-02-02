@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import upp.demo.dto.FormFieldDto;
 import upp.demo.dto.FormSubmissionDto;
 import upp.demo.dto.PropertyDto;
+import upp.demo.dto.TableDto;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -21,7 +21,7 @@ export class WriterDocumentComponent implements OnInit {
       this.documentService.documentProcess(processId).subscribe(
           data=>{
               console.log(data);
-              this.taskId=data.taskId;
+              this.taskId=data.formDto.taskId;
               this.loading=false;
           }
       )

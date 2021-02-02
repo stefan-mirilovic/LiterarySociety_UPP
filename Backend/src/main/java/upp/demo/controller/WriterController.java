@@ -8,10 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import upp.demo.dto.FormDto;
+import upp.demo.dto.UserInterfaceDto;
 import upp.demo.globals.PropertyName;
 import upp.demo.service.impl.process.GenericFormProcess;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -21,7 +23,7 @@ public class WriterController {
 	private final GenericFormProcess genericFormProcess;
 
 	@GetMapping("/writer/document/{id}")
-	public ResponseEntity<FormDto> getFormForDocument(@PathVariable ("id") String processId ){
+	public ResponseEntity<UserInterfaceDto> getFormForDocument(@PathVariable ("id") String processId ) throws IOException {
 		return new ResponseEntity<>(genericFormProcess.findNextTasks(processId), HttpStatus.OK);
 	}
 }

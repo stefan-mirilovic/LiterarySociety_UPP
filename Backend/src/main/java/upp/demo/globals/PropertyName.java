@@ -22,7 +22,23 @@ public interface PropertyName {
 		String PROCESS_ID = "processId";
 		String GENERIC_EMAIL = "genericEmail";
 		String BOOK_SYNOPSIS = "bookSynopsis";
+		String EDITORS_FOR_REVIEW_TEXT = "textEditors";
+		String BOOKS_FOR_REVIEW = "booksForReviews";
+		String LOGGED_USER = "loggedUser";
+		String EMAIL_FOR_REVIEW = "emailForReview";
+		String REVIEWERS_OPINION = "reviewersOpinion";
+		String REVIEW_DTO = "reviewDto";
+		String REJECT_COUNTER = "rejectCounter";
 	}
+
+	interface Review {
+		String MORE_DOCUMENT_COUNTER = "moreDocumentCounter";
+	    String ACCEPT = "acceptRegistration";
+	    String REJECT = "rejectRegistration";
+	    String MORE_DOCUMENTS = "moreDocuments";
+	    String REVIEW_LIST = "reviewList";
+	    String REVIEWERS_COMMENTS = "reviewersComments";
+    }
 
 	interface Validation {
 		String EMAIL = "email";

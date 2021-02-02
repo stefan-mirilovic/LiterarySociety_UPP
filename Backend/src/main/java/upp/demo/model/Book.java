@@ -1,8 +1,10 @@
 package upp.demo.model;
 
 import lombok.Data;
+import upp.demo.enumeration.DocumentStatus;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,13 +12,13 @@ import java.util.Objects;
 @Data
 @Entity
 @Table
-public class Book {
+public class Book implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
-	private User owner;
+	@Column
+	private String ownerEmail;
 
 	@ManyToMany
 	private List<User> editors = new ArrayList<>();
@@ -44,6 +46,12 @@ public class Book {
 
 	@Column
 	private Boolean published;
+
+	@Column
+	private DocumentStatus documentStatus;
+
+	@Column
+	private String documentPath;
 
 	@Override
 	public boolean equals(Object o) {

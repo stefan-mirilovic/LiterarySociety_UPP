@@ -45,5 +45,6 @@ public class EmailApproveReaderService implements JavaDelegate {
 		request.setGenres((List<Genre>)delegateExecution.getVariable("genres"));
 		registerReaderRequestRepository.save(request);
 		userRepository.save(user);
+
 	}
 }

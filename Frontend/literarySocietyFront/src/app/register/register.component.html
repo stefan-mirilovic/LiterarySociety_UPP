@@ -1,7 +1,12 @@
 <div class="container">
+  <h2 class="text-primary">{{tableName}}</h2>
+  <div >
+
+    <app-table [tableRows]="tableRows"></app-table>
+  </div>
   <div class="container h-100 d-flex justify-content-center">
     <div class="container jumbotron w-50 bg-light text-white">
-      <h2 class="text-primary">{{formName}} form</h2>
+      <h2 class="text-primary">{{formName}}</h2>
       <br>
       <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!load">
         <p *ngIf=load>Loading...</p>
@@ -10,7 +15,7 @@
           <app-text-input-field [field]="field" [form]="form" *ngSwitchCase="['text']"></app-text-input-field>
           <app-radio-button-field [field]="field" [form]="form" (isBeta)="setBeta($event)"  [enumValues]="enumValues" *ngSwitchCase="['radio']"></app-radio-button-field>
           <app-enum-select-field [field]="field" [form]="form" [isBeta]="isBeta" *ngSwitchCase="['enum']" ></app-enum-select-field>
-          <app-pdf-input-field [field]="field" [form]="form" *ngSwitchCase="['file']"></app-pdf-input-field>
+          <app-pdf-input-field [field]="field" [form]="form" *ngSwitchCase="['file']" [filesList]="fileMap" ></app-pdf-input-field>
           <app-text-area-field [field]="field" [form]="form" *ngSwitchCase="['textarea']" ></app-text-area-field>
         </div>
         <br>

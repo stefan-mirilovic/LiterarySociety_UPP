@@ -3,20 +3,16 @@ package upp.demo.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import upp.demo.dto.FormDto;
 import upp.demo.dto.FormSubmissionDto;
 import upp.demo.dto.TaskDto;
 import upp.demo.globals.PropertyName;
-import upp.demo.model.User;
 import upp.demo.service.impl.RegisterReaderRequestService;
 import upp.demo.service.impl.process.GenericFormProcess;
 
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
+import java.io.IOException;
 import java.util.UUID;
 
 import java.util.List;
@@ -42,7 +38,7 @@ public class FormController {
 	}
 
 	@PostMapping("/submitForm/{taskId}")
-	public void registerReader(@RequestBody List<FormSubmissionDto> formSubmissionList, @PathVariable("taskId") String taskId) {
+	public void registerReader(@RequestBody List<FormSubmissionDto> formSubmissionList, @PathVariable("taskId") String taskId) throws IOException {
 		genericFormProcess.submitForm(taskId, formSubmissionList);
 	}
 

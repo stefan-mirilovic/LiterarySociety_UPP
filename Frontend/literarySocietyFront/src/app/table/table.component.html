@@ -1,3 +1,27 @@
-<div>
-    <app-table-field></app-table-field>
+<div class="container">
+    <div class="container d-flex justify-content-center">
+        <div class="col-12">
+            <table  class="record_table table table-hover table-bordered">
+                <thead class="thead-secondary">
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of tableRows">
+                      <td *ngFor="let td of toArray(row)">
+                        <div *ngIf="td.fieldId=='pdf'">
+                          <button class="btn btn-primary" (click)="download(td.fieldValue)"><i class="fa-spin"></i> Review Text</button>
+                        </div>
+                        <div *ngIf="td.fieldId!='pdf'">
+                          {{td.fieldValue}}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
 </div>

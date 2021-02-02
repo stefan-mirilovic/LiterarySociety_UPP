@@ -46,7 +46,7 @@ public class RegistrationApprovedReaderService implements JavaDelegate {
 		delegateExecution.setVariable(PropertyName.VariableName.APPROVE_CODE, registerReaderRequest.getApproveCode());
 		delegateExecution.setVariable(PropertyName.VariableName.REGISTRATION_REQUEST, registerReaderRequest.getId());
 		emailService.sendSimpleMessage(registerReaderRequest.getEmail(), "Confirm your email",
-				"To confirm your email, please click this link: http://localhost:9090/api/approve/" + registerReaderRequest.getId()
+				"To confirm your email, please click this link: http://localhost:4200/confirm/" + registerReaderRequest.getId()
 						+ "/" + registerReaderRequest.getApproveCode());
 	}
 }

@@ -2,6 +2,7 @@ package upp.demo.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import upp.demo.enumeration.DocumentStatus;
 import upp.demo.model.Book;
 import upp.demo.model.Genre;
 import upp.demo.model.User;
@@ -12,7 +13,10 @@ public interface BookRepository extends JpaRepository<Book,Long> {
 
     List<Book> findAllByEditorsIn(List<User> users);
 
+    List<Book> findAllByDocumentStatusAndOwnerEmail(DocumentStatus documentStatus, String email);
+
     List<Book> findAllByPublishedOrderByPublishingYearDesc(boolean published);
 
     List<Book> findAllByGenreAndPublishedOrderByPublishingYearDesc(Genre genre, boolean published);
+
 }

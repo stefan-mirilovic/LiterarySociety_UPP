@@ -15,9 +15,11 @@ import { WriterDashboardComponent } from './dashboard/writer-dashboard/writer-da
 import { WriterGuard } from './guard/writer.guard';
 import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guard/admin.guard';
+import {EditorsReviewComponent} from "./editors-review/editors-review.component";
 import { StoreComponent } from './pages/store/store.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 import { MyBooksComponent } from './pages/my-books/my-books.component';
+
 
 
 const routes: Routes = [
@@ -30,13 +32,16 @@ const routes: Routes = [
     path: 'confirm/:id/:uuid',
     component: RegisterRedirectComponent
   },
-  { path: 'readerRegistration', component: ReaderComponent },
-  { path: 'writerRegistration', component: WriterComponent },
-  { path: 'book', component: BookComponent },
-  { path: 'table', component: TableComponent },
-  { path: 'writer/document', component: WriterDocumentComponent },
-  { path: 'book/publish', component: SynopsisComponent },
-  { path: 'login', component: LoginComponent },
+
+  { path: 'readerRegistration', component: ReaderComponent},
+  { path: 'writerRegistration', component: WriterComponent},
+  { path: 'book', component: BookComponent},
+  { path: 'table', component: TableComponent},
+  { path: 'writer/document', component: WriterDocumentComponent},
+  { path: 'book/publish', component: SynopsisComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'editor/review', component: EditorsReviewComponent},
+
   {
     path: 'reader-dashboard',
     component: ReaderDashboardComponent,

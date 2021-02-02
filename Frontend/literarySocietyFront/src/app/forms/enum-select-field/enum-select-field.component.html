@@ -1,7 +1,7 @@
 <div [formGroup]="form" *ngIf="field.constraint=='single.select'">
     <label for={{field.id}} class="text-primary">{{field.label}}</label>
     <select formControlName="{{field.id}}"  name="{{field.id}}" id="{{field.id}}" ngModel class="form-control">
-
+      <option disabled selected hidden>Select {{field.id}}</option>
       <option *ngFor="let val of field.availableValues">
           {{val.value}}
         </option>

@@ -13,4 +13,12 @@ export class DocumentService {
   public documentProcess(processId:any): Observable<any> {
     return this.http.get(`${environment.baseUrl}/writer/document/${processId}`);
   }
+
+  public getNextTaskTable(processId:any): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/getNextTaskTable/${processId}`);
+  }
+
+  public getTable(processId:any): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/getTable/${processId}`);
+  }
 }

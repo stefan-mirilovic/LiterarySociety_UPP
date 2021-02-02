@@ -27,6 +27,7 @@ public class EmailApproveWriterService implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution delegateExecution) throws Exception {
+		int moreDocumentCounter=0;
 		Long id = (Long) delegateExecution.getVariable(PropertyName.VariableName.REGISTRATION_REQUEST);
 		UUID approveCode = (UUID) delegateExecution.getVariable(PropertyName.VariableName.APPROVE_CODE);
 		RegisterReaderRequest request = registerReaderRequestRepository.findById(id).orElseThrow(Exception::new);
@@ -42,6 +43,9 @@ public class EmailApproveWriterService implements JavaDelegate {
 		request.setGenres((List<Genre>) delegateExecution.getVariable("genres"));
 		registerReaderRequestRepository.save(request);
 		userRepository.save(user);
+		delegateExecution.setVariable(PropertyName.VariableName.LOGGED_USER,user.getEmail());
+
+		delegateExecution.setVariable(PropertyName.Review.MORE_DOCUMENT_COUNTER,moreDocumentCounter);
 
 		String processId = delegateExecution.getProcessInstanceId();
 		delegateExecution.setVariable(PropertyName.VariableName.PROCESS_ID, processId);
