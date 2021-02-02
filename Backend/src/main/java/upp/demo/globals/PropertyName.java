@@ -26,7 +26,19 @@ public interface PropertyName {
 		String BOOKS_FOR_REVIEW = "booksForReviews";
 		String LOGGED_USER = "loggedUser";
 		String EMAIL_FOR_REVIEW = "emailForReview";
+		String REVIEWERS_OPINION = "reviewersOpinion";
+		String REVIEW_DTO = "reviewDto";
+		String REJECT_COUNTER = "rejectCounter";
 	}
+
+	interface Review {
+		String MORE_DOCUMENT_COUNTER = "moreDocumentCounter";
+	    String ACCEPT = "acceptRegistration";
+	    String REJECT = "rejectRegistration";
+	    String MORE_DOCUMENTS = "moreDocuments";
+	    String REVIEW_LIST = "reviewList";
+	    String REVIEWERS_COMMENTS = "reviewersComments";
+    }
 
 	interface Validation {
 		String EMAIL = "email";

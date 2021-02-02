@@ -41,20 +41,21 @@ public class TableHelper {
                     tableFieldDto.setFieldId(formField.getId());
                     tableFieldDto.setFieldValue(fileHelper.load(book.getDocumentPath()));
                     tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
+                    tableFieldDtoList.add(tableFieldDto);
                 }
                 if (formField.getId().equals("owner")) {
                     tableFieldDto.setFieldId(formField.getId());
                     tableFieldDto.setFieldValue(book.getOwnerEmail());
                     tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
+                    tableFieldDtoList.add(tableFieldDto);
                 }
-                if (formField.getId().equals("comment")) {
-                    tableFieldDto.setFieldId(formField.getId());
-                    tableFieldDto.setFieldValue("");
-                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
-                    tableFieldDto.setCustom(propertyHelper.findAvailableProperties(formField.getProperties()).getCustom());
-                }
+//                if (formField.getId().equals("comment")) {
+//                    tableFieldDto.setFieldId(formField.getId());
+//                    tableFieldDto.setFieldValue("");
+//                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
+//                    tableFieldDto.setCustom(propertyHelper.findAvailableProperties(formField.getProperties()).getCustom());
 
-                tableFieldDtoList.add(tableFieldDto);
+
             }
             rowDto.setRow(tableFieldDtoList);
             rows.add(rowDto);
