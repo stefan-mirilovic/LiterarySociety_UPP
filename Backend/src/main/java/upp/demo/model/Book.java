@@ -20,6 +20,9 @@ public class Book implements Serializable {
 	@Column
 	private String ownerEmail;
 
+	@ManyToOne
+	private User owner;
+
 	@ManyToMany
 	private List<User> editors = new ArrayList<>();
 
