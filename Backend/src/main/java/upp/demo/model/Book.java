@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -37,7 +38,7 @@ public class Book implements Serializable {
 	@Column
 	private int noOfPages;
 
-	@Column
+	@Column(columnDefinition="text")
 	private String synopsis;
 
 	@ManyToOne
@@ -51,4 +52,22 @@ public class Book implements Serializable {
 
 	@Column
 	private String documentPath;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Book book = (Book) o;
+		return publishingYear == book.publishingYear &&
+				noOfPages == book.noOfPages &&
+				id.equals(book.id) &&
+				Objects.equals(isbn, book.isbn) &&
+				Objects.equals(title, book.title) &&
+				Objects.equals(published, book.published);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, isbn, title, publishingYear, noOfPages, published);
+	}
 }

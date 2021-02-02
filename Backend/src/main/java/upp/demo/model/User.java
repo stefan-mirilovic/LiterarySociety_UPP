@@ -8,8 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import upp.demo.enumeration.RoleEnum;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Table(name = "user_table")
@@ -49,6 +51,12 @@ public class User implements UserDetails {
 
 	@Column
 	private boolean enabled;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Book> ownedBooks = new ArrayList<>();
+
+	@Column
+	private UUID merchantId;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

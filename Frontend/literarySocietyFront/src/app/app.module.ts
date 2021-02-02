@@ -33,7 +33,13 @@ import { WriterDashboardComponent } from './dashboard/writer-dashboard/writer-da
 import { WriterGuard } from './guard/writer.guard';
 import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guard/admin.guard';
+
 import { EditorsReviewComponent } from './editors-review/editors-review.component';
+
+import { StoreComponent } from './pages/store/store.component';
+import { BookDetailsComponent } from './pages/book-details/book-details.component';
+import { MyBooksComponent } from './pages/my-books/my-books.component';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +62,13 @@ import { EditorsReviewComponent } from './editors-review/editors-review.componen
     ReaderDashboardComponent,
     WriterDashboardComponent,
     AdminDashboardComponent,
+
     EditorsReviewComponent,
+
+    StoreComponent,
+    BookDetailsComponent,
+    MyBooksComponent,
+
   ],
   imports: [
     BrowserModule,

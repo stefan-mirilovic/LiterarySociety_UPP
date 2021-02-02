@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:9090/api',
+  paymentUrl: 'http://localhost:4201/choose/payment'
 };
 
 /*

@@ -1,0 +1,38 @@
+<button class="back-btn" (click)="back()"><fa-icon icon="arrow-left"></fa-icon></button>
+<div class="row">
+    <mat-spinner *ngIf="loading" [diameter]="200"></mat-spinner>
+    <div class="col-12 row row-fluid" *ngIf="!loading">
+        <div class="col-lg-6 order-1 order-lg-2 middle-container">
+            
+            <h3 class="title">{{book.title}}</h3>
+            <span *ngIf="book.owned" class="card-badge"> <!--*ngIf="book.owned"-->
+                <fa-icon class="card-badge-icon" icon="check-circle"></fa-icon>Owned
+            </span>
+            <h5 class="subtitle author">{{book.writer}}</h5>
+            
+            <h6 class="subtitle">Genre</h6>
+            <p>{{book.genre}}</p>
+            <hr class="sidebar-divider">
+            <h6 class="subtitle">Synopsis</h6>
+            <p>{{book.synopsis}}</p>
+        </div>
+        <div class="col-lg-3 order-2 order-lg-1 left-container">
+            <div>
+                <h6 class="subtitle">No of Pages</h6>
+                <p>{{book.noOfPages}}</p>
+                <h6 class="subtitle">Publishing Year</h6>
+                <p>{{book.publishingYear}}</p>
+                <h6 class="subtitle">ISBN</h6>
+                <p>{{book.isbn}}</p>
+            </div>  
+        </div>
+        <div class="col-lg-3 order-3 right-container">
+            <h6 class="subtitle">Price</h6>
+            <p class="price-tag" *ngIf="!book.owned">{{book.price}}€</p>
+            <p class="price-tag strikethrough" *ngIf="book.owned">{{book.price}}€</p>
+            <button mat-button class="btn-purchase" *ngIf="!book.owned" (click)="purchase()">PURCHASE</button>
+            <button mat-button class="btn-download" *ngIf="book.owned">DOWNLOAD</button>
+        </div>
+    </div>
+    
+</div>

@@ -13,8 +13,10 @@ import upp.demo.security.TokenUtils;
 import upp.demo.security.UserTokenState;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AuthService {
 
