@@ -22,10 +22,10 @@ public class MoreMaterial implements JavaDelegate {
         moreMaterial++;
         delegateExecution.setVariable(PropertyName.Review.MORE_DOCUMENT_COUNTER,moreMaterial);
 
-        String comments = "Reviewers comments/n";
+        String comments = "Reviewers comments";
         List<ReviewDto> reviewDtoList = (List<ReviewDto>) delegateExecution.getVariable(PropertyName.Review.REVIEW_LIST);
         for(ReviewDto reviewDto: reviewDtoList){
-            comments+="Comment: "+comments+reviewDto.getComment()+"  ";
+            comments+="Comment: "+reviewDto.getComment()+"  ";
         }
         String ownerEmail = (String) delegateExecution.getVariable(PropertyName.VariableName.LOGGED_USER);
         emailService.sendSimpleMessage(ownerEmail,"Registration need more material EXPIRES IN 7 Days", comments );
