@@ -38,7 +38,7 @@ public class SavePdfService implements JavaDelegate {
 				e.printStackTrace();
 			}
 		});
-		List<User> editors= userRepository.findAllByRole(RoleEnum.EDITOR);
+		List<User> editors= userRepository.findAllByRole(RoleEnum.COMITTEE_MEMBER);
 		delegateExecution.setVariable(PropertyName.VariableName.EDITORS_FOR_REVIEW_TEXT,editors);
 	}
 }
