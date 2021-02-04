@@ -21,7 +21,7 @@ public class FormFieldsHelper {
 	private final ValidationHelper validationHelper;
 	private final upp.demo.helper.PropertyHelper propertyHelper;
 
-	public List<FormFieldDto> convertToDto(String processInstanceId, List<FormField> formFields) {
+	public List<FormFieldDto> convertToDto(String processInstanceId, List<FormField> formFields)  {
 		List<FormFieldDto> formFieldDtos = new ArrayList<>();
 
 		for (FormField formField : formFields) {

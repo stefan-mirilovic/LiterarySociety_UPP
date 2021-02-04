@@ -19,6 +19,8 @@ import {EditorsReviewComponent} from "./editors-review/editors-review.component"
 import { StoreComponent } from './pages/store/store.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 import { MyBooksComponent } from './pages/my-books/my-books.component';
+import {ReclamationComponent} from "./reclamation/reclamation.component";
+import {EditorsFindComponent} from "./editors-find/editors-find.component";
 
 
 
@@ -41,6 +43,7 @@ const routes: Routes = [
   { path: 'book/publish', component: SynopsisComponent},
   { path: 'login', component: LoginComponent},
   { path: 'editor/review', component: EditorsReviewComponent},
+  { path: 'find/editors', component: EditorsFindComponent},
 
   {
     path: 'reader-dashboard',
@@ -75,6 +78,10 @@ const routes: Routes = [
         path: 'book/publish',
         component: SynopsisComponent
       },
+      {
+        path: 'reclamation',
+        component: ReclamationComponent
+      }
     ]
   },
   {

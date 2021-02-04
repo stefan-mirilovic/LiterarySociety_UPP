@@ -12,11 +12,11 @@ import java.util.List;
 public interface ProcessInstanceService {
 	FormDto startProcess(String processName);
 
-	FormDto getFormFields(String taskId);
+	FormDto getFormFields(String taskId) throws Exception;
 
 	String submitForm(String taskId, List<FormSubmissionDto> submissionDto) throws IOException;
 
-	UserInterfaceDto findNextTasks(String processId) throws IOException;
+	UserInterfaceDto findNextTasks(String processId) throws Exception;
 
 	List<TaskDto> getAllTasks(String name);
 }

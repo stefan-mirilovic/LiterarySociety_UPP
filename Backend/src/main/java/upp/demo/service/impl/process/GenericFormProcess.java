@@ -49,7 +49,7 @@ public class GenericFormProcess implements ProcessInstanceService {
 	}
 
 	@Override
-	public FormDto getFormFields(String taskId) {
+	public FormDto getFormFields(String taskId)  {
 		Task task = taskService.getById(taskId);
 		TaskFormData taskFormData = taskService.formData(taskId);
 
@@ -80,6 +80,7 @@ public class GenericFormProcess implements ProcessInstanceService {
 		TaskFormData taskFormData = taskService.formData(currentTask.getId());
 		TableDto tableDto = new TableDto();
 		tableDto.setTableRows(tableHelper.convertToBook(processId, taskFormData.getFormFields()));
+
 
 		FormDto formDto = new FormDto();
 		formDto.setTaskId(currentTask.getId());
