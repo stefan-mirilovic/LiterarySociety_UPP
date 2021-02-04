@@ -34,7 +34,7 @@
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_1uerrym" sourceRef="StartEvent_1" targetRef="Activity_1vi9l1r" />
     <bpmn:endEvent id="Event_0wj5py4">
-      <bpmn:incoming>Flow_0dh80gy</bpmn:incoming>
+      <bpmn:incoming>Flow_1lpqzeg</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0msxgt0" sourceRef="Activity_1vi9l1r" targetRef="Activity_107drg4" />
     <bpmn:serviceTask id="Activity_107drg4" name="Send Notification To Lead Editor" camunda:class="upp.demo.service.task.plagiatism.NotifyLeadEditor">
@@ -63,13 +63,71 @@
       <bpmn:incoming>Flow_0dumjyl</bpmn:incoming>
       <bpmn:outgoing>Flow_03rw88a</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:subProcess id="Activity_0zybpdc">
+    <bpmn:subProcess id="Activity_0zybpdc" name="Editor Plagiarism Checking">
       <bpmn:incoming>Flow_03rw88a</bpmn:incoming>
       <bpmn:outgoing>Flow_0dh80gy</bpmn:outgoing>
       <bpmn:multiInstanceLoopCharacteristics camunda:collection="${chosenEditors}" />
-      <bpmn:startEvent id="Event_13ly1xg" />
+      <bpmn:startEvent id="Event_13ly1xg">
+        <bpmn:outgoing>Flow_0kn6zsm</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_0kn6zsm" sourceRef="Event_13ly1xg" targetRef="Activity_0uzfkup" />
+      <bpmn:userTask id="Activity_0uzfkup" name="Plagiarism Table Check">
+        <bpmn:extensionElements>
+          <camunda:formData>
+            <camunda:formField id="pdf" label="Book" type="string">
+              <camunda:properties>
+                <camunda:property id="input" value="pdf" />
+              </camunda:properties>
+            </camunda:formField>
+            <camunda:formField id="owner" label="Owner" type="string">
+              <camunda:properties>
+                <camunda:property id="input" value="pdf" />
+              </camunda:properties>
+            </camunda:formField>
+            <camunda:formField id="notes" label="Leave Notes" type="string">
+              <camunda:properties>
+                <camunda:property id="input" value="textarea" />
+              </camunda:properties>
+            </camunda:formField>
+          </camunda:formData>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0kn6zsm</bpmn:incoming>
+        <bpmn:outgoing>Flow_1ymaojx</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:sequenceFlow id="Flow_1ymaojx" sourceRef="Activity_0uzfkup" targetRef="Activity_1gz59xt" />
+      <bpmn:serviceTask id="Activity_1gz59xt" name="Save Notes" camunda:class="upp.demo.service.task.plagiatism.SaveNotes">
+        <bpmn:incoming>Flow_1ymaojx</bpmn:incoming>
+      </bpmn:serviceTask>
     </bpmn:subProcess>
-    <bpmn:sequenceFlow id="Flow_0dh80gy" sourceRef="Activity_0zybpdc" targetRef="Event_0wj5py4" />
+    <bpmn:sequenceFlow id="Flow_0dh80gy" sourceRef="Activity_0zybpdc" targetRef="Activity_035c6g0" />
+    <bpmn:sequenceFlow id="Flow_07ug9tg" sourceRef="Activity_035c6g0" targetRef="Activity_0gdj17i" />
+    <bpmn:serviceTask id="Activity_035c6g0" name="Get All Comeetee Members" camunda:class="upp.demo.service.task.plagiatism.SaveNotes">
+      <bpmn:incoming>Flow_0dh80gy</bpmn:incoming>
+      <bpmn:outgoing>Flow_07ug9tg</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:subProcess id="Activity_0gdj17i">
+      <bpmn:incoming>Flow_07ug9tg</bpmn:incoming>
+      <bpmn:outgoing>Flow_18conw4</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${committee}" />
+      <bpmn:startEvent id="Event_1n48t4w">
+        <bpmn:outgoing>Flow_1vlmrr3</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_1vlmrr3" sourceRef="Event_1n48t4w" targetRef="Activity_1njoz88" />
+      <bpmn:sequenceFlow id="Flow_0rs5ipy" sourceRef="Activity_1njoz88" targetRef="Activity_0gstvwu" />
+      <bpmn:userTask id="Activity_1njoz88" name="Committee Table">
+        <bpmn:incoming>Flow_1vlmrr3</bpmn:incoming>
+        <bpmn:outgoing>Flow_0rs5ipy</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:serviceTask id="Activity_0gstvwu" name="Save Decision" camunda:class="upp.demo.service.task.plagiatism.SaveDecision">
+        <bpmn:incoming>Flow_0rs5ipy</bpmn:incoming>
+      </bpmn:serviceTask>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_18conw4" sourceRef="Activity_0gdj17i" targetRef="Activity_0ag33df" />
+    <bpmn:sequenceFlow id="Flow_1lpqzeg" sourceRef="Activity_0ag33df" targetRef="Event_0wj5py4" />
+    <bpmn:serviceTask id="Activity_0ag33df" name="CheckDecision" camunda:class="upp.demo.service.task.plagiatism.CheckDecision">
+      <bpmn:incoming>Flow_18conw4</bpmn:incoming>
+      <bpmn:outgoing>Flow_1lpqzeg</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="plagiarismCheck">
@@ -95,6 +153,18 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0dh80gy_di" bpmnElement="Flow_0dh80gy">
         <di:waypoint x="1260" y="177" />
+        <di:waypoint x="1330" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07ug9tg_di" bpmnElement="Flow_07ug9tg">
+        <di:waypoint x="1430" y="177" />
+        <di:waypoint x="1500" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18conw4_di" bpmnElement="Flow_18conw4">
+        <di:waypoint x="1850" y="177" />
+        <di:waypoint x="1930" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lpqzeg_di" bpmnElement="Flow_1lpqzeg">
+        <di:waypoint x="2030" y="177" />
         <di:waypoint x="2292" y="177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
@@ -115,11 +185,51 @@
       <bpmndi:BPMNShape id="Activity_1y8kf2r_di" bpmnElement="Activity_066yhdh">
         <dc:Bounds x="760" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mu4ta2_di" bpmnElement="Activity_035c6g0">
+        <dc:Bounds x="1330" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16w7ps8_di" bpmnElement="Activity_0ag33df">
+        <dc:Bounds x="1930" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0zybpdc_di" bpmnElement="Activity_0zybpdc" isExpanded="true">
         <dc:Bounds x="910" y="77" width="350" height="200" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0kn6zsm_di" bpmnElement="Flow_0kn6zsm">
+        <di:waypoint x="986" y="177" />
+        <di:waypoint x="1010" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ymaojx_di" bpmnElement="Flow_1ymaojx">
+        <di:waypoint x="1110" y="177" />
+        <di:waypoint x="1140" y="177" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_13ly1xg_di" bpmnElement="Event_13ly1xg">
         <dc:Bounds x="950" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18y62us_di" bpmnElement="Activity_0uzfkup">
+        <dc:Bounds x="1010" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1709log_di" bpmnElement="Activity_1gz59xt">
+        <dc:Bounds x="1140" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0gdj17i_di" bpmnElement="Activity_0gdj17i" isExpanded="true">
+        <dc:Bounds x="1500" y="77" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1vlmrr3_di" bpmnElement="Flow_1vlmrr3">
+        <di:waypoint x="1576" y="177" />
+        <di:waypoint x="1600" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rs5ipy_di" bpmnElement="Flow_0rs5ipy">
+        <di:waypoint x="1700" y="177" />
+        <di:waypoint x="1730" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1n48t4w_di" bpmnElement="Event_1n48t4w">
+        <dc:Bounds x="1540" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0e76r4h_di" bpmnElement="Activity_1njoz88">
+        <dc:Bounds x="1600" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nnbsh9_di" bpmnElement="Activity_0gstvwu">
+        <dc:Bounds x="1730" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

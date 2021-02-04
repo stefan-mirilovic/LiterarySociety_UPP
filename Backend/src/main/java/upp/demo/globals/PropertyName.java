@@ -46,6 +46,9 @@ public interface PropertyName {
     interface Plagiarism {
 		String ALL_EDITORS = "allEditors";
 		String CHOSEN_EDITORS = "chosenEditors";
+		String NOTES = "notes";
+		String COMMITTEE_MEMBERS = "committee";
+		String PLAGIARISM_DECISION = "plagiarismDecision";
 	}
 
 	interface Validation {
