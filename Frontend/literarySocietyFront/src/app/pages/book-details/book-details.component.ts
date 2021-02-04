@@ -7,6 +7,7 @@ import { BookDetails } from 'src/app/model/book-details';
 import { Transaction } from 'src/app/model/transaction';
 import { BookService } from 'src/app/service/book.service';
 import { TransactionService } from 'src/app/service/transaction.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-book-details',
@@ -56,7 +57,7 @@ export class BookDetailsComponent implements OnInit {
     let transaction: Transaction = new Transaction(null, null, null, this.book.id, null);
     this.transactionService.create(transaction).subscribe({
       next: (result) => {
-        
+        window.location.href = `${environment.paymentUrl}?merchantId=${result.merchantId}&amount=${result.amount}&successUrl=${result.successUrl}&failedUrl=${result.failedUrl}&errorUrl=${result.errorUrl}`;
       },
       error: data => {
         this.loading = false;

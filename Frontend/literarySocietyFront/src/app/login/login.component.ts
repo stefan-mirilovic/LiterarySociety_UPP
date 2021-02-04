@@ -65,6 +65,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/writer-dashboard"]);
         } else if (result.userType === "ADMINISTRATOR") {
           this.router.navigate(["/admin-dashboard"]);
+        } else if (result.userType === "COMITTEE_MEMBER") {
+          this.router.navigate(["/committee-dashboard"]);
+        } else if (result.userType === "EDITOR") {
+          this.router.navigate(["/editor-dashboard"]);
+        } else if (result.userType === "MAIN_EDITOR") {
+          this.router.navigate(["/main-editor-dashboard"]);
+        } else if (result.userType === "COMITTEE_LEADER") {
+          this.router.navigate(["/committee-leader-dashboard"]);
         } else {
           this.toastr.success(`Welcome, ${result.email}`);
           //this.router.navigate(["/reader-dashboard"]);
