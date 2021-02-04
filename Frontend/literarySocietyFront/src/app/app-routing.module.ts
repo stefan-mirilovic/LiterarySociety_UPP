@@ -29,6 +29,7 @@ import { MainEditorDashboardComponent } from './dashboard/main-editor-dashboard/
 import { MainEditorGuard } from './guard/main-editor.guard';
 import { ComitteeLeaderDashboardComponent } from './dashboard/comittee-leader-dashboard/comittee-leader-dashboard.component';
 import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
+import {EditorsNotesComponent} from "./editors-notes/editors-notes.component";
 
 
 
@@ -105,12 +106,18 @@ const routes: Routes = [
   {
     path: 'editor-dashboard',
     component: EditorDashboardComponent,
-    canActivate: [EditorGuard]
+    canActivate: [EditorGuard],
+    children: [
+      { path: 'editor/notes', component: EditorsNotesComponent},
+    ]
   },
   {
     path: 'main-editor-dashboard',
     component: MainEditorDashboardComponent,
-    canActivate: [MainEditorGuard]
+    canActivate: [MainEditorGuard],
+    children: [
+      { path: 'find/editors', component: EditorsFindComponent},
+    ]
   },
   {
     path: 'committee-leader-dashboard',

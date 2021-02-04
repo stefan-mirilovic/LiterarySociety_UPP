@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SaveNotes implements JavaDelegate {
 
-    private NoteMapper noteMapper;
+    private final NoteMapper noteMapper;
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {

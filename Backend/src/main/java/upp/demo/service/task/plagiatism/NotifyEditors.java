@@ -19,9 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NotifyEditors implements JavaDelegate {
 
-    private EmailService emailService;
-    private MultiSelectHelper multiSelectHelper;
-    private UserRepository userRepository;
+    private final EmailService emailService;
+    private final MultiSelectHelper multiSelectHelper;
+    private final UserRepository userRepository;
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {

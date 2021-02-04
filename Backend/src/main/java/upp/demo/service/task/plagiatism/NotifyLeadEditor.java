@@ -15,10 +15,12 @@ import upp.demo.repository.BookRepository;
 import upp.demo.repository.UserRepository;
 import upp.demo.service.impl.EmailService;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class NotifyLeadEditor implements JavaDelegate {
 
@@ -32,16 +34,15 @@ public class NotifyLeadEditor implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        String leadEditor = userRepository.findAllByRole(RoleEnum.LEAD_EDITOR).get(0).getEmail();
+        String leadEditor = userRepository.findAllByRole(RoleEnum.MAIN_EDITOR).get(0).getEmail();
         List<FormSubmissionDto> submissionList = (List<FormSubmissionDto>) delegateExecution.getVariable(PropertyName.FormName.FORM_DATA);
         PlagiarismDto plagiarismDto = bookMapperPlagiarism.convertToPlagiarismDto(submissionList);
 
-        Book plagiarismBook = bookRepository.findByTitle(plagiarismDto.getPlagiarismTitle());
-        Book ownerBook = bookRepository.findByTitle(plagiarismDto.getOwnerTitle());
+        List<String> titles=new ArrayList<>();
+        titles.add(plagiarismDto.getOwnerTitle());
+        titles.add(plagiarismDto.getPlagiarismTitle());
 
-        List<Book> books = new ArrayList<>();
-        books.add(plagiarismBook);
-        books.add(ownerBook);
+        List<Book> books = bookRepository.findAllByTitleIn(titles);
 
         delegateExecution.setVariable(PropertyName.VariableName.BOOKS_FOR_REVIEW,books);
         emailService.sendSimpleMessage(leadEditor, "New Plagiarism Checking", "Please find editors for review" +
