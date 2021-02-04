@@ -39,6 +39,14 @@ import { EditorsReviewComponent } from './editors-review/editors-review.componen
 import { StoreComponent } from './pages/store/store.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 import { MyBooksComponent } from './pages/my-books/my-books.component';
+import { ComitteeDashboardComponent } from './dashboard/comittee-dashboard/comittee-dashboard.component';
+import { ComitteeGuard } from './guard/comittee.guard';
+import { EditorDashboardComponent } from './dashboard/editor-dashboard/editor-dashboard.component';
+import { EditorGuard } from './guard/editor.guard';
+import { MainEditorDashboardComponent } from './dashboard/main-editor-dashboard/main-editor-dashboard.component';
+import { MainEditorGuard } from './guard/main-editor.guard';
+import { ComitteeLeaderDashboardComponent } from './dashboard/comittee-leader-dashboard/comittee-leader-dashboard.component';
+import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
 
 
 @NgModule({
@@ -68,6 +76,10 @@ import { MyBooksComponent } from './pages/my-books/my-books.component';
     StoreComponent,
     BookDetailsComponent,
     MyBooksComponent,
+    ComitteeDashboardComponent,
+    EditorDashboardComponent,
+    MainEditorDashboardComponent,
+    ComitteeLeaderDashboardComponent,
 
   ],
   imports: [
@@ -89,7 +101,11 @@ import { MyBooksComponent } from './pages/my-books/my-books.component';
     },
     ReaderGuard,
     WriterGuard,
-    AdminGuard
+    AdminGuard,
+    ComitteeGuard,
+    EditorGuard,
+    MainEditorGuard,
+    ComitteeLeaderGuard
   ],
   bootstrap: [AppComponent]
 })
