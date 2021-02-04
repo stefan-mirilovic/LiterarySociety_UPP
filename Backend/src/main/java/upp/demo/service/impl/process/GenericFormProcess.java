@@ -12,6 +12,7 @@ import upp.demo.dto.*;
 import upp.demo.globals.PropertyName;
 import upp.demo.handler.PdfHandler;
 import upp.demo.helper.FormFieldsHelper;
+import upp.demo.helper.NotesHelper;
 import upp.demo.helper.TableHelper;
 import upp.demo.service.ProcessInstanceService;
 import upp.demo.service.ProcessService;
@@ -33,6 +34,7 @@ public class GenericFormProcess implements ProcessInstanceService {
 	private final ProcessService processService;
 	private final RuntimeService runtimeService;
 	private final FormFieldsHelper formFieldsHelper;
+	private final NotesHelper notesHelper;
 
 	@Override
 	public FormDto startProcess(String processName) {
@@ -49,7 +51,7 @@ public class GenericFormProcess implements ProcessInstanceService {
 	}
 
 	@Override
-	public FormDto getFormFields(String taskId) {
+	public FormDto getFormFields(String taskId)  {
 		Task task = taskService.getById(taskId);
 		TaskFormData taskFormData = taskService.formData(taskId);
 
@@ -80,6 +82,8 @@ public class GenericFormProcess implements ProcessInstanceService {
 		TaskFormData taskFormData = taskService.formData(currentTask.getId());
 		TableDto tableDto = new TableDto();
 		tableDto.setTableRows(tableHelper.convertToBook(processId, taskFormData.getFormFields()));
+
+		tableDto.getTableRows().addAll(notesHelper.convertToNotes(processId,taskFormData.getFormFields()));
 
 		FormDto formDto = new FormDto();
 		formDto.setTaskId(currentTask.getId());

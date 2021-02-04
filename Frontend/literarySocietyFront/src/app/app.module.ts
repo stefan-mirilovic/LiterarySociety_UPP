@@ -39,6 +39,8 @@ import { EditorsReviewComponent } from './editors-review/editors-review.componen
 import { StoreComponent } from './pages/store/store.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 import { MyBooksComponent } from './pages/my-books/my-books.component';
+import { ReclamationComponent } from './reclamation/reclamation.component';
+import { EditorsFindComponent } from './editors-find/editors-find.component';
 import { ComitteeDashboardComponent } from './dashboard/comittee-dashboard/comittee-dashboard.component';
 import { ComitteeGuard } from './guard/comittee.guard';
 import { EditorDashboardComponent } from './dashboard/editor-dashboard/editor-dashboard.component';
@@ -47,6 +49,8 @@ import { MainEditorDashboardComponent } from './dashboard/main-editor-dashboard/
 import { MainEditorGuard } from './guard/main-editor.guard';
 import { ComitteeLeaderDashboardComponent } from './dashboard/comittee-leader-dashboard/comittee-leader-dashboard.component';
 import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
+import { EditorsNotesComponent } from './editors-notes/editors-notes.component';
+import { CommitteeDecisionComponent } from './committee-decision/committee-decision.component';
 
 
 @NgModule({
@@ -76,10 +80,14 @@ import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
     StoreComponent,
     BookDetailsComponent,
     MyBooksComponent,
+    ReclamationComponent,
+    EditorsFindComponent,
     ComitteeDashboardComponent,
     EditorDashboardComponent,
     MainEditorDashboardComponent,
     ComitteeLeaderDashboardComponent,
+    EditorsNotesComponent,
+    CommitteeDecisionComponent,
 
   ],
   imports: [

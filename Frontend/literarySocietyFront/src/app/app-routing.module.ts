@@ -19,6 +19,8 @@ import {EditorsReviewComponent} from "./editors-review/editors-review.component"
 import { StoreComponent } from './pages/store/store.component';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 import { MyBooksComponent } from './pages/my-books/my-books.component';
+import {ReclamationComponent} from "./reclamation/reclamation.component";
+import {EditorsFindComponent} from "./editors-find/editors-find.component";
 import { ComitteeDashboardComponent } from './dashboard/comittee-dashboard/comittee-dashboard.component';
 import { ComitteeGuard } from './guard/comittee.guard';
 import { EditorDashboardComponent } from './dashboard/editor-dashboard/editor-dashboard.component';
@@ -27,6 +29,8 @@ import { MainEditorDashboardComponent } from './dashboard/main-editor-dashboard/
 import { MainEditorGuard } from './guard/main-editor.guard';
 import { ComitteeLeaderDashboardComponent } from './dashboard/comittee-leader-dashboard/comittee-leader-dashboard.component';
 import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
+import {EditorsNotesComponent} from "./editors-notes/editors-notes.component";
+import {CommitteeDecisionComponent} from "./committee-decision/committee-decision.component";
 
 
 
@@ -49,6 +53,7 @@ const routes: Routes = [
   { path: 'book/publish', component: SynopsisComponent},
   { path: 'login', component: LoginComponent},
   { path: 'editor/review', component: EditorsReviewComponent},
+  { path: 'find/editors', component: EditorsFindComponent},
 
   {
     path: 'reader-dashboard',
@@ -83,6 +88,10 @@ const routes: Routes = [
         path: 'book/publish',
         component: SynopsisComponent
       },
+      {
+        path: 'reclamation',
+        component: ReclamationComponent
+      }
     ]
   },
   {
@@ -93,17 +102,26 @@ const routes: Routes = [
   {
     path: 'committee-dashboard',
     component: ComitteeDashboardComponent,
-    canActivate: [ComitteeGuard]
+    canActivate: [ComitteeGuard],
+    children: [
+      { path: 'committee/decision', component: CommitteeDecisionComponent},
+    ]
   },
   {
     path: 'editor-dashboard',
     component: EditorDashboardComponent,
-    canActivate: [EditorGuard]
+    canActivate: [EditorGuard],
+    children: [
+      { path: 'editor/notes', component: EditorsNotesComponent},
+    ]
   },
   {
     path: 'main-editor-dashboard',
     component: MainEditorDashboardComponent,
-    canActivate: [MainEditorGuard]
+    canActivate: [MainEditorGuard],
+    children: [
+      { path: 'find/editors', component: EditorsFindComponent},
+    ]
   },
   {
     path: 'committee-leader-dashboard',

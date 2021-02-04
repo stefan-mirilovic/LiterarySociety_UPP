@@ -9,6 +9,9 @@ public interface PropertyName {
 
 	interface CustomNames {
 		String GENRES = "genres";
+		String EDITORS = "editors";
+		String BOOKS = "books";
+		String OTHER_BOOKS = "otherBooks";
 	}
 
 	interface FormName {
@@ -39,6 +42,15 @@ public interface PropertyName {
 	    String REVIEW_LIST = "reviewList";
 	    String REVIEWERS_COMMENTS = "reviewersComments";
     }
+
+    interface Plagiarism {
+		String ALL_EDITORS = "allEditors";
+		String CHOSEN_EDITORS = "chosenEditors";
+		String NOTES = "notesList";
+		String COMMITTEE_MEMBERS = "committee";
+		String PLAGIARISM_DECISION = "plagiarismDecision";
+		String FINISH_DECISION = "finishDecision";
+	}
 
 	interface Validation {
 		String EMAIL = "email";
