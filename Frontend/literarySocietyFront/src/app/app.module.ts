@@ -50,6 +50,7 @@ import { MainEditorGuard } from './guard/main-editor.guard';
 import { ComitteeLeaderDashboardComponent } from './dashboard/comittee-leader-dashboard/comittee-leader-dashboard.component';
 import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
 import { EditorsNotesComponent } from './editors-notes/editors-notes.component';
+import { CommitteeDecisionComponent } from './committee-decision/committee-decision.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { EditorsNotesComponent } from './editors-notes/editors-notes.component';
     MainEditorDashboardComponent,
     ComitteeLeaderDashboardComponent,
     EditorsNotesComponent,
+    CommitteeDecisionComponent,
 
   ],
   imports: [

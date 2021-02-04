@@ -36,4 +36,4 @@
 --
 INSERT INTO public.genre(
     id, name)
-    VALUES (8, 'Comedy');
+    VALUES (9, 'Comedy');

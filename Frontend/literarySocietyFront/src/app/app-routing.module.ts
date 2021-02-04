@@ -30,6 +30,7 @@ import { MainEditorGuard } from './guard/main-editor.guard';
 import { ComitteeLeaderDashboardComponent } from './dashboard/comittee-leader-dashboard/comittee-leader-dashboard.component';
 import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
 import {EditorsNotesComponent} from "./editors-notes/editors-notes.component";
+import {CommitteeDecisionComponent} from "./committee-decision/committee-decision.component";
 
 
 
@@ -101,7 +102,10 @@ const routes: Routes = [
   {
     path: 'committee-dashboard',
     component: ComitteeDashboardComponent,
-    canActivate: [ComitteeGuard]
+    canActivate: [ComitteeGuard],
+    children: [
+      { path: 'committee/decision', component: CommitteeDecisionComponent},
+    ]
   },
   {
     path: 'editor-dashboard',

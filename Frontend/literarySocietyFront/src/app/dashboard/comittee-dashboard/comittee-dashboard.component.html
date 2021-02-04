@@ -18,17 +18,17 @@
         </mat-menu>
       </div>
     </mat-toolbar>
-  
+
     <mat-sidenav-container class="example-sidenav-container"
                            [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
       <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <mat-nav-list>
-        <a class="link-btn" mat-list-item routerLink="store" ><fa-icon class="btn-icon" icon="store-alt"></fa-icon>Store</a>
+        <a class="link-btn" mat-list-item routerLink="committee/decision" ><fa-icon class="btn-icon" icon="sticky-note"></fa-icon>Decision</a>
         <hr class="sidebar-divider d-none d-md-block">
       </mat-nav-list>
       </mat-sidenav>
-  
+
       <mat-sidenav-content>
         <router-outlet></router-outlet>
       </mat-sidenav-content>
