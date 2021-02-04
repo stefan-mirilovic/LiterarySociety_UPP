@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserLogin } from '../model/userLogin';
 import { AuthService } from '../service/auth.service';
@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   passwordToggle: boolean = false;
 
   constructor(
+    private route: ActivatedRoute,
     private authService: AuthService,
     private toastr: ToastrService,
     public router: Router
@@ -26,6 +27,30 @@ export class LoginComponent implements OnInit {
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required])
     });
+    this.route.queryParams
+      .subscribe(params => {
+        console.log(params);
+
+        if (params.msg) {
+          if (params.msg.startsWith("Subscription failed")) {
+            this.toastr.error(params.msg, "", {
+              timeOut: 0,
+              extendedTimeOut: 0
+            });
+          } else if (params.msg.startsWith("Subscription activated")){
+            this.toastr.success(params.msg, "", {
+              timeOut: 0,
+              extendedTimeOut: 0
+            });
+          } else {
+            this.toastr.info(params.msg, "", {
+              timeOut: 0,
+              extendedTimeOut: 0
+            });
+          }
+          
+        }
+      });
   }
 
   onSubmit() {
@@ -40,6 +65,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/writer-dashboard"]);
         } else if (result.userType === "ADMINISTRATOR") {
           this.router.navigate(["/admin-dashboard"]);
+        } else if (result.userType === "COMITTEE_MEMBER") {
+          this.router.navigate(["/committee-dashboard"]);
+        } else if (result.userType === "EDITOR") {
+          this.router.navigate(["/editor-dashboard"]);
+        } else if (result.userType === "MAIN_EDITOR") {
+          this.router.navigate(["/main-editor-dashboard"]);
+        } else if (result.userType === "COMITTEE_LEADER") {
+          this.router.navigate(["/committee-leader-dashboard"]);
         } else {
           this.toastr.success(`Welcome, ${result.email}`);
           //this.router.navigate(["/reader-dashboard"]);

@@ -21,6 +21,14 @@ import { BookDetailsComponent } from './pages/book-details/book-details.componen
 import { MyBooksComponent } from './pages/my-books/my-books.component';
 import {ReclamationComponent} from "./reclamation/reclamation.component";
 import {EditorsFindComponent} from "./editors-find/editors-find.component";
+import { ComitteeDashboardComponent } from './dashboard/comittee-dashboard/comittee-dashboard.component';
+import { ComitteeGuard } from './guard/comittee.guard';
+import { EditorDashboardComponent } from './dashboard/editor-dashboard/editor-dashboard.component';
+import { EditorGuard } from './guard/editor.guard';
+import { MainEditorDashboardComponent } from './dashboard/main-editor-dashboard/main-editor-dashboard.component';
+import { MainEditorGuard } from './guard/main-editor.guard';
+import { ComitteeLeaderDashboardComponent } from './dashboard/comittee-leader-dashboard/comittee-leader-dashboard.component';
+import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
 
 
 
@@ -88,6 +96,26 @@ const routes: Routes = [
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
     canActivate: [AdminGuard]
+  },
+  {
+    path: 'committee-dashboard',
+    component: ComitteeDashboardComponent,
+    canActivate: [ComitteeGuard]
+  },
+  {
+    path: 'editor-dashboard',
+    component: EditorDashboardComponent,
+    canActivate: [EditorGuard]
+  },
+  {
+    path: 'main-editor-dashboard',
+    component: MainEditorDashboardComponent,
+    canActivate: [MainEditorGuard]
+  },
+  {
+    path: 'committee-leader-dashboard',
+    component: ComitteeLeaderDashboardComponent,
+    canActivate: [ComitteeLeaderGuard]
   },
 ];
 

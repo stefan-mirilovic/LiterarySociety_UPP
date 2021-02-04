@@ -1,0 +1,36 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="example-toolbar">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <div class="topbar-divider d-none d-sm-block"></div>
+      <div class="sidebar-brand-icon">
+        <fa-icon class="btn-icon" icon="user-tie"></fa-icon>
+      </div>
+      <div class="sidebar-brand-text mx-3" class="example-app-name">Comittee Leader Dashboard</div>
+      <!--Profile dropdown-->
+      <div class="ml-auto profile-dropdown">
+        <button [matMenuTriggerFor]="menu" mat-list-item class="avatar-dropdown" id="icon">
+          <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ username }}</span>
+          <fa-icon icon="user-circle"></fa-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before" class="profile-menu">
+          <!--<button mat-menu-item class="link-btn" routerLink="my-profile"><i class="fas fa-user btn-icon"></i>My profile</button>-->
+          <button mat-menu-item class="link-btn" routerLink="." (click)="logout()"><fa-icon class="btn-icon" icon="sign-out-alt"></fa-icon>Log out</button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="example-sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+        <mat-nav-list>
+        <a class="link-btn" mat-list-item routerLink="store"><fa-icon class="btn-icon" icon="store-alt"></fa-icon>Store</a>
+        <hr class="sidebar-divider d-none d-md-block">
+      </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>

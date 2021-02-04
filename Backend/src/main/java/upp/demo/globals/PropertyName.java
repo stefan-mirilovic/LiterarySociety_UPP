@@ -54,4 +54,13 @@ public interface PropertyName {
 	interface Validation {
 		String EMAIL = "email";
 	}
+
+	interface Payment {
+		String PC_URL = "http://localhost:4201/choose/subscription";
+		String MERCHANT_ID = "84074cf2-3d74-11eb-9d51-0242ac130002";
+		String FREQUENCY = "MONTH";
+		String INTERVAL = "1";
+		String CYCLES = "0";
+		String SUBSCRIPTION_COST = "4.99";
+	}
 }
