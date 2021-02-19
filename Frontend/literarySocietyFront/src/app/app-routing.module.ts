@@ -31,6 +31,7 @@ import { ComitteeLeaderDashboardComponent } from './dashboard/comittee-leader-da
 import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
 import {EditorsNotesComponent} from "./editors-notes/editors-notes.component";
 import {CommitteeDecisionComponent} from "./committee-decision/committee-decision.component";
+import {MainEditorReviewComponent} from "./main-editor-review/main-editor-review.component";
 
 
 
@@ -121,6 +122,7 @@ const routes: Routes = [
     canActivate: [MainEditorGuard],
     children: [
       { path: 'find/editors', component: EditorsFindComponent},
+      { path: 'synopsis/review', component: MainEditorReviewComponent},
     ]
   },
   {

@@ -10,6 +10,7 @@ public interface PropertyName {
 	interface CustomNames {
 		String GENRES = "genres";
 		String EDITORS = "editors";
+		String BETA_READERS = "betaReaders";
 		String BOOKS = "books";
 		String OTHER_BOOKS = "otherBooks";
 	}
@@ -50,6 +51,18 @@ public interface PropertyName {
 		String COMMITTEE_MEMBERS = "committee";
 		String PLAGIARISM_DECISION = "plagiarismDecision";
 		String FINISH_DECISION = "finishDecision";
+	}
+
+	interface BookPublishing {
+		String BOOK_OWNER_EMAIL = "bookOwnerEmail";
+		String WANNA_READ_HANDWRITING = "isAcceptRead";
+		String IS_ACCEPTED_TEXT = "isAcceptedText";
+		String IS_ACCEPTED_BETA = "isBetaChose";
+		String CHOSEN_BETA_READERS = "chosenBeta";
+		String BETA_COMMENTS = "betaComments";
+		String NEED_LECTOR = "needLector";
+		String MORE_CORRECTION = "moreCorrection";
+		String PUBLISH_BOOK = "publishBook";
 	}
 
 	interface Validation {

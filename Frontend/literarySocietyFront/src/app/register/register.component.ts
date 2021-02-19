@@ -79,6 +79,9 @@ export class RegisterComponent implements OnInit {
                 else if(property == 'editors' && this.form.value[property] instanceof Array){
                     o.push({fieldId: property, fieldValue: this.transform(this.form.value[property])});
                 }
+                else if(property == 'betaReaders' && this.form.value[property] instanceof Array){
+                  o.push({fieldId: property, fieldValue: this.transform(this.form.value[property])});
+                }
                 else {
 
                     o.push({fieldId: property, fieldValue: this.form.value[property]});

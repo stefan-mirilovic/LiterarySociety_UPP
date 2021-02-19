@@ -1,3 +1,4 @@
+
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
         <div class="genre-container">
@@ -9,6 +10,7 @@
             </span>
         </div>
     </mat-drawer>
+
     <div class="row">
         <div class="col-12">
             <button type="button" mat-button (click)="drawer.toggle()" class="genre-toggle-button">
@@ -17,6 +19,49 @@
         </div>
 
     </div>
+    <div>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Book Search
+          </mat-panel-title>
+          <mat-panel-description>
+            Show Search Form
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputTitle">Title</label>
+            <input type="text" class="form-control" id="inputTitle" placeholder="Title">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputAuthor">Author</label>
+            <input type="text" class="form-control" id="inputAuthor" placeholder="Author">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <label for="inputPdf">Words In PDF</label>
+            <input type="text" class="form-control" id="inputPdf" placeholder="Words In PDF">
+          </div>
+          <div class="form-group col-md-4">
+            <div>
+              <label for="mySelectId">Genres</label>
+            </div>
+            <div>
+              <select matNativeControl id="mySelectId" class="form-control" multiple>
+                <option *ngFor="let genre of genres">
+                  {{genre.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </mat-expansion-panel>
+    </div>
+    <br>
+    <br>
     <div class="row">
         <div class="col-12">
             <h3 class="title">{{title}}</h3>

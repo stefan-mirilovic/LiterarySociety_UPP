@@ -7,6 +7,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import upp.demo.dto.FormSubmissionDto;
+import upp.demo.enumeration.DocumentStatus;
 import upp.demo.enumeration.RoleEnum;
 import upp.demo.globals.PropertyName;
 import upp.demo.helper.FileHelper;
@@ -33,7 +34,7 @@ public class SavePdfService implements JavaDelegate {
 		List<FormSubmissionDto> submissionList = (List<FormSubmissionDto>) delegateExecution.getVariable(PropertyName.FormName.FORM_DATA);
 		submissionList.forEach(x-> {
 			try {
-				 fileHelper.saveFile(x.getFieldValue(),ownerEmail);
+				 fileHelper.saveFile(x.getFieldValue(),ownerEmail, DocumentStatus.TEXT_PENDING);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

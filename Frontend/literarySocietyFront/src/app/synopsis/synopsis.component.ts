@@ -18,12 +18,14 @@ export class SynopsisComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loading = true;
+    this.loading=true;
     this.processService.startProcess(processes.book).subscribe(
       data => {
-        this.formFieldsDto = data;
-        this.taskId = data.taskId;
-        this.loading = false;
+        this.formFieldsDto=data;
+        localStorage.setItem('processId',this.formFieldsDto.processInstanceId);
+        this.taskId=data.taskId;
+        console.log(this.formFieldsDto);
+        this.loading=false;
       });
   }
 

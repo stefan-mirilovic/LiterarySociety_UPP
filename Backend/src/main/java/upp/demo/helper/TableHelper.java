@@ -49,12 +49,18 @@ public class TableHelper {
                     tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
                     tableFieldDtoList.add(tableFieldDto);
                 }
-//                if (formField.getId().equals("comment")) {
-//                    tableFieldDto.setFieldId(formField.getId());
-//                    tableFieldDto.setFieldValue("");
-//                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
-//                    tableFieldDto.setCustom(propertyHelper.findAvailableProperties(formField.getProperties()).getCustom());
-
+                if (formField.getId().equals("synopsis")) {
+                    tableFieldDto.setFieldId(formField.getId());
+                    tableFieldDto.setFieldValue(book.getSynopsis());
+                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
+                    tableFieldDtoList.add(tableFieldDto);
+                }
+                if (formField.getId().equals("title")){
+                    tableFieldDto.setFieldId(formField.getId());
+                    tableFieldDto.setFieldValue(book.getTitle());
+                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
+                    tableFieldDtoList.add(tableFieldDto);
+                }
 
             }
             rowDto.setRow(tableFieldDtoList);

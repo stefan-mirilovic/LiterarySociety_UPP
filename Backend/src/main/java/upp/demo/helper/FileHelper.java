@@ -30,7 +30,7 @@ public class FileHelper {
 	private final BookRepository bookRepository;
 	static String filePath="pdf/";
 
-	public void saveFile(String base64,String ownerEmail) throws IOException {
+	public Book saveFile(String base64,String ownerEmail, DocumentStatus documentStatus) throws IOException {
 
 		int length = 10;
 		boolean useLetters = true;
@@ -52,9 +52,10 @@ public class FileHelper {
 		textDocument.setOwnerEmail(owner.getEmail());
 		textDocument.setPublished(false);
 		textDocument.setEditors(editors);
-		textDocument.setDocumentStatus(DocumentStatus.TEXT_PENDING);
+		textDocument.setDocumentStatus(documentStatus);
 		textDocument.setDocumentPath(path);
 		Book book=bookRepository.save(textDocument);
+		return book;
 	}
 
 	public String load(String path) throws IOException {
