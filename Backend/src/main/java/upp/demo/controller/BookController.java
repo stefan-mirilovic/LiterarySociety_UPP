@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import upp.demo.dto.BookSearchDto;
 import upp.demo.dto.BookStoreDTO;
 import upp.demo.dto.BookStoreDisplayDTO;
 import upp.demo.service.impl.BookService;
@@ -46,5 +47,11 @@ public class BookController {
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping(value = "/search")
+    public ResponseEntity<?> searchStore(@RequestBody List<BookSearchDto> bookSearchDtoList){
+        bookService.searchBooks(bookSearchDtoList);
+        return null;
     }
 }

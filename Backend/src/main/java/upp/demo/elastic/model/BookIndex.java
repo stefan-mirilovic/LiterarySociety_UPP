@@ -10,6 +10,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import javax.persistence.Id;
 
 @Data
+@Builder
 @Document(indexName = "literary-society", type="book", replicas = 0)
 public class BookIndex {
 

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BookDetails } from '../model/book-details';
 import { BookDisplay } from '../model/book-display';
+import {BookSearch} from "../model/book-search";
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,9 @@ export class BookService {
 
   public getBook(id: number) {
     return this.http.get<BookDetails>(`${environment.baseUrl}/books/store/${id}`)
+  }
+
+  public searchBook(searchModel: any){
+    return this.http.post<BookDisplay[]>(`${environment.baseUrl}/books/search`,searchModel);
   }
 }

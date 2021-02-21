@@ -9,6 +9,7 @@ import { BookService } from 'src/app/service/book.service';
 import { GenreService } from 'src/app/service/genre.service';
 import { TransactionService } from 'src/app/service/transaction.service';
 import { environment } from 'src/environments/environment';
+import {BookSearch} from "../../model/book-search";
 
 @Component({
   selector: 'app-store',
@@ -25,6 +26,17 @@ export class StoreComponent implements OnInit {
   pageNo: number;
   resultsPerPage: number;
   selectedGenre: GenreDisplay
+  model: BookSearch={
+    title : "",
+    genre : "",
+    pdf : "",
+    writer : "",
+    mustWriter : false,
+    mustTitle : false,
+    mustGenre : false,
+    mustPdf : false,
+  };
+
 
   constructor(
     private transactionService: TransactionService,
@@ -173,4 +185,21 @@ export class StoreComponent implements OnInit {
     event.stopPropagation();
     this.toastr.info("Placeholder");
   }
+
+  searchBooks(){
+    this.model.genre = this.title;
+    let o = new Array();
+
+    o.push({elementId: "text", elementValue: this.model.pdf, must: this.model.mustPdf });
+    o.push({elementId: "genre", elementValue: this.model.genre, must: this.model.mustGenre });
+    o.push({elementId: "title", elementValue: this.model.title, must: this.model.mustTitle });
+    o.push({elementId: "writer", elementValue: this.model.writer, must: this.model.mustWriter });
+    console.log(o);
+    this.bookService.searchBook(o).subscribe(
+      value => {
+        this.books = value;
+      }
+    );
+  }
+
 }

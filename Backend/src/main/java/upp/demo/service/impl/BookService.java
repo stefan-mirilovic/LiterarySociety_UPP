@@ -1,10 +1,24 @@
 package upp.demo.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import upp.demo.dto.BookSearchDto;
 import upp.demo.dto.BookStoreDTO;
 import upp.demo.dto.BookStoreDisplayDTO;
+import upp.demo.elastic.model.BookIndex;
+import upp.demo.elastic.repository.BookIndexRepository;
+import upp.demo.elastic.utils.ResultMapper;
 import upp.demo.mapper.BookMapper;
 import upp.demo.model.Book;
 import upp.demo.model.Genre;
@@ -22,6 +36,8 @@ public class BookService {
     private final BookRepository bookRepository;
     private final GenreRepository genreRepository;
     private final BookMapper bookMapper;
+    private final BookIndexRepository bookIndexRepository;
+    private final ElasticsearchTemplate elasticsearchTemplate;
 
     public List<BookStoreDisplayDTO> findAllForStoreDisplay(int resultsPerPage, int pageNo, String genreid) throws Exception {
         List<Book> list = null;
@@ -38,10 +54,10 @@ public class BookService {
         }
         List<BookStoreDisplayDTO> results = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (i < resultsPerPage*pageNo) {
+            if (i < resultsPerPage * pageNo) {
                 continue;
             }
-            if (i >= resultsPerPage*(pageNo + 1)) {
+            if (i >= resultsPerPage * (pageNo + 1)) {
                 break;
             }
             results.add(bookMapper.toBookStoreDisplayDTO(list.get(i)));
@@ -66,10 +82,10 @@ public class BookService {
         }
         List<BookStoreDisplayDTO> results = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (i < resultsPerPage*pageNo) {
+            if (i < resultsPerPage * pageNo) {
                 continue;
             }
-            if (i >= resultsPerPage*(pageNo + 1)) {
+            if (i >= resultsPerPage * (pageNo + 1)) {
                 break;
             }
             results.add(bookMapper.toBookStoreDisplayDTO(list.get(i)));
@@ -78,4 +94,31 @@ public class BookService {
             results.get(0).setNoOfPages(no_of_pages);
         return results;
     }
+
+    public List<BookStoreDisplayDTO> searchBooks(List<BookSearchDto> searchQueryList) {
+        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+
+        for (BookSearchDto element : searchQueryList) {
+            if (element.isMust()) {
+                boolQueryBuilder.must(QueryBuilders.commonTermsQuery(element.getElementId(), element.getElementValue()));
+            }
+            else {
+                boolQueryBuilder.should(QueryBuilders.commonTermsQuery(element.getElementId(), element.getElementValue()));
+            }
+        }
+
+        SearchQuery query = queryBuilder.withQuery(boolQueryBuilder).withHighlightFields(
+                new HighlightBuilder.Field("text")
+                        .preTags("<b>")
+                        .postTags("</b>")
+                        .numOfFragments(1)
+                        .fragmentSize(250)
+        ).withPageable(PageRequest.of(1, 3))
+                .build();
+        Page<BookIndex> books = elasticsearchTemplate.queryForPage(query, BookIndex.class, new ResultMapper());
+        return null;
+    }
+
+
 }

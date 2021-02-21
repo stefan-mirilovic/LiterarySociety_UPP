@@ -45,6 +45,7 @@ public class DbInit implements ApplicationRunner {
         bookHorror.setDocumentPath("pdf/mqqLxJAQeC.pdf");
         Book book = bookRepository.save(bookHorror);
 
+        indexingService.deleteAllIndexes();
         indexingService.indexBook(book);
     }
 }

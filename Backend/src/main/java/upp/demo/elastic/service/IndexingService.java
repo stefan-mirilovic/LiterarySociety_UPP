@@ -22,16 +22,19 @@ public class IndexingService {
     private PdfIndexHandler pdfIndexHandler;
 
     public void indexBook(Book book) throws IOException {
-        BookIndex bookIndex = new BookIndex();
-        bookIndex.setId(book.getId());
-        bookIndex.setTitle(book.getTitle());
-        bookIndex.setBasicInfo(book.getSynopsis());
-        bookIndex.setOpenAccess(book.getPublished());
-        bookIndex.setGenre(book.getGenre().getName());
-        bookIndex.setText(pdfIndexHandler.getPdfText(new File(book.getDocumentPath())));
-        bookIndex.setWriter(book.getOwner().getName() + " " + book.getOwner().getSurname());
-        bookIndexRepository.save(bookIndex);
+       BookIndex bookIndex = BookIndex.builder()
+                .id(book.getId())
+                .title(book.getTitle())
+                .basicInfo(book.getSynopsis())
+                .openAccess(book.getPublished())
+                .genre(book.getGenre().getName())
+                .text(pdfIndexHandler.getPdfText(new File(book.getDocumentPath())))
+                .writer(book.getOwner().getName() + " " + book.getOwner().getSurname()).build();
+       bookIndexRepository.save(bookIndex);
     }
 
+    public void deleteAllIndexes() {
+        bookIndexRepository.deleteAll();
+    }
 
 }
