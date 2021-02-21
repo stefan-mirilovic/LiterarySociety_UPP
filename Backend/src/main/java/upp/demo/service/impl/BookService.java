@@ -113,10 +113,11 @@ public class BookService {
                         .preTags("<b>")
                         .postTags("</b>")
                         .numOfFragments(1)
-                        .fragmentSize(250)
-        ).withPageable(PageRequest.of(1, 3))
-                .build();
-        Page<BookIndex> books = elasticsearchTemplate.queryForPage(query, BookIndex.class, new ResultMapper());
+                        .fragmentSize(200)).withPageable(PageRequest.of(0, 5)).build();
+
+        Iterable<BookIndex> test = bookIndexRepository.findAll();
+
+        Page<BookIndex> books =  elasticsearchTemplate.queryForPage(query, BookIndex.class, new ResultMapper());
         return null;
     }
 

@@ -1,16 +1,17 @@
 package upp.demo.elastic.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.Id;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Builder
+@AllArgsConstructor
 @Document(indexName = "literary-society", type="book", replicas = 0)
 public class BookIndex {
 
