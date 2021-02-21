@@ -31,7 +31,7 @@ public class BookMapper {
         boolean owned = user.getOwnedBooks().contains(entity);
         BookStoreDisplayDTO dto = new BookStoreDisplayDTO(entity.getId(), entity.getTitle(),
                 entity.getOwner().getName() + " " + entity.getOwner().getSurname(),
-                entity.getSynopsis(), owned, 59.99, -1);
+                null, owned, 59.99, -1);
         return dto;
     }
 

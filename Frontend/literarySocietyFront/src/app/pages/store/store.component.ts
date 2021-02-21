@@ -42,7 +42,7 @@ export class StoreComponent implements OnInit {
     this.pageNo = 0;
     this.noOfPages = 1;
     this.getBooks();
-    /*this.books.push(
+    this.books.push(
       new BookDisplay(0, "SPQR: Istorija starog Rima", "Meri Bird", "„Prekretnica, osveženje, revolucija. Potpuno novi pristup istoriji starog veka.“ Spectator\nSveobuhvatna, majstorski napisana istorija Rimskog carstva iz pera vodećeg svetskog stručnjaka pokazuje zašto je Rim „važan ljudima mnogo vekova kasnije“ (Atlantic). U delu SPQR, koje je odmah po objavljivanju postalo klasik, Meri Bird iznosi istoriju Rima „sa strašću i bez monotonog stručnog žargona“ i pokazuje kako je od „pomalo neuglednog sela iz gvozdenog doba“ Rim postao „neosporni vladar Sredozemlja“ (Wall Street Journal).\nKritičari su pozdravili ovu knjigu koja dočarava „široku sliku i intimne pojedinosti koje oživljavaju daleku prošlost“ (Economist). Obuhvatajući gotovo hiljadu godina istorije, ovo „vrlo informativno i vrlo čitljivo delo“ (Dallas Morning News) ne samo što istražuje način na koji razmišljamo o drevnom Rimu, nego i osporava ukorenjene istorijske stavove koji su vladali stolećima. Suptilnim skretanjem pažnje na staleže, borbu za demokratiju i živote čitavih društvenih grupa vekovima izostavljanih iz istorijske pripovesti, SPQR će u sledećim decenijama oblikovati naš pogled na Rim.\n„Prefinjeno i zavodljivo preispitivanje složenih i međusobno protivrečnih pisanih i materijalnih tragova rimskog sveta.“ Guardian\n „Vrhunska naučnica i smela rušiteljka mitova, Meri Bird poučava i zabavlja nimalo ne potcenjujući svoje čitaoce. SPQR je ozbiljno delo brzog tempa, važno i ikonoklastično.“ Independent\n„Ovo je prema svim merilima veličanstvena povest koju bi se malo koji sadašnji naučnik usudio da ponudi.“ History Today\n„Uzbudljivo, psihološki oštroumno, blagonaklono podozrivo.“ Sunday Times", false, 59.99)
     );
     this.books.push(
@@ -56,7 +56,7 @@ export class StoreComponent implements OnInit {
     );
     this.books.push(
       new BookDisplay(3, "Cilkin put", "Heder Moris", "Od autorke bestselera Tetovažer iz Aušvica\nZasnovano na potresnoj istinitoj priči o ljubavi i opstanku\nLepota ju je spasla – i osudila.\nCilka je imala svega šesnaest godina kad je 1942. odvedena u koncentracioni logor Aušvic-Birkenau, gde je komandant odmah primetio njenu lepotu. Zbog toga će biti prisilno odvojena od ostalih zatvorenica, i ubrzo shvatiti da moć, čak i nerado prihvaćena, znači opstanak.\n Završetak rata i oslobađanje logora Cilki neće doneti slobodu već optužbu za kolaboraciju jer je spavala s neprijateljem i osudu na zatočeništvo u sibirskom logoru. Ali da li je zaista imala izbora? I gde su granice morala za Cilku, koja je odvedena u Aušvic kad je još bila dete?\nU Sibiru se Cilka suočava i sa novim i sa starim, jezivim izazovima uključujući i neželjenu pažnju stražara. Ali kad upozna ljubaznu lekarku, Cilka dospeva pod njeno okrilje i počinje da neguje bolesne logoraše trudeći se da im pomogne u surovim uslovima.\nSvakodnevno se suočavajući sa smrću i užasom, Cilka u sebi otkriva snagu kakvu nije ni znala da poseduje. A kad počne da s oklevanjem gradi veze i odnose u toj surovoj novoj stvarnosti, Cilka shvata da, uprkos svemu što joj se dogodilo, u njenom srcu ima mesta za ljubav.\nOd deteta do žene, od žene do isceliteljke, Cilkin put rasvetljava izdržljivost ljudskog duha i našu volju da preživimo.\n„Nikad nisam sreo hrabriju osobu od Cilke.“ Lali Sokolov, tetovažer iz Aušvica\n„Cilkina neizmerna hrabrost i odlučnost da preživi čak i kad je svaka nada već izgubljena bude veliko poštovanje. Potresna priča koju ćete dugo pamtiti.“ Sunday Express\n„Izuzetna priča o snazi da se prevaziđu nezamislive teškoće.“ Woman’s Weekly", false, 49.99)
-    );*/
+    );
     this.genres = [];
     /*this.genres.push(new GenreDisplay(0, "Mystery", false))
     this.genres.push(new GenreDisplay(1, "Comedy", false))
@@ -84,7 +84,7 @@ export class StoreComponent implements OnInit {
           if (book.synopsis.length > this.synopsisMaxLength) {
             book.synopsis = book.synopsis.substr(0, this.synopsisMaxLength-3) + "..."
           }
-          book.color = this.randomColorBackground(); 
+          book.color = this.randomColorBackground();
         }
       },
       error: data => {

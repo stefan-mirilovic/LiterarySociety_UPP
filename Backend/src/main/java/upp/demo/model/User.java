@@ -45,9 +45,9 @@ public class User implements UserDetails {
     @Column
     private RoleEnum role;
 
-	@ManyToMany
-	@JoinTable(name = "user_genre", joinColumns = @JoinColumn(name = "genre_id"), inverseJoinColumns = @JoinColumn (name = "user_id"))
-	private List<Genre> genres;
+//	@ManyToMany
+//	@JoinTable(name = "user_genre", joinColumns = @JoinColumn(name = "genre_id"), inverseJoinColumns = @JoinColumn (name = "user_id"))
+//	private List<Genre> genres;
 
 	@Column
 	private boolean enabled;

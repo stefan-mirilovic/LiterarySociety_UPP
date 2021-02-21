@@ -33,6 +33,7 @@ public class BookController {
             BookStoreDTO result = bookService.findForStore(id);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }

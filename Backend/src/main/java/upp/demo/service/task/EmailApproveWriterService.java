@@ -39,7 +39,7 @@ public class EmailApproveWriterService implements JavaDelegate {
 		request.setStatus(RegisterRequestStatus.APPROVED);
 		RoleEnum roleEnum = RoleEnum.WRITER;
 		User user = new User(null, request.getEmail(), request.getPassword(), request.getName(), request.getSurname(),
-				request.getCity(), request.getCountry(), roleEnum, request.getGenres(), false, new ArrayList<>(), null);
+				request.getCity(), request.getCountry(), roleEnum, false, new ArrayList<>(), null);
 		request.setGenres((List<Genre>) delegateExecution.getVariable("genres"));
 		registerReaderRequestRepository.save(request);
 		userRepository.save(user);
