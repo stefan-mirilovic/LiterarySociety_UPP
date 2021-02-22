@@ -41,9 +41,15 @@ public class FileHelper {
 		String path = filePath + generatedString+".pdf";
 		Files.createDirectories(Paths.get("pdf"));
 		File file = new File(path);
+		File file2 = new File("../Frontend/literarySocietyFront/src/assets/"+path);
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.write(pdfBytes);
 		System.out.println("PDF File Saved");
+		fos.close();
+
+		FileOutputStream fos2 = new FileOutputStream(file2);
+		fos2.write(pdfBytes);
+		System.out.println("PDFCopy File Saved");
 		fos.close();
 
 		List<User> editors = userRepository.findAllByRole(RoleEnum.EDITOR);

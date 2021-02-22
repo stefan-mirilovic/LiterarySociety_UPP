@@ -183,7 +183,14 @@ export class StoreComponent implements OnInit {
 
   download(event, book: BookDisplay) {
     event.stopPropagation();
-    this.toastr.info("Placeholder");
+    const link = document.createElement('a');
+    link.setAttribute('target', '_self');
+    link.setAttribute('href', 'assets/pdf/FQPVgflvpc.pdf');
+    link.setAttribute('download', `FQPVgflvpc.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    this.toastr.info("Downloaded");
   }
 
   searchBooks(){

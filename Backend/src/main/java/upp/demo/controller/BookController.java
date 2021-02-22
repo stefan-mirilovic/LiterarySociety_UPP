@@ -51,7 +51,12 @@ public class BookController {
 
     @PostMapping(value = "/search")
     public ResponseEntity<?> searchStore(@RequestBody List<BookSearchDto> bookSearchDtoList){
-        bookService.searchBooks(bookSearchDtoList);
-        return null;
+        try {
+            List<BookStoreDisplayDTO> result = bookService.searchBooks(bookSearchDtoList);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 }

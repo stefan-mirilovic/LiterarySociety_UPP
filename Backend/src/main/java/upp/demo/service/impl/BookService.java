@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import upp.demo.dto.BookSearchDto;
 import upp.demo.dto.BookStoreDTO;
 import upp.demo.dto.BookStoreDisplayDTO;
+import upp.demo.elastic.handler.BookIndexMapper;
 import upp.demo.elastic.model.BookIndex;
 import upp.demo.elastic.repository.BookIndexRepository;
 import upp.demo.elastic.utils.ResultMapper;
@@ -38,6 +39,7 @@ public class BookService {
     private final BookMapper bookMapper;
     private final BookIndexRepository bookIndexRepository;
     private final ElasticsearchTemplate elasticsearchTemplate;
+    private final BookIndexMapper bookIndexMapper;
 
     public List<BookStoreDisplayDTO> findAllForStoreDisplay(int resultsPerPage, int pageNo, String genreid) throws Exception {
         List<Book> list = null;
@@ -118,7 +120,8 @@ public class BookService {
         Iterable<BookIndex> test = bookIndexRepository.findAll();
 
         Page<BookIndex> books =  elasticsearchTemplate.queryForPage(query, BookIndex.class, new ResultMapper());
-        return null;
+        List<BookStoreDisplayDTO> bookForDisplay = bookIndexMapper.convertIndexToDto(books.getContent());
+        return bookForDisplay;
     }
 
 
