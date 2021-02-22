@@ -32,6 +32,7 @@ import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
 import {EditorsNotesComponent} from "./editors-notes/editors-notes.component";
 import {CommitteeDecisionComponent} from "./committee-decision/committee-decision.component";
 import {MainEditorReviewComponent} from "./main-editor-review/main-editor-review.component";
+import {SendBookComponent} from "./send-book/send-book.component";
 
 
 
@@ -92,6 +93,10 @@ const routes: Routes = [
       {
         path: 'reclamation',
         component: ReclamationComponent
+      },
+      {
+        path: 'book/indexing',
+        component: SendBookComponent
       }
     ]
   },

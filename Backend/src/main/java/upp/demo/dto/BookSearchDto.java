@@ -7,4 +7,5 @@ public class BookSearchDto {
     private String elementId;
     private String elementValue;
     private boolean must;
+    private boolean phrase;
 }

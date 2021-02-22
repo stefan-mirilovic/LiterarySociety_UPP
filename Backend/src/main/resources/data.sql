@@ -4,7 +4,7 @@ INSERT INTO public.user_table(
 
 INSERT INTO public.user_table(
 	id, city, country, email, enabled, name, password, role, surname)
-	VALUES (10010, 'Sremska Mitrovica','Srbija', 'writer1@yahoo.com', true, 'Edi', '$2y$10$ovqM3ue/XJCuF1mbwt/CMOhNrTyxq.aFU8mfDzTGAddvyKS3rc/RG', 1,'Edi');
+	VALUES (10010, 'Sremska Mitrovica','Srbija', 'writer1@yahoo.com', true, 'Edi', '$2y$10$ovqM3ue/XJCuF1mbwt/CMOhNrTyxq.aFU8mfDzTGAddvyKS3rc/RG', 0,'Edi');
 
 
 INSERT INTO public.user_table(

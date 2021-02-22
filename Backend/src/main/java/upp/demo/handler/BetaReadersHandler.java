@@ -21,6 +21,7 @@ public class BetaReadersHandler {
 
     public List<EnumDto> getReaders() {
         List<User> editors = userRepository.findAllByRole(RoleEnum.BETA_READER);
+
         return editors.stream().map(editorMapper::convert).collect(Collectors.toList());
     }
 }

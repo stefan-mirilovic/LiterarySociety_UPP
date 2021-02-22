@@ -197,16 +197,26 @@ export class StoreComponent implements OnInit {
     this.model.genre = this.title;
     let o = new Array();
 
-    o.push({elementId: "text", elementValue: this.model.pdf, must: this.model.mustPdf });
+    o.push({elementId: "text", elementValue: this.model.pdf, must: this.model.mustPdf, phrase: this.checkPhrase(this.model.pdf)});
     o.push({elementId: "genre", elementValue: this.model.genre, must: this.model.mustGenre });
-    o.push({elementId: "title", elementValue: this.model.title, must: this.model.mustTitle });
-    o.push({elementId: "writer", elementValue: this.model.writer, must: this.model.mustWriter });
+    o.push({elementId: "title", elementValue: this.model.title, must: this.model.mustTitle, phrase: this.checkPhrase(this.model.title) });
+    o.push({elementId: "writer", elementValue: this.model.writer, must: this.model.mustWriter, phrase: this.checkPhrase(this.model.writer)});
     console.log(o);
     this.bookService.searchBook(o).subscribe(
       value => {
         this.books = value;
       }
     );
+  }
+
+  checkPhrase(str){
+    var phrase = false;
+    var firstChar = str.substring(0,1);
+    var lastChar = str.substring([str.length-1]);
+    if(firstChar === '"' && lastChar ==='"'){
+      phrase=true;
+    }
+    return phrase;
   }
 
 }

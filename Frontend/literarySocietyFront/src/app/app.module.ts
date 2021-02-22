@@ -52,6 +52,7 @@ import { ComitteeLeaderGuard } from './guard/comittee-leader.guard';
 import { EditorsNotesComponent } from './editors-notes/editors-notes.component';
 import { CommitteeDecisionComponent } from './committee-decision/committee-decision.component';
 import { MainEditorReviewComponent } from './main-editor-review/main-editor-review.component';
+import { SendBookComponent } from './send-book/send-book.component';
 
 
 @NgModule({
@@ -90,6 +91,7 @@ import { MainEditorReviewComponent } from './main-editor-review/main-editor-revi
     EditorsNotesComponent,
     CommitteeDecisionComponent,
     MainEditorReviewComponent,
+    SendBookComponent,
 
   ],
   imports: [
