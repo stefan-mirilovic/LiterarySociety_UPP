@@ -32,6 +32,15 @@ INSERT INTO public.user_table(
 	id, city, country, email, enabled, name, password, role, surname)
 	VALUES (10008, 'Sremska Mitrovica','Srbija', 'reader@yahoo.com', true, 'Reader', '$2y$10$rAUWMhHGu/3eQZvykAYudeQSBp1g.xqmyFwss8yP8dpHWHRbrKk12', 1,'Read');
 
+INSERT INTO public.user_table(
+	id, city, country, email, enabled, name, password, role, surname)
+	VALUES (10009, 'Novi Sad','Srbija', 'novisad@yahoo.com', true, 'Reader', '$2y$10$rAUWMhHGu/3eQZvykAYudeQSBp1g.xqmyFwss8yP8dpHWHRbrKk12', 2,'Read');
+
+INSERT INTO public.user_table(
+	id, city, country, email, enabled, name, password, role, surname)
+	VALUES (10011, 'Washington DC','Pennsylvania ', 'washington@yahoo.com', true, 'Reader', '$2y$10$rAUWMhHGu/3eQZvykAYudeQSBp1g.xqmyFwss8yP8dpHWHRbrKk12', 2,'Read');
+
+
 INSERT INTO public.genre(
 	id, name)
 	VALUES (1, 'Horror');

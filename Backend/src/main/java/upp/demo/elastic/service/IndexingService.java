@@ -55,6 +55,7 @@ public class IndexingService {
 
     public void deleteAllIndexes() {
         bookIndexRepository.deleteAll();
+        betaIndexRepository.deleteAll();
     }
 
 }

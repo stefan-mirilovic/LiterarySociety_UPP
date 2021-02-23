@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import upp.demo.dto.Coordinate;
 import upp.demo.dto.EnumDto;
 import upp.demo.elastic.model.BetaIndex;
+import upp.demo.elastic.repository.BetaIndexRepository;
 import upp.demo.elastic.service.GeolocationService;
 import upp.demo.enumeration.RoleEnum;
 import upp.demo.globals.PropertyName;
@@ -35,6 +36,7 @@ public class BetaReadersHandler {
     private final RuntimeService runtimeService;
     private final GeolocationService geolocationService;
     private final ElasticsearchTemplate elasticsearchTemplate;
+    private final BetaIndexRepository betaIndexRepository;
 
     public List<EnumDto> getReaders(String processInstance) {
         String bookOwnerEmail = (String) runtimeService.getVariable(processInstance, PropertyName.BookPublishing.BOOK_OWNER_EMAIL);
@@ -50,6 +52,7 @@ public class BetaReadersHandler {
         boolQueryBuilder.mustNot(geo);
         //*IMPLEMENT GENRES
 
+        Iterable<BetaIndex> test = betaIndexRepository.findAll();
         SearchQuery query = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).build();
         List<BetaIndex> betaReaders = elasticsearchTemplate.queryForList(query, BetaIndex.class);
 

@@ -13,6 +13,9 @@ import upp.demo.repository.BookRepository;
 import upp.demo.repository.GenreRepository;
 import upp.demo.repository.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class DbInit implements ApplicationRunner {
@@ -41,11 +44,22 @@ public class DbInit implements ApplicationRunner {
         bookHorror.setOwner(writer1);
         bookHorror.setPublished(true);
         bookHorror.setSynopsis("Scary");
-        bookHorror.setTitle("Killer in the house");
+        bookHorror.setTitle("Primenjena kriptografija");
         bookHorror.setDocumentPath("pdf/mqqLxJAQeC.pdf");
         Book book = bookRepository.save(bookHorror);
+        List<Book> books = new ArrayList<>();
+        books.add(book);
+        writer1.setOwnedBooks(books);
 
         indexingService.deleteAllIndexes();
         indexingService.indexBook(book);
+
+        User beta1 = userRepository.findByEmail("novisad@yahoo.com");
+        User beta2 = userRepository.findByEmail("washington@yahoo.com");
+        indexingService.indexBeta(beta1);
+        indexingService.indexBeta(beta2);
+
+
+
     }
 }
