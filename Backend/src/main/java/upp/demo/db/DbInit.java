@@ -50,14 +50,17 @@ public class DbInit implements ApplicationRunner {
         List<Book> books = new ArrayList<>();
         books.add(book);
         writer1.setOwnedBooks(books);
+        userRepository.save(writer1);
 
         indexingService.deleteAllIndexes();
         indexingService.indexBook(book);
 
         User beta1 = userRepository.findByEmail("novisad@yahoo.com");
         User beta2 = userRepository.findByEmail("washington@yahoo.com");
+        User beta3 = userRepository.findByEmail("beograd@yahoo.com");
         indexingService.indexBeta(beta1);
         indexingService.indexBeta(beta2);
+        indexingService.indexBeta(beta3);
 
 
 

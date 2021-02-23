@@ -40,6 +40,9 @@ INSERT INTO public.user_table(
 	id, city, country, email, enabled, name, password, role, surname)
 	VALUES (10011, 'Washington DC','Pennsylvania ', 'washington@yahoo.com', true, 'Reader', '$2y$10$rAUWMhHGu/3eQZvykAYudeQSBp1g.xqmyFwss8yP8dpHWHRbrKk12', 2,'Read');
 
+INSERT INTO public.user_table(
+	id, city, country, email, enabled, name, password, role, surname)
+	VALUES (10012, 'Beograd','Srbija', 'beograd@yahoo.com', true, 'Reader', '$2y$10$rAUWMhHGu/3eQZvykAYudeQSBp1g.xqmyFwss8yP8dpHWHRbrKk12', 2,'Read');
 
 INSERT INTO public.genre(
 	id, name)
