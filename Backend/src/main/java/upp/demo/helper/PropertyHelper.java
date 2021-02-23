@@ -20,7 +20,7 @@ public class PropertyHelper {
 	private final PlagiarismHandler plagiarismHandler;
 	private final BetaReadersHandler betaReadersHandler;
 
-	public PropertyDto findAvailableProperties(Map<String, String> properties)  {
+	public PropertyDto findAvailableProperties(Map<String, String> properties, String process)  {
 		PropertyDto propertyDto = new PropertyDto();
 
 
@@ -39,7 +39,7 @@ public class PropertyHelper {
 						propertyDto.setValues(editorsHandler.getEditors());
 					}
 					if(properties.get(key).equals(PropertyName.CustomNames.BETA_READERS)){
-						propertyDto.setValues(betaReadersHandler.getReaders());
+						propertyDto.setValues(betaReadersHandler.getReaders(process));
 					}
 					if(properties.get(key).equals(PropertyName.CustomNames.BOOKS)){
 						propertyDto.setValues(plagiarismHandler.getWriterBook());

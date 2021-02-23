@@ -25,7 +25,7 @@ public class FormFieldsHelper {
 		List<FormFieldDto> formFieldDtos = new ArrayList<>();
 
 		for (FormField formField : formFields) {
-			PropertyDto propertyDto = propertyHelper.findAvailableProperties(formField.getProperties());
+			PropertyDto propertyDto = propertyHelper.findAvailableProperties(formField.getProperties(),processInstanceId);
 			HashMap<String, String> constraintsMap = validationHelper.getValidationConstraints(formField.getValidationConstraints());
 			FormFieldDto formFieldDto = new FormFieldDto();
 

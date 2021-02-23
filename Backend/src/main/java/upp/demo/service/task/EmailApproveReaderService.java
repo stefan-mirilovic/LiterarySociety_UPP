@@ -7,6 +7,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.springframework.stereotype.Service;
+import upp.demo.elastic.service.IndexingService;
 import upp.demo.enumeration.RegisterRequestStatus;
 import upp.demo.enumeration.RoleEnum;
 import upp.demo.globals.PropertyName;
@@ -27,6 +28,7 @@ public class EmailApproveReaderService implements JavaDelegate {
 	private final EmailService emailService;
 	private final UserRepository userRepository;
 	private final RegisterReaderRequestRepository registerReaderRequestRepository;
+	private final IndexingService indexingService;
 
 	@Override
 	public void execute(DelegateExecution delegateExecution) throws Exception {
@@ -40,11 +42,15 @@ public class EmailApproveReaderService implements JavaDelegate {
 		}
 		request.setStatus(RegisterRequestStatus.APPROVED);
 		RoleEnum roleEnum = request.isBeta() ? RoleEnum.BETA_READER : RoleEnum.READER;
+
 		User user = new User(null, request.getEmail(), request.getPassword(), request.getName(), request.getSurname(),
 				request.getCity(), request.getCountry(), roleEnum, true, new ArrayList<>(), null);
 		request.setGenres((List<Genre>)delegateExecution.getVariable("genres"));
 		registerReaderRequestRepository.save(request);
-		userRepository.save(user);
+		User userIndex =  userRepository.save(user);
+		if(request.isBeta()){
+			indexingService.indexBeta(userIndex);
+		}
 
 	}
 }

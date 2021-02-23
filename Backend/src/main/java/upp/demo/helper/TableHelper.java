@@ -26,10 +26,10 @@ public class TableHelper {
 
     public List<RowDto> convertToBook(String process, List<FormField> formFields) throws IOException {
         List<Book> textForReviews = (List<Book>) runtimeService.getVariable(process, PropertyName.VariableName.BOOKS_FOR_REVIEW);
-        return (textForReviews != null) ? convertToTableField(textForReviews, formFields) : new ArrayList<>();
+        return (textForReviews != null) ? convertToTableField(textForReviews, formFields, process) : new ArrayList<>();
     }
 
-    public List<RowDto> convertToTableField(List<Book> books, List<FormField> formFields) throws IOException {
+    public List<RowDto> convertToTableField(List<Book> books, List<FormField> formFields, String processInstance) throws IOException {
         List<TableFieldDto> tableFieldDtoList;
         List<RowDto> rows = new ArrayList<>();
         for (Book book : books) {
@@ -40,25 +40,25 @@ public class TableHelper {
                 if (formField.getId().equals("pdf")) {
                     tableFieldDto.setFieldId(formField.getId());
                     tableFieldDto.setFieldValue(fileHelper.load(book.getDocumentPath()));
-                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
+                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties(),processInstance).getInputs());
                     tableFieldDtoList.add(tableFieldDto);
                 }
                 if (formField.getId().equals("owner")) {
                     tableFieldDto.setFieldId(formField.getId());
                     tableFieldDto.setFieldValue(book.getOwnerEmail());
-                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
+                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties(),processInstance).getInputs());
                     tableFieldDtoList.add(tableFieldDto);
                 }
                 if (formField.getId().equals("synopsis")) {
                     tableFieldDto.setFieldId(formField.getId());
                     tableFieldDto.setFieldValue(book.getSynopsis());
-                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
+                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties(),processInstance).getInputs());
                     tableFieldDtoList.add(tableFieldDto);
                 }
                 if (formField.getId().equals("title")){
                     tableFieldDto.setFieldId(formField.getId());
                     tableFieldDto.setFieldValue(book.getTitle());
-                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties()).getInputs());
+                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties(),processInstance).getInputs());
                     tableFieldDtoList.add(tableFieldDto);
                 }
 

@@ -103,10 +103,20 @@ public class BookService {
 
         for (BookSearchDto element : searchQueryList) {
             if (element.isMust()) {
-                boolQueryBuilder.must(QueryBuilders.commonTermsQuery(element.getElementId(), element.getElementValue()));
+                if(element.isPhrase()){
+                    boolQueryBuilder.must(QueryBuilders.matchPhraseQuery(element.getElementId(), element.getElementValue()));
+                }
+                else{
+                    boolQueryBuilder.must(QueryBuilders.commonTermsQuery(element.getElementId(), element.getElementValue()));
+                }
             }
             else {
-                boolQueryBuilder.should(QueryBuilders.commonTermsQuery(element.getElementId(), element.getElementValue()));
+                if(element.isPhrase()){
+                    boolQueryBuilder.should(QueryBuilders.matchPhraseQuery(element.getElementId(), element.getElementValue()));
+                }
+                else{
+                    boolQueryBuilder.should(QueryBuilders.commonTermsQuery(element.getElementId(), element.getElementValue()));
+                }
             }
         }
 
