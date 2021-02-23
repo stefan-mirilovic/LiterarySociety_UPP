@@ -205,11 +205,19 @@ export class StoreComponent implements OnInit {
     o.push({elementId: "title", elementValue: this.model.title, must: this.model.mustTitle, phrase: this.checkPhrase(this.model.title) });
     o.push({elementId: "writer", elementValue: this.model.writer, must: this.model.mustWriter, phrase: this.checkPhrase(this.model.writer)});
     console.log(o);
-    this.bookService.searchBook(o).subscribe(
-      value => {
+    this.bookService.searchBook(o).subscribe({
+      next: (value) => {
         this.books = value;
+      },
+      error: data => {
+        this.books = [];
+        this.loading = false;
+        if (data.error && typeof data.error === "string")
+          this.toastr.error(data.error);
+        else
+          this.toastr.error("There is no book for that criterium!")
       }
-    );
+    });
   }
 
   checkPhrase(str){
