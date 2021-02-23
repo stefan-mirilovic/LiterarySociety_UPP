@@ -9,11 +9,13 @@ import upp.demo.model.Book;
 import upp.demo.model.User;
 import upp.demo.repository.BookRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Transactional
 public class BookIndexMapper {
 
     private final BookRepository bookRepository;

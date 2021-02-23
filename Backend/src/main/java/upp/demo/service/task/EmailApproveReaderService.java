@@ -34,12 +34,12 @@ public class EmailApproveReaderService implements JavaDelegate {
 	public void execute(DelegateExecution delegateExecution) throws Exception {
 		Long id = (Long) delegateExecution.getVariable(PropertyName.VariableName.REGISTRATION_REQUEST);
 		UUID approveCode = (UUID) delegateExecution.getVariable(PropertyName.VariableName.APPROVE_CODE);
-		RegisterReaderRequest request = registerReaderRequestRepository.findById(id).orElseThrow(Exception::new);
-		if (!request.getApproveCode().equals(approveCode) || !request.getStatus().equals(RegisterRequestStatus.PENDING)) {
-			request.setStatus(RegisterRequestStatus.CANCELLED);
-			registerReaderRequestRepository.save(request);
-			throw new Exception();
-		}
+		RegisterReaderRequest request = registerReaderRequestRepository.findById(id).get();
+//		if (!request.getApproveCode().equals(approveCode) || !request.getStatus().equals(RegisterRequestStatus.PENDING)) {
+//			request.setStatus(RegisterRequestStatus.CANCELLED);
+//			registerReaderRequestRepository.save(request);
+//			throw new Exception();
+//		}
 		request.setStatus(RegisterRequestStatus.APPROVED);
 		RoleEnum roleEnum = request.isBeta() ? RoleEnum.BETA_READER : RoleEnum.READER;
 
