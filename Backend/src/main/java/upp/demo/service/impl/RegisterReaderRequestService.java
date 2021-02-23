@@ -32,7 +32,7 @@ public class RegisterReaderRequestService  {
     public String approve(Long id, UUID approveCode) {
         String result = "Successfully confirmed your email!";
         RegisterReaderRequest request;
-        runtimeService.createSignalEvent("signalName").send();
+        runtimeService.createSignalEvent("signalReader").send();
         return result;
     }
 }

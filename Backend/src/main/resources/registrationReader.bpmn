@@ -119,7 +119,7 @@
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:message id="Message_1suw24v" />
-  <bpmn:signal id="Signal_0c9yg8g" name="signalName" />
+  <bpmn:signal id="Signal_0c9yg8g" name="signalReader" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="readerRegistration">
       <bpmndi:BPMNEdge id="Flow_1sejoya_di" bpmnElement="Flow_1sejoya">

@@ -36,6 +36,7 @@ public class DbInit implements ApplicationRunner {
 
         //Writers
         User writer1 = userRepository.findByEmail("writer1@yahoo.com");
+        User reader = userRepository.findByEmail("reader@yahoo.com");
 
         //Forming book in DB
         Book bookHorror  = new Book();
@@ -49,8 +50,8 @@ public class DbInit implements ApplicationRunner {
         Book book = bookRepository.save(bookHorror);
         List<Book> books = new ArrayList<>();
         books.add(book);
-        writer1.setOwnedBooks(books);
-        userRepository.save(writer1);
+        reader.setOwnedBooks(books);
+        userRepository.save(reader);
 
         indexingService.deleteAllIndexes();
         indexingService.indexBook(book);

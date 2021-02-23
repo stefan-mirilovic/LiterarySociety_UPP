@@ -31,11 +31,11 @@ public class EmailApproveWriterService implements JavaDelegate {
 		Long id = (Long) delegateExecution.getVariable(PropertyName.VariableName.REGISTRATION_REQUEST);
 		UUID approveCode = (UUID) delegateExecution.getVariable(PropertyName.VariableName.APPROVE_CODE);
 		RegisterReaderRequest request = registerReaderRequestRepository.findById(id).orElseThrow(Exception::new);
-		if (!request.getApproveCode().equals(approveCode) || !request.getStatus().equals(RegisterRequestStatus.PENDING)) {
-			request.setStatus(RegisterRequestStatus.CANCELLED);
-			registerReaderRequestRepository.save(request);
-			throw new Exception();
-		}
+//		if (!request.getApproveCode().equals(approveCode) || !request.getStatus().equals(RegisterRequestStatus.PENDING)) {
+//			request.setStatus(RegisterRequestStatus.CANCELLED);
+//			registerReaderRequestRepository.save(request);
+//			throw new Exception();
+//		}
 		request.setStatus(RegisterRequestStatus.APPROVED);
 		RoleEnum roleEnum = RoleEnum.WRITER;
 		User user = new User(null, request.getEmail(), request.getPassword(), request.getName(), request.getSurname(),

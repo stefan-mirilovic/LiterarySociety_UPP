@@ -15,4 +15,5 @@ public class BookStoreDisplayDTO {
     private boolean owned;
     private double price;
     private int noOfPages;
+    private String path;
 }

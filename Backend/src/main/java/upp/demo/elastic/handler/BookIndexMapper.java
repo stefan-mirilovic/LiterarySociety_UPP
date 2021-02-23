@@ -25,7 +25,7 @@ public class BookIndexMapper {
         List<Book> list = user.getOwnedBooks();
         List<BookStoreDisplayDTO> bookStore = new ArrayList<>();
         for (BookIndex index : bookIndexList){
-            Book bookFromDb = bookRepository.getOne(index.getId());
+            Book bookFromDb = bookRepository.findById(index.getId()).get();
             boolean owned = user.getOwnedBooks().contains(bookFromDb);
             BookStoreDisplayDTO book = new BookStoreDisplayDTO();
             book.setId(index.getId());
@@ -33,6 +33,7 @@ public class BookIndexMapper {
             book.setOwned(owned);
             book.setSynopsis(index.getText());
             book.setWriter(index.getWriter());
+            book.setPath(bookFromDb.getDocumentPath());
             bookStore.add(book);
         }
         return bookStore;

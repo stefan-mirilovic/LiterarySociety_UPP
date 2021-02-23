@@ -23,10 +23,10 @@ public class Book implements Serializable {
 	@ManyToOne
 	private User owner;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<User> editors = new ArrayList<>();
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<User> betaReaders = new ArrayList<>();
 
 	@Column
