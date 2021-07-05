@@ -20,7 +20,7 @@ public class BookIndexMapper {
 
     private final BookRepository bookRepository;
 
-    public List<BookStoreDisplayDTO> convertIndexToDto(List<BookIndex> bookIndexList) {
+    public List<BookStoreDisplayDTO> convertIndexToDto(List<BookIndex> bookIndexList, boolean toHighlight) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Book> list = user.getOwnedBooks();
         List<BookStoreDisplayDTO> bookStore = new ArrayList<>();
@@ -31,9 +31,14 @@ public class BookIndexMapper {
             book.setId(index.getId());
             book.setTitle(index.getTitle());
             book.setOwned(owned);
-            book.setSynopsis(index.getText());
+            if (toHighlight) {
+                book.setSynopsis(index.getText());
+            } else {
+                book.setSynopsis(index.getBasicInfo());
+            }
             book.setWriter(index.getWriter());
             book.setPath(bookFromDb.getDocumentPath());
+            book.setPrice(59.99);
             bookStore.add(book);
         }
         return bookStore;

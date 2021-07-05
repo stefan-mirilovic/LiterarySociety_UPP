@@ -55,7 +55,6 @@ public class BookController {
             List<BookStoreDisplayDTO> result = bookService.searchBooks(bookSearchDtoList);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
-            e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }

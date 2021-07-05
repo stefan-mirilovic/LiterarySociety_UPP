@@ -8,4 +8,5 @@ public enum  DocumentStatus {
 	PDF_PENDING,
 	PDF_REJECTED,
 	PDF_ACCEPTED,
+	PLAGIATOR_DUPLICATE
 }

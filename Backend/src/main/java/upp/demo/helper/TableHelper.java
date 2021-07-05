@@ -39,7 +39,9 @@ public class TableHelper {
                 TableFieldDto tableFieldDto = new TableFieldDto();
                 if (formField.getId().equals("pdf")) {
                     tableFieldDto.setFieldId(formField.getId());
-                    tableFieldDto.setFieldValue(fileHelper.load(book.getDocumentPath()));
+                    if (book.getDocumentPath() != null) {
+                        tableFieldDto.setFieldValue(fileHelper.load(book.getDocumentPath()));
+                    }
                     tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties(),processInstance).getInputs());
                     tableFieldDtoList.add(tableFieldDto);
                 }
@@ -61,9 +63,16 @@ public class TableHelper {
                     tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties(),processInstance).getInputs());
                     tableFieldDtoList.add(tableFieldDto);
                 }
+                if (formField.getId().equals("similarProcent")) {
+                    tableFieldDto.setFieldId(formField.getId());
+                    tableFieldDto.setFieldValue(book.getIsbn());
+                    tableFieldDto.setInput(propertyHelper.findAvailableProperties(formField.getProperties(),processInstance).getInputs());
+                    tableFieldDtoList.add(tableFieldDto);
+                }
 
             }
             rowDto.setRow(tableFieldDtoList);
+            //rowDto.getRow().get(0).setFieldId("header");
             rows.add(rowDto);
 
         }

@@ -2,13 +2,11 @@ package upp.demo.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -100,8 +98,12 @@ public class BookService {
     public List<BookStoreDisplayDTO> searchBooks(List<BookSearchDto> searchQueryList) {
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-
+        boolean toHighlight = false;
         for (BookSearchDto element : searchQueryList) {
+            //ako ima keywords u upitu, generisi highlight, ako ne, koristi sinopsis
+            if (element.getElementId().equals("text")) {
+                toHighlight = true;
+            }
             if (element.isMust()) {
                 if(element.isPhrase()){
                     boolQueryBuilder.must(QueryBuilders.matchPhraseQuery(element.getElementId(), element.getElementValue()));
@@ -119,20 +121,25 @@ public class BookService {
                 }
             }
         }
+        SearchQuery query;
+        if (toHighlight) {
+            query = queryBuilder.withQuery(boolQueryBuilder).withHighlightFields(
+                    new HighlightBuilder.Field("text")
+                            .preTags("<b>")
+                            .postTags("</b>")
+                            .numOfFragments(1)
+                            .fragmentSize(200)).withPageable(PageRequest.of(0, 5)).build();
+        } else {
+            query = queryBuilder.withQuery(boolQueryBuilder).withPageable(PageRequest.of(0, 5)).build();
+        }
 
-        SearchQuery query = queryBuilder.withQuery(boolQueryBuilder).withHighlightFields(
-                new HighlightBuilder.Field("text")
-                        .preTags("<b>")
-                        .postTags("</b>")
-                        .numOfFragments(1)
-                        .fragmentSize(200)).withPageable(PageRequest.of(0, 5)).build();
-
-        Iterable<BookIndex> test = bookIndexRepository.findAll();
 
         Page<BookIndex> books =  elasticsearchTemplate.queryForPage(query, BookIndex.class, new ResultMapper());
-        List<BookStoreDisplayDTO> bookForDisplay = bookIndexMapper.convertIndexToDto(books.getContent());
+        if (books == null) {
+            return new ArrayList<>();
+        }
+        List<BookStoreDisplayDTO> bookForDisplay = bookIndexMapper.convertIndexToDto(books.getContent(), toHighlight);
         return bookForDisplay;
     }
-
 
 }
